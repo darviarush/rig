@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Автоматизатор задач
-# 
+#
 # Выполните:
 #
 # $ . ./rc.sh startup
@@ -20,7 +20,7 @@ fi
 
 
 # fn - отредактировать rig/rc.sh и внести его в bash
-alias fn='mcedit $RIG_RC/rc.sh; . $RIG_RC/rc.sh'
+alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
 
 
 # help - показать список целей
@@ -47,7 +47,7 @@ run() {
 push() {
 	branch=`branch`
 	run "git add ."
-	run "git commit -am \"$branch ${2:-save}\""
+	run "git commit -am \"$branch ${1:-save}\""
 	run "git pull origin $branch"
 	run "git push origin $branch"
 }
@@ -60,7 +60,7 @@ pull() {
 	if [ "`git status -s`" != "" ]; then
 		is_new=true
 		run "git add ."
-		run "git commit -am \"$branch ${2:-save}\""
+		run "git commit -am \"$branch ${1:-save}\""
 	fi
 
 	git pull origin $branch
