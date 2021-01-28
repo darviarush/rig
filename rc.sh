@@ -21,6 +21,7 @@ fi
 
 # fn - отредактировать rig/rc.sh и внести его в bash
 alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
+alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
 
 # help - показать список целей
