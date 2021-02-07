@@ -83,3 +83,7 @@ alias reset='git reset --hard HEAD'
 # install_pip - установить pip с инета
 alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
+# github - клонировать с github мой проект
+github() {
+    git clone git@github.com:darviarush/$1.git
+}
