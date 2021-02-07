@@ -21,7 +21,6 @@ fi
 
 # fn - отредактировать rig/rc.sh и внести его в bash
 alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
-alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
 
 # help - показать список целей
@@ -68,9 +67,9 @@ pull() {
 
 	if ["$is_new" != ""]; then git push origin $branch; fi
 
-	if [ "`git status -s`" == "" ]
-	then cp -ra etc/sublime-text-3 ~/.config/sublime-text-3
-	fi
+	#if [ "`git status -s`" == "" ]
+	#then cp -ra etc/sublime-text-3 ~/.config/sublime-text-3
+	#fi
 }
 
 
@@ -81,4 +80,6 @@ alias sta="git status -s"
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
+# install_pip - установить pip с инета
+alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
