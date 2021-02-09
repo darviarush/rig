@@ -87,3 +87,10 @@ alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py &
 github() {
     git clone git@github.com:darviarush/$1.git
 }
+
+# mk snippet - выполняет скрипт из каталога snippet
+mk() {
+    x=$1
+    shift
+    . $RIG_RC/snippet/$x.sh $*
+}
