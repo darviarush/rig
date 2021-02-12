@@ -87,3 +87,7 @@ alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py &
 github() {
     git clone git@github.com:darviarush/$1.git
 }
+
+# cdx - cd to astrobook
+alias cdx='cd ~/__/astrobook'
+
