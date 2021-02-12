@@ -20,7 +20,7 @@ fi
 
 
 # fn - отредактировать rig/rc.sh и внести его в bash
-alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
+alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; mkdir -p etc/sublime-text-3/; cp -af ~/.config/sublime-text-3/Packages/User/* etc/sublime-text-3/; push fn; popd'
 
 
 # help - показать список целей
@@ -91,3 +91,9 @@ github() {
 # cdx - cd to astrobook
 alias cdx='cd ~/__/astrobook'
 
+# mk snippet - выполняет скрипт из каталога snippet
+mk() {
+    x=$1
+    shift
+    . $RIG_RC/snippet/$x.sh $*
+}

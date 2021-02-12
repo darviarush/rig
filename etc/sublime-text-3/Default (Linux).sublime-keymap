@@ -1,0 +1,20 @@
+[
+	{ "keys": ["ctrl+q"], "command": "" },
+	{ "keys": ["ctrl+t"], "command": "title_case" },
+	{ "keys": ["ctrl+shift+t"], "command": "swap_case" },
+	{ "keys": ["ctrl+u"], "command": "upper_case" },
+	{ "keys": ["ctrl+shift+u"], "command": "lower_case" },
+
+	{ "keys": ["f1"], "command": "goto_definition" },
+	{ "keys": ["shift+f1"], "command": "goto_reference" },
+	{ "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" },
+
+	// меняем местами
+	{ "keys": ["ctrl+r"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+
+	{ "keys": ["ctrl+h"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
+
+	{ "keys": ["ctrl+shift+r"], "command": "replace_next" },
+
+	{ "keys": ["ctrl+d"], "command": "duplicate_line" },
+]
