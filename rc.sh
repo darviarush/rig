@@ -8,6 +8,8 @@
 #
 # для добавления задач в bash
 
+export LANG=ru_RU.UTF-8
+export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
 
 if [ "$1" == startup ]; then
