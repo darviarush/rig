@@ -65,7 +65,7 @@ pull() {
 		run "git commit -am \"$branch ${1:-save}\""
 	fi
 
-	git pull origin $branch
+	git pull origin $branch --no-edit
 
 	if ["$is_new" != ""]; then git push origin $branch; fi
 
