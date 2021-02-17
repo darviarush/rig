@@ -8,6 +8,8 @@
 #
 # для добавления задач в bash
 
+export LANG=ru_RU.UTF-8
+export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
 
 if [ "$1" == startup ]; then
@@ -63,7 +65,7 @@ pull() {
 		run "git commit -am \"$branch ${1:-save}\""
 	fi
 
-	git pull origin $branch
+	git pull origin $branch --no-edit
 
 	if ["$is_new" != ""]; then git push origin $branch; fi
 
@@ -87,6 +89,9 @@ alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py &
 github() {
     git clone git@github.com:darviarush/$1.git
 }
+
+# cdx - cd to astrobook
+alias cdx='cd ~/__/astrobook'
 
 # mk snippet - выполняет скрипт из каталога snippet
 mk() {
