@@ -63,6 +63,9 @@ git_diff() {
 # co branch - переключение на ветку
 alias co='git checkout'
 
+# desc - описание текущего бранча
+alias desc='git config branch.`branch`.description'
+
 # new branch - создаёт ветку
 new() {
     if "`git_diff`" == 1; then return; fi
