@@ -42,7 +42,7 @@ branch() {
 run() {
 	echo "$*"
 	eval "$*"
-	if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; exit; fi
+	#if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; fi
 }
 
 git_diff() {
@@ -54,7 +54,7 @@ git_diff() {
 	    if $REPLY == 1; then read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"
 	    elif $REPLY == 2; then run git reset --hard HEAD
 	    elif $REPLY == 3; then echo "Пропущено"
-	    else exit
+	    else return 1
 	    fi
 	done
     fi
@@ -65,11 +65,11 @@ alias co='git checkout'
 
 # new branch - создаёт ветку
 new() {
-    git_diff
+    if "`git_diff`" == 1; then return; fi
     run git checkout master
     run git pull origin master
     branch=`echo "$1" | awk '{print $1}'`
-    if [ "$branch" == "" ]; then echo "Нет бранча!"; exit; fi
+    if [ "$branch" == "" ]; then echo "Нет бранча!"; fi
     git config branch.$branch.description "$1"
     run git checkout -b $branch
     run git push origin $branch --no-edit
@@ -80,7 +80,7 @@ push() {
 	branch=`branch`
 	run "git add ."
 	run "git commit -am \"$branch ${1:-save}\""
-	run "git pull origin $branch"
+	run "git pull origin $branch --no-edit"
 	run "git push origin $branch"
 }
 
