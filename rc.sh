@@ -36,14 +36,44 @@ branch() {
 }
 
 
-# run - показать код bash и выполнить его
+# run code - показать код bash и выполнить его
 run() {
-	echo "$1"
-	eval "$1"
+	echo "$*"
+	eval "$*"
+	if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; exit; fi
 }
 
+git_diff() {
+    m=`git status -s`
+    if [ "$m" != "" ]; then
+	git status -s
+	select i in "Комитим" "Ресетим" "Пропускаем" "Отмена"
+	do
+	    if $REPLY == 1; then read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"
+	    elif $REPLY == 2; then run git reset --hard HEAD
+	    elif $REPLY == 3; then
+	    else exit
+	    fi
+	done
+    fi
+}
 
-# push - делает комит текущей ветки
+# co branch - переключение на ветку
+alias co='git checkout'
+
+# new branch - создаёт ветку
+new() {
+    git_diff
+    run git checkout master
+    run git pull origin master
+    branch=`echo "$1" | awk '{print $1}'`
+    if [ "$branch" == "" ]; then echo "Нет бранча!"; exit; fi
+    git config branch.$branch.description "$1"
+    run git checkout -b $branch
+    run git push origin $branch --no-edit
+}
+
+# push [comment] - делает комит текущей ветки
 push() {
 	branch=`branch`
 	run "git add ."
