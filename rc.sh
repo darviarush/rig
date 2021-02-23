@@ -53,7 +53,7 @@ git_diff() {
 	do
 	    if $REPLY == 1; then read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"
 	    elif $REPLY == 2; then run git reset --hard HEAD
-	    elif $REPLY == 3; then
+	    elif $REPLY == 3; then echo "Пропущено"
 	    else exit
 	    fi
 	done
