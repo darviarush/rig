@@ -72,7 +72,7 @@ new() {
     if [ "$branch" == "" ]; then echo "Нет бранча!"; fi
     git config branch.$branch.description "$1"
     run git checkout -b $branch
-    run git push origin $branch --no-edit
+    run git push origin $branch
 }
 
 # push [comment] - делает комит текущей ветки
