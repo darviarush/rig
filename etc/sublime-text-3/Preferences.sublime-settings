@@ -1,10 +1,11 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
-	"font_size": 11,
+	"color_scheme": "Packages/Agila Theme/Agila Light Solarized.tmTheme",
+	"font_size": 10,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"theme": "Default.sublime-theme",
+	"show_encoding": true,
+	"theme": "Adaptive.sublime-theme",
 	"word_wrap": true
 }

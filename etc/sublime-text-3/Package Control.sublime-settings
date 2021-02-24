@@ -5,9 +5,19 @@
 	],
 	"installed_packages":
 	[
+		"Agila Theme",
+		"Better CoffeeScript",
+		"Coffee Color Scheme",
+		"Dracula Color Scheme",
 		"Emmet",
-		"GitGutter",
+		"Fortran",
+		"GNU Octave Completions",
+		"Gnuplot",
+		"Jinja2",
+		"Julia",
+		"Mojolicious",
+		"Outline",
 		"Package Control",
-		"SublimeCodeIntel"
+		"Prolog"
 	]
 }
