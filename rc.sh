@@ -139,5 +139,5 @@ py_test() {
 }
 
 # py_upload - загружает текущий репозиторий питон как пакет в pypi
-alias py_upload='$RIG_RC/bin/pypi.org.upload.sh'
+alias py_upload='py_test && push dist && $RIG_RC/bin/pypi.org.upload.sh'
 

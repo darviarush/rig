@@ -1,9 +1,8 @@
 import sys
 import unittest
 
-sys.path.append(".")
+from {{pypkg}} import {{pypkg}}
 
-from {{pypkg}} import
 
 class DistInfoTestCase(unittest.TestCase):
 
@@ -11,6 +10,7 @@ class DistInfoTestCase(unittest.TestCase):
         """ тест функций """
 
         self.assertEqual(123, 123, '')
+
 
 
 if __name__ == '__main__':

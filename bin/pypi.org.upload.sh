@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 pkg=`basename $(pwd )`
-pypkg=`echo -n $pkg | sed 's/-/_/g'`
+pypkg=`echo -n $pkg | sed 's/-/_/g' | sed 's/python_//'`
 
 echo
 echo step 0
-push dist
+rm -fr build dist *.egg_info htmlcov
+#py_test
+#push dist
 
 echo
 echo step 1

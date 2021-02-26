@@ -3,6 +3,7 @@
 # Развернуть указанный сниппет в текущий каталог
 
 export pkg=$2
+export xpkg=`echo "$pkg" | sed 's/python_//g'`
 export pypkg=`echo "$pkg" | sed 's/-/_/g' | sed 's/python_//g'`
 snippet=$RIG_RC/snippet/$1
 
