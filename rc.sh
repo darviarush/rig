@@ -126,7 +126,7 @@ github() {
 # cdx - cd to astrobook
 alias cdx='cd ~/__/astrobook'
 
-# mk snippet - копирует сниппет с подстановками в текущий каталог
+# mk snippet name - копирует сниппет с подстановками в текущий каталог
 alias mk='$RIG_RC/bin/mk.sh'
 
 # py_upload - загружает текущий репозиторий питон как пакет в pypi

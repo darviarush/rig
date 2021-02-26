@@ -2,7 +2,7 @@
 
 # Развернуть указанный сниппет в текущий каталог
 
-export pkg=`basename "$(pwd )"`
+export pkg=$2
 export pypkg=`echo "$pkg" | sed 's/-/_/g'`
 snippet=$RIG_RC/snippet/$1
 
