@@ -132,3 +132,6 @@ mk() {
     shift
     . $RIG_RC/snippet/$x.sh $*
 }
+
+# py_upload - загружает текущий репозиторий питон как пакет в pypi
+alias py_upload='$RIG_RC/bin/pypi.org.upload.sh'
