@@ -3,11 +3,11 @@ import unittest
 
 sys.path.append(".")
 
-from sql2alchemy import sql2alchemy, fsql2alchemy
+from {{pypkg}} import
 
 class DistInfoTestCase(unittest.TestCase):
 
-    def test_dist_info(self):
+    def test_{{pypkg}}(self):
         """ тест функций """
 
         self.assertEqual(123, 123, '')
@@ -15,4 +15,3 @@ class DistInfoTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

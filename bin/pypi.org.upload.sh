@@ -1,7 +1,11 @@
 #!/bin/sh
 
-pkg=$1
+pkg=`basename $(pwd )`
 pypkg=`echo -n $pkg | sed 's/-/_/g'`
+
+echo
+echo step 0
+push dist
 
 echo
 echo step 1

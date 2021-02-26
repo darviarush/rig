@@ -19,17 +19,17 @@ requirements = requirements.group(1)
 requirements = [] if requirements == 'Нет' else requirements.split('\n* ')
 
 setup(
-    name='dist-info',
+    name='{{pkg}}',
     version=version.group(1),
     description=description.group(1),
     long_description=readme,
     long_description_content_type="text/markdown",
 
-    scripts=['dist-info'],
+    scripts=['{{pkg}}'],
     platforms=['any'],
     python_requires='>=3.6',
     # The project's main homepage.
-    url='https://github.com/darviarush/python-dist-info',
+    url='https://github.com/darviarush/{{pkg}}',
 
     # Author details
     author=author.group(1),
