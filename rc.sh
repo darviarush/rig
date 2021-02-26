@@ -129,5 +129,15 @@ alias cdx='cd ~/__/astrobook'
 # mk snippet name - копирует сниппет с подстановками в текущий каталог
 alias mk='$RIG_RC/bin/mk.sh'
 
+# py_test - тестирует пакет питон в текущей папке с покрытием
+py_test() {
+    pypkg=`basename $(pwd )`
+    pypkg=`echo "$pypkg" | sed 's/-/_/g' | sed 's/python_//g'`
+    rm -fr htmlcov
+    PYTHONPATH=. coverage run --branch --source=$pypkg -m pytest tests/ && coverage report -m && coverage html && \
+        if [ "$1" == "open" ]; then xdg-open htmlcov/index.html; fi
+}
+
 # py_upload - загружает текущий репозиторий питон как пакет в pypi
 alias py_upload='$RIG_RC/bin/pypi.org.upload.sh'
+
