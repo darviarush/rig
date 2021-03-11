@@ -22,7 +22,7 @@ fi
 
 
 # fn - отредактировать rig/rc.sh и внести его в bash
-alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; mkdir -p etc/sublime-text-3/; cp -af ~/.config/sublime-text-3/Packages/User/* etc/sublime-text-3/; push fn; popd'
+alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; mkdir -p etc/sublime-text-3/; rsync -ravh ~/.config/sublime-text-3/Packages/User/ etc/sublime-text-3/; push fn; popd'
 
 
 # help - показать список целей
@@ -38,19 +38,52 @@ branch() {
 }
 
 
-# run - показать код bash и выполнить его
+# run code - показать код bash и выполнить его
 run() {
-	echo "$1"
-	eval "$1"
+	echo "$*"
+	eval "$*"
+	#if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; fi
 }
 
+git_diff() {
+    m=`git status -s`
+    if [ "$m" != "" ]; then
+	git status -s
+	select i in "Комитим" "Ресетим" "Пропускаем" "Отмена"
+	do
+	    if $REPLY == 1; then read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"
+	    elif $REPLY == 2; then run git reset --hard HEAD
+	    elif $REPLY == 3; then echo "Пропущено"
+	    else return 1
+	    fi
+	done
+    fi
+}
 
-# push - делает комит текущей ветки
+# co branch - переключение на ветку
+alias co='git checkout'
+
+# desc - описание текущего бранча
+alias desc='git config branch.`branch`.description'
+
+# new branch - создаёт ветку
+new() {
+    if "`git_diff`" == 1; then return; fi
+    run git checkout master
+    run git pull origin master
+    branch=`echo "$1" | awk '{print $1}'`
+    if [ "$branch" == "" ]; then echo "Нет бранча!"; fi
+    git config branch.$branch.description "$1"
+    run git checkout -b $branch
+    run git push origin $branch
+}
+
+# push [comment] - делает комит текущей ветки
 push() {
 	branch=`branch`
 	run "git add ."
 	run "git commit -am \"$branch ${1:-save}\""
-	run "git pull origin $branch"
+	run "git pull origin $branch --no-edit"
 	run "git push origin $branch"
 }
 
@@ -93,9 +126,18 @@ github() {
 # cdx - cd to astrobook
 alias cdx='cd ~/__/astrobook'
 
-# mk snippet - выполняет скрипт из каталога snippet
-mk() {
-    x=$1
-    shift
-    . $RIG_RC/snippet/$x.sh $*
+# mk snippet name - копирует сниппет с подстановками в текущий каталог
+alias mk='$RIG_RC/bin/mk.sh'
+
+# py_test - тестирует пакет питон в текущей папке с покрытием
+py_test() {
+    pypkg=`basename $(pwd )`
+    pypkg=`echo "$pypkg" | sed 's/-/_/g' | sed 's/python_//g'`
+    rm -fr htmlcov
+    PYTHONPATH=. coverage run --branch --source=$pypkg -m pytest tests/ && coverage report -m && coverage html && \
+        if [ "$1" == "open" ]; then xdg-open htmlcov/index.html; fi
 }
+
+# py_upload - загружает текущий репозиторий питон как пакет в pypi
+alias py_upload='py_test && push dist && $RIG_RC/bin/pypi.org.upload.sh'
+
