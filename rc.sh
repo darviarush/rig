@@ -60,14 +60,14 @@ pull() {
 	branch=`branch`
 
 	if [ "`git status -s`" != "" ]; then
-		is_new=true
+		is_new="true"
 		run "git add ."
 		run "git commit -am \"$branch ${1:-save}\""
 	fi
 
 	git pull origin $branch --no-edit
 
-	if ["$is_new" != ""]; then git push origin $branch; fi
+	if [ "$is_new" != "" ]; then git push origin $branch; fi
 
 	#if [ "`git status -s`" == "" ]
 	#then cp -ra etc/sublime-text-3 ~/.config/sublime-text-3
