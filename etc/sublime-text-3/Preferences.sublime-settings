@@ -7,5 +7,9 @@
 	],
 	"show_encoding": true,
 	"theme": "Adaptive.sublime-theme",
-	"word_wrap": true
+	"word_wrap": true,
+	"binary_file_patterns": [
+		"*.txt", "*.bz2", ".gz", ".tgz", ".tbz2",
+		"*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"
+	],
 }

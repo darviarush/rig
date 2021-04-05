@@ -18,7 +18,7 @@
 # INSTALL
 
 ```sh
-$ pip3 install {{pkg}}
+$ pip3 install {{xpkg}}
 ```
 
 # REQUIREMENTS
