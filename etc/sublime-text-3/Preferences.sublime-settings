@@ -1,5 +1,26 @@
 {
-	"color_scheme": "Packages/Agila Theme/Agila Light Solarized.tmTheme",
+	"binary_file_patterns":
+	[
+		"*.txt",
+		"*.bz2",
+		".gz",
+		".tgz",
+		".tbz2",
+		"*.jpg",
+		"*.jpeg",
+		"*.png",
+		"*.gif",
+		"*.ttf",
+		"*.tga",
+		"*.dds",
+		"*.ico",
+		"*.eot",
+		"*.pdf",
+		"*.swf",
+		"*.jar",
+		"*.zip"
+	],
+	"color_scheme": "Packages/Agila Theme/Markdown/Cobalt Markdown.tmTheme",
 	"font_size": 10,
 	"ignored_packages":
 	[
@@ -7,9 +28,5 @@
 	],
 	"show_encoding": true,
 	"theme": "Adaptive.sublime-theme",
-	"word_wrap": true,
-	"binary_file_patterns": [
-		"*.txt", "*.bz2", ".gz", ".tgz", ".tbz2",
-		"*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"
-	],
+	"word_wrap": true
 }
