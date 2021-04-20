@@ -141,5 +141,9 @@ py_test() {
 # py_upload - загружает текущий репозиторий питон как пакет в pypi
 alias py_upload='py_test && push dist && $RIG_RC/bin/pypi.org.upload.sh'
 
+# py_upload_only - загружает текущий репозиторий питон как пакет в pypi не тестируя его и не пуша
+alias py_upload_only='py_test && push dist && $RIG_RC/bin/pypi.org.upload.sh'
+
+
 # portal - подключение по ssh для нестандартного порта
 alias portal='ssh -p 6022 '
