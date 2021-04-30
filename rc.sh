@@ -21,10 +21,10 @@ if [ "$1" == startup ]; then
 	echo "Установлено"
 fi
 
+alias ls='ls --color'
 
 # fn - отредактировать rig/rc.sh и внести его в bash
 alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; mkdir -p etc/sublime-text-3/; rsync -ravh ~/.config/sublime-text-3/Packages/User/ etc/sublime-text-3/; push fn; popd'
-
 
 # help - показать список целей
 help() {
