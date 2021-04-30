@@ -11,6 +11,7 @@
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
+export PATH=$PATH:/usr/sbin
 
 if [ "$1" == startup ]; then
 
