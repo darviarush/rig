@@ -128,7 +128,7 @@ github() {
 alias cdx='cd ~/__/astrobook'
 
 # cde - cd to erswitcher
-alias cdx='cd ~/__/erswitcher'
+alias cde='cd ~/__/erswitcher'
 
 
 # mk snippet name - копирует сниппет с подстановками в текущий каталог
