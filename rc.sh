@@ -126,6 +126,10 @@ github() {
 # cdx - cd to astrobook
 alias cdx='cd ~/__/astrobook'
 
+# cde - cd to erswitcher
+alias cdx='cd ~/__/erswitcher'
+
+
 # mk snippet name - копирует сниппет с подстановками в текущий каталог
 alias mk='$RIG_RC/bin/mk.sh'
 
