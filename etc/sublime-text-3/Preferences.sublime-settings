@@ -21,7 +21,7 @@
 		"*.zip"
 	],
 	"color_scheme": "Packages/Agila Theme/Agila Light Solarized.tmTheme",
-	"font_size": 10,
+	"font_size": 11,
 	"ignored_packages":
 	[
 		"Vintage"
