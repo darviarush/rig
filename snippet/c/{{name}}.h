@@ -9,4 +9,7 @@ typedef struct {
 	
 } {{name}}_t;
 
+
+int {{name}}();
+
 #endif

@@ -20,13 +20,14 @@
 		"*.jar",
 		"*.zip"
 	],
-	"color_scheme": "Packages/Agila Theme/Agila Light Solarized.tmTheme",
+	"color_scheme": "Packages/Agila Theme/Agila Cobalt.tmTheme",
 	"font_size": 11,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
 	"show_encoding": true,
-	"theme": "Adaptive.sublime-theme",
+	"theme": "Agila Cobalt.sublime-theme",
+	"update_check": false,
 	"word_wrap": true
 }
