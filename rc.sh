@@ -130,6 +130,12 @@ alias cdx='cd ~/__/astrobook'
 # cde - cd to erswitcher
 alias cde='cd ~/__/erswitcher'
 
+# vg - перейти в каталог ~/_vg и запустить vagrant
+vg() {
+    pushd ~/_vg
+    vagrant $*
+    popd
+}
 
 # mk snippet name - копирует сниппет с подстановками в текущий каталог
 alias mk='$RIG_RC/bin/mk.sh'
