@@ -5,7 +5,7 @@
  * {{name}}_t - 
  */
 
-typedef struct {
+typedef struct {{NAME}} {
 	
 } {{name}}_t;
 
