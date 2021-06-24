@@ -130,6 +130,9 @@ alias cdx='cd ~/__/astrobook'
 # cde - cd to erswitcher
 alias cde='cd ~/__/erswitcher'
 
+# npp - запустить notepad++ в новом окне
+alias npp='wine notepad++.exe -multiInst'
+
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
     pushd ~/_vg
