@@ -131,7 +131,7 @@ alias cdx='cd ~/__/astrobook'
 alias cde='cd ~/__/erswitcher'
 
 # npp - запустить notepad++ в новом окне
-alias npp='/home/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst'
+alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst'
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
