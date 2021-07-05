@@ -124,8 +124,8 @@ github() {
     git clone git@github.com:darviarush/$1.git
 }
 
-# cdx - cd to astrobook
-alias cdx='cd ~/__/astrobook'
+# cda - cd to astrobook
+alias cda='cd ~/__/astrobook'
 
 # cde - cd to erswitcher
 alias cde='cd ~/__/erswitcher'
