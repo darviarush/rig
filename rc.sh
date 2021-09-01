@@ -135,7 +135,7 @@ alias cdn='cd ~/__/ninja'
 
 
 # npp - запустить notepad++ в новом окне
-alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst'
+alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
