@@ -165,3 +165,8 @@ alias py_upload_only='$RIG_RC/bin/pypi.org.upload.sh'
 
 # portal - подключение по ssh для нестандартного порта
 alias portal='ssh -p 6022 '
+
+# defopt - установить опции окружения по умолчанию
+defopt() {
+	xdg-settings set default-web-browser opera.desktop
+}
