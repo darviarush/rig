@@ -11,15 +11,15 @@ rm -fr build dist *.egg_info htmlcov
 
 echo
 echo step 1
-#python3 -m pip install --user --upgrade setuptools wheel
+python3 -m pip install --user --upgrade setuptools wheel
 
 echo
 echo step 2
-#python3 setup.py sdist bdist_wheel
+python3 setup.py sdist bdist_wheel
 
 echo
 echo step 3
-#python3 -m pip install --user --upgrade twine
+python3 -m pip install --user --upgrade twine
 
 echo
 echo step 4

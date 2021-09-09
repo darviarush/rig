@@ -162,6 +162,12 @@ alias py_upload='py_test && push dist && $RIG_RC/bin/pypi.org.upload.sh'
 # py_upload_only - загружает текущий репозиторий питон как пакет в pypi не тестируя его и не пуша
 alias py_upload_only='$RIG_RC/bin/pypi.org.upload.sh'
 
+# py_init - настраивает консоль на работу с pyenv
+py_init() {
+    export PATH="~/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+}
 
 # portal - подключение по ssh для нестандартного порта
 alias portal='ssh -p 6022 '
