@@ -176,3 +176,9 @@ alias portal='ssh -p 6022 '
 defopt() {
 	xdg-settings set default-web-browser opera.desktop
 }
+
+# gitconf - конфигурирует git
+gitconf() {
+	git config pull.rebase true   # rebase
+	git config pull.ff only       # fast-forward only
+}
