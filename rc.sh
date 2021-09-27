@@ -84,7 +84,7 @@ push() {
 	branch=`branch`
 	run "git add ."
 	run "git commit -am \"$branch ${1:-save}\""
-	run "git pull origin $branch --no-edit"
+	run "git pull origin $branch"
 	run "git push origin $branch"
 }
 
@@ -179,6 +179,6 @@ defopt() {
 
 # gitconf - конфигурирует git
 gitconf() {
-	git config pull.rebase true   # rebase
-	git config pull.ff only       # fast-forward only
+	git config --global pull.rebase false   # rebase
+	git config --global pull.ff only       # fast-forward only
 }
