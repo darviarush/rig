@@ -92,7 +92,7 @@ bdiff() {
 push() {
 	branch=`branch`
 	run "git add ."
-	run "git commit -am \"$branch ${1:-save}\""
+	run "git commit -am \"$branch ${1:-`desc`}\""
 	run "git pull origin $branch"
 	run "git push origin $branch"
 }
