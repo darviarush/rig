@@ -64,7 +64,7 @@ git_diff() {
     return 0
 }
 
-# co branch - переключение на ветку
+# c0 branch - переключение на ветку
 c0() {
     if git_diff; then
         git checkout $1
