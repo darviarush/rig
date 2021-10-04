@@ -182,3 +182,8 @@ gitconf() {
 	git config --global pull.rebase false   # rebase
 	git config --global pull.ff only       # fast-forward only
 }
+
+# installrig - 		инсталлирует самое необходимое
+installrig() {
+    pamac install aspell hspell libvoikko kcompare
+}
