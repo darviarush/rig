@@ -63,7 +63,7 @@ git_diff() {
 
 # co branch - переключение на ветку
 co() {
-    git_diff
+    if "`git_diff`" == 1; then return; fi
     git checkout $1
 }
 
@@ -76,8 +76,9 @@ new() {
     run git checkout master
     run git pull origin master
     branch=`echo "$1" | awk '{print $1}'`
-    if [ "$branch" == "" ]; then echo "Нет бранча!"; fi
-    git config branch.$branch.description "$1"
+    if [ "$branch" == "" ]; then echo "Нет бранча!"; return; fi
+    desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    git config branch.$branch.description "$desc"
     run git checkout -b $branch
     run git push origin $branch
 }
