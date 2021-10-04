@@ -62,7 +62,10 @@ git_diff() {
 }
 
 # co branch - переключение на ветку
-alias co='git checkout'
+co() {
+    git_diff
+    git checkout
+}
 
 # desc - описание текущего бранча
 alias desc='git config branch.`branch`.description'
