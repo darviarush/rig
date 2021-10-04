@@ -43,7 +43,7 @@ branch() {
 run() {
 	echo "$*"
 	eval "$*"
-	#if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; fi
+	if [ "$?" != 0 ]; then echo "Завершение команды: $?. Выходим"; fi
 }
 
 git_diff() {
@@ -64,7 +64,7 @@ git_diff() {
 # co branch - переключение на ветку
 co() {
     git_diff
-    git checkout
+    git checkout $1
 }
 
 # desc - описание текущего бранча
@@ -96,7 +96,6 @@ push() {
 	run "git pull origin $branch"
 	run "git push origin $branch"
 }
-
 
 # pull - пулл текущей ветки
 pull() {
