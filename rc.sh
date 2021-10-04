@@ -90,11 +90,18 @@ bdiff() {
     git diff master...$branch | kompare -
 }
 
+# commit - комититю Если нечего комитить - ничего не делает
+commit() {
+    if [ "`sta`" != "" ]; then
+        run "git add ."
+        run "git commit -am \"`branch` ${1:-`desc`}\""
+    fi
+}
+
 # push [comment] - делает комит текущей ветки
 push() {
 	branch=`branch`
-	run "git add ."
-	run "git commit -am \"$branch ${1:-`desc`}\""
+	if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
 	run "git pull origin $branch"
 	run "git push origin $branch"
 }
@@ -103,21 +110,23 @@ push() {
 pull() {
 	branch=`branch`
 
-	if [ "`git status -s`" != "" ]; then
-		is_new="true"
-		run "git add ."
-		run "git commit -am \"$branch ${1:-save}\""
+	if [ "`sta`" != "" ]; then
+	    sta
+	    echo
+	    echo "Вначале запуште."
+	    return 1
 	fi
 
-	git pull origin $branch --no-edit
-
-	if [ "$is_new" != "" ]; then git push origin $branch; fi
-
-	#if [ "`git status -s`" == "" ]
-	#then cp -ra etc/sublime-text-3 ~/.config/sublime-text-3
-	#fi
+	run "git pull origin $branch --no-edit"
 }
 
+# merge - мержит текущую ветку с мастером
+merge() {
+    branch=`branch`
+    run "co master"
+    run "git merge --no-ff $branch"
+    run "git push 'Слияние $branch \"`desc`\"'"
+}
 
 # sta - показать git-статус 
 alias sta="git status -s"
