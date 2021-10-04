@@ -61,12 +61,14 @@ git_diff() {
 	    fi
 	done
     fi
+    return 0
 }
 
 # co branch - переключение на ветку
 co() {
-    if "`git_diff`" == 1; then return; fi
-    git checkout $1
+    if git_diff; then
+        git checkout $1
+    fi
 }
 
 # desc - описание текущего бранча
