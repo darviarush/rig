@@ -65,7 +65,7 @@ git_diff() {
 }
 
 # co branch - переключение на ветку
-con() {
+co() {
     if git_diff; then
         git checkout $1
     fi
