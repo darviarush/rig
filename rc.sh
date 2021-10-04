@@ -79,6 +79,12 @@ new() {
     run git push origin $branch
 }
 
+# bdiff - сравнение двух бранчей. Выполните installrig перед использованием
+bdiff() {
+    if [ "$1" == "" ]; then branch=`branch`; else branch=$1; fi
+    git diff master...$branch | kompare -
+}
+
 # push [comment] - делает комит текущей ветки
 push() {
 	branch=`branch`
