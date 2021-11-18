@@ -144,13 +144,20 @@ alias sta1="git status"
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
-# release version-message - git-релиз
+# release version-message - ставит тег и меняет версию в README.md
 release() {
-    c0 master
+    if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
+
     ver=`echo "$1" | awk '{print $1}'`
     if [ "$ver" == "" ]; then echo "Нет версии!"; return; fi
     desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+
+    perl -i -np 's/^(#+[ \t]+VERSION\s*)\S+/$1$ver/m' README.md
+
+    commit "Релиз версии $ver"
+
     git tag -a "$ver" -m "$desc"
+    git push origin --tags
 }
 
 # github name - клонировать с github мой проект
