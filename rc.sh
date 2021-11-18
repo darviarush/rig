@@ -34,10 +34,6 @@ help() {
 }
 
 
-# branch - показать текущую ветку
-branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
 
 
 # run code - показать код bash и выполнить его
@@ -64,12 +60,6 @@ git_diff() {
     return 0
 }
 
-# c0 branch - переключение на ветку
-c0() {
-    if git_diff; then
-        git checkout $1
-    fi
-}
 
 # desc - описание текущего бранча
 alias desc='git config branch.`branch`.description'
@@ -87,13 +77,26 @@ new() {
     run git push origin $branch
 }
 
-# bdiff - сравнение двух бранчей. Выполните installrig перед использованием
+# branch - показать текущую ветку
+branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+# c0 branch - переключение на ветку
+c0() {
+    if git_diff; then
+        git checkout $1
+    fi
+}
+
+
+# bdiff - сравнение двух бранчей. Выполните installrig или установите kompare
 bdiff() {
     if [ "$1" == "" ]; then branch=`branch`; else branch=$1; fi
     git diff master...$branch | kompare -
 }
 
-# commit - комититю Если нечего комитить - ничего не делает
+# commit - комитит. Если нечего комитить - ничего не делает
 commit() {
     if [ "`sta`" != "" ]; then
         run "git add ."
@@ -131,20 +134,30 @@ merge() {
     run "git push 'Слияние $branch \"`desc`\"'"
 }
 
-# sta - показать git-статус 
+# sta - показать сокращённый git-статус
 alias sta="git status -s"
+
+# sta1 - показать git-статус
+alias sta1="git status"
 
 
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
-# install_pip - установить pip с инета
-alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
+# release - git-релиз
+release() {
+    c0 master
+    
+}
 
-# github - клонировать с github мой проект
+# github name - клонировать с github мой проект
 github() {
     git clone git@github.com:darviarush/$1.git
 }
+
+# install_pip - установить pip с инета
+alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
+
 
 # cda - cd to astrobook
 alias cda='cd ~/__/astrobook'
