@@ -144,10 +144,13 @@ alias sta1="git status"
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
-# release - git-релиз
+# release version-message - git-релиз
 release() {
     c0 master
-    
+    ver=`echo "$1" | awk '{print $1}'`
+    if [ "$ver" == "" ]; then echo "Нет версии!"; return; fi
+    desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    git tag -a "$ver" -m "$desc"
 }
 
 # github name - клонировать с github мой проект
