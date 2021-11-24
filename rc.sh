@@ -182,9 +182,11 @@ alias cda='cd ~/__/astrobook'
 # cde - cd to erswitcher
 alias cde='cd ~/__/erswitcher'
 
-# cdn - cd to ninjs
+# cdn - cd to ninja
 alias cdn='cd ~/__/ninja'
 
+# cds - cd to starset
+alias cds='cd ~/__/starset'
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
