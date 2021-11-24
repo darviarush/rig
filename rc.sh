@@ -151,6 +151,7 @@ release() {
     ver=`echo "$1" | awk '{print $1}'`
     if [ "$ver" == "" ]; then echo "Нет версии!"; return; fi
     desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    if [ "$desc" == "" ]; then echo "Нет описания!"; return; fi
 
     perl -i -np 's/^(#+[ \t]+VERSION\s*)\S+/$1$ver/m' README.md
     return
