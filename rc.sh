@@ -153,11 +153,17 @@ release() {
     desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
 
     perl -i -np 's/^(#+[ \t]+VERSION\s*)\S+/$1$ver/m' README.md
+    return
 
     commit "Релиз версии $ver"
 
     git tag -a "$ver" -m "$desc"
     git push origin --tags
+}
+
+# version - версия из README.md текущего проекта
+version() {
+    perl -n 'print("$1\n"), exit if /^#+[ \t]+VERSION\s*(\S+)/' README.md
 }
 
 # github name - клонировать с github мой проект
