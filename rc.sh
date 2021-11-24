@@ -163,7 +163,7 @@ release() {
 
 # version - версия из README.md текущего проекта
 version() {
-    perl -n 'print("$1\n"), exit if /^#+[ \t]+VERSION\s*(\S+)/' README.md
+    perl -n -e 'print("$1\n"), exit if /^#+[ \t]+VERSION\s*(\S+)/' README.md
 }
 
 # github name - клонировать с github мой проект
