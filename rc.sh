@@ -74,8 +74,11 @@ new() {
     branch=`echo "$1" | awk '{print $1}'`
     if [ "$branch" == "" ]; then echo "Нет бранча!"; return; fi
     desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    git config --global merge.branchdesc true
     git config branch.$branch.description "$desc"
+
     run git checkout -b $branch
+    git merge --log
     run git push origin $branch
 }
 
