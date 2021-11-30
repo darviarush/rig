@@ -48,13 +48,15 @@ git_diff() {
     m=`git status -s`
     if [ "$m" != "" ]; then
 	git status -s
-	select i in "Комитим" "Ресетим" "Пропускаем" "Отмена"
+	PS3="Ваш выбор:"
+	select i in Комитим Ресетим Пропускаем Отмена
 	do
-	    if $REPLY == 1; then read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"
-	    elif $REPLY == 2; then run git reset --hard HEAD
-	    elif $REPLY == 3; then echo "Пропущено"
-	    else return 1
-	    fi
+	    case $i in
+		Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
+		Ресетим) run git reset --hard HEAD;;
+		Пропускаем) echo "Пропущено";;
+		Отмена) return 1;;
+	    esac
 	done
     fi
     return 0
