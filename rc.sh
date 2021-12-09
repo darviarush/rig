@@ -113,7 +113,7 @@ commit() {
 push() {
 	branch=`branch`
 	if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
-	run "git pull origin $branch"
+	run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
 	run "git push origin $branch"
 }
 
@@ -128,7 +128,7 @@ pull() {
 	    return 1
 	fi
 
-	run "git pull origin $branch --no-edit"
+	run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
 }
 
 # merge - мержит текущую ветку с мастером
