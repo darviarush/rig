@@ -8,6 +8,8 @@
 #
 # для добавления задач в bash
 
+# Для zsh
+
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
@@ -15,10 +17,12 @@ export PATH=$PATH:/usr/sbin
 
 if [ "$1" == startup ]; then
 
-	echo "export RIG_RC='`pwd`'" >> ~/.bashrc
-	echo '. $RIG_RC/rc.sh' >> ~/.bashrc
-
-	echo "Установлено"
+    for i in ~/.bashrc ~/.zshrc; do
+	if [ -e $i ]; then
+	    perl -i -0pe 's/$/\n\nexport RIG_RC=${\`pwd`}. $RIG_RC\/rc.sh/ if !/^export[ \t]+RIG_RC=/m' $i
+	    echo "Установлено в $i"
+	fi
+    done
 fi
 
 alias ls='ls --color'
