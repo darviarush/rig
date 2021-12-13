@@ -151,7 +151,7 @@ alias sta1="git status"
 alias reset='git reset --hard HEAD'
 
 # bdiff - диф текущего бранча
-alias bdiff='git diff master...`branch` | kcompare'
+alias bdiff='git diff master...`branch` | kompare'
 
 # release version-message - ставит тег и меняет версию в README.md
 release() {
@@ -248,5 +248,5 @@ gitconf() {
 
 # installrig - 		инсталлирует самое необходимое
 installrig() {
-    pamac install aspell hspell libvoikko kcompare
+    pamac install aspell hspell libvoikko kompare
 }
