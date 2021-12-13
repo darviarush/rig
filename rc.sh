@@ -151,7 +151,7 @@ alias sta1="git status"
 alias reset='git reset --hard HEAD'
 
 # bdiff - диф текущего бранча
-alias bdiff='git master...`branch` | kcompare'
+alias bdiff='git diff master...`branch` | kcompare'
 
 # release version-message - ставит тег и меняет версию в README.md
 release() {
