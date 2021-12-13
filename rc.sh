@@ -8,8 +8,6 @@
 #
 # для добавления задач в bash
 
-# Для zsh
-
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
@@ -138,7 +136,7 @@ pull() {
 # merge - мержит текущую ветку с мастером
 merge() {
     branch=`branch`
-    run "co master"
+    run "c0 master"
     run "git merge --no-ff $branch"
     run "git push 'Слияние $branch \"`desc`\"'"
 }
@@ -149,9 +147,11 @@ alias sta="git status -s"
 # sta1 - показать git-статус
 alias sta1="git status"
 
-
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
+
+# bdiff - диф текущего бранча
+alias bdiff='git master...`branch` | kcompare'
 
 # release version-message - ставит тег и меняет версию в README.md
 release() {
