@@ -111,6 +111,11 @@ commit() {
     fi
 }
 
+# upd - обновить ветку с мастера
+upd() {
+    run "git merge origin/master --no-edit --no-ff"
+}
+
 # push [comment] - делает комит текущей ветки
 push() {
 	branch=`branch`
