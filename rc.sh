@@ -150,9 +150,6 @@ alias sta1="git status"
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
-# bdiff - диф текущего бранча
-alias bdiff='git diff master...`branch` | kompare'
-
 # release version-message - ставит тег и меняет версию в README.md
 release() {
     if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
