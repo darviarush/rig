@@ -199,6 +199,10 @@ alias cdn='cd ~/__/ninja'
 # cds - cd to starset
 alias cds='cd ~/__/starset'
 
+# cdth - cd to ethereal-theory
+alias cds='cd ~/__/ethereal-theory'
+
+
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
