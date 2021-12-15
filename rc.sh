@@ -200,7 +200,7 @@ alias cdn='cd ~/__/ninja'
 alias cds='cd ~/__/starset'
 
 # cdth - cd to ethereal-theory
-alias cds='cd ~/__/ethereal-theory'
+alias cdth='cd ~/__/ethereal-theory'
 
 
 # npp - запустить notepad++ в новом окне
