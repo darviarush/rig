@@ -196,8 +196,8 @@ alias cde='cd ~/__/erswitcher'
 # cdn - cd to ninja
 alias cdn='cd ~/__/ninja'
 
-# cds - cd to starset
-alias cds='cd ~/__/starset'
+# cds - cd to sua-basic
+alias cds='cd ~/__/sua-basic'
 
 # cdth - cd to ethereal-theory
 alias cdth='cd ~/__/ethereal-theory'
