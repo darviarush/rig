@@ -9,6 +9,7 @@ export NAME=${2^^}
 export pkg=$2
 export xpkg=`echo "$pkg" | sed 's/python_//g'`
 export pypkg=`echo "$pkg" | sed 's/-/_/g' | sed 's/python_//g'`
+export Pypkg=${pypkg^}
 snippet=$RIG_RC/snippet/$1
 
 if [ -z "$3" ]; then FLAT=$pkg; else FLAT="."; fi

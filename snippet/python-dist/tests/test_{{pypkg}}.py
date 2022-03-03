@@ -4,7 +4,7 @@ import unittest
 from {{pypkg}} import {{pypkg}}
 
 
-class DistInfoTestCase(unittest.TestCase):
+class {{Pypkg}}TestCase(unittest.TestCase):
 
     def test_{{pypkg}}(self):
         """ тест функций """
