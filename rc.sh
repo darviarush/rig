@@ -197,7 +197,7 @@ alias cde='cd ~/__/erswitcher'
 alias cdn='cd ~/__/ninja'
 
 # cds - cd to sua-basic
-alias cds='cd ~/__/sua-basic'
+alias cdmx='cd ~/__/mx-basic'
 
 # cdth - cd to ethereal-theory
 alias cdth='cd ~/__/ethereal-theory'
