@@ -46,4 +46,9 @@ cp_path() {
 	fi
 }
 
-find $snippet | while read file; do cp_path "$file"; done
+if [ -d $snippet ]; then
+	find $snippet | while read file; do cp_path "$file"; done
+else
+	cp_path $snippet.* 
+fi
+
