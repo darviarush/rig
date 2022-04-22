@@ -90,6 +90,8 @@ branch() {
 
 # branch_prompt - показать ветку красной и с отступом в пробел, если есть
 branch_prompt() {
+	b=`branch`
+	if [ "$b" != "" ]; then return " $b"; fi
 }
 
 # c0 branch - переключение на ветку
