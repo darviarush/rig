@@ -12,7 +12,7 @@ export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
 export PATH=$PATH:/usr/sbin
-export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W$(branch )\[\033[01;32m\]]\$\[\033[00m\] '
+export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]$(branch_prompt )\$\[\033[00m\] '
 
 if [ "$1" == startup ]; then
 
@@ -35,8 +35,6 @@ help() {
 	grep -e "^#" $RIG_RC/rc.sh | tail -n +2 | sed "s/^#[ \\t]\?//" 
 	echo
 }
-
-
 
 
 # run code - показать код bash и выполнить его
@@ -88,6 +86,10 @@ new() {
 # branch - показать текущую ветку
 branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+# branch_prompt - показать ветку красной и с отступом в пробел, если есть
+branch_prompt() {
 }
 
 # c0 branch - переключение на ветку
