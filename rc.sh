@@ -91,7 +91,7 @@ branch() {
 # branch_prompt - показать ветку красной и с отступом в пробел, если есть
 branch_prompt() {
 	b=`branch`
-	if [ "$b" != "" ]; then echo " \[\033[31m\]$b"; fi
+	if [ "$b" != "" ]; then echo " \[\033\[31m\]$b"; fi
 }
 
 # c0 branch - переключение на ветку
