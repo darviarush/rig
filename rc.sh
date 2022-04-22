@@ -12,7 +12,7 @@ export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
 export PATH=$PATH:/usr/sbin
-export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W \[\033 ! [01;32m\]]\$\[\033[00m\] '
+export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W$(branch )\[\033[01;32m\]]\$\[\033[00m\] '
 
 if [ "$1" == startup ]; then
 
