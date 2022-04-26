@@ -143,12 +143,16 @@ pull() {
 	run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
 }
 
-# merge - мержит текущую ветку с мастером
+# merge - мержит текущую ветку с мастером и удаляет её
 merge() {
     branch=`branch`
     run "c0 master"
     run "git merge --no-ff $branch"
     run "git push 'Слияние $branch \"`desc`\"'"
+	if [ "$1" == "" ]; then
+		run "git push origin :$branch"
+		run "git branch -D $branch"
+	fi
 }
 
 # sta - показать сокращённый git-статус
