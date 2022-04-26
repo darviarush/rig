@@ -72,15 +72,15 @@ new() {
     if "`git_diff`" == 1; then return; fi
     run git checkout master
     run git pull origin master
-    branch=`echo "$1" | awk '{print $1}'`
-    if [ "$branch" == "" ]; then echo "Нет бранча!"; return; fi
-    desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    local b=`echo "$1" | awk '{print $1}'`
+    if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
+    local s="`echo "$1" | sed -r 's/^\S+\s*//'`"
     git config --global merge.branchdesc true
-    git config branch.$branch.description "$desc"
+    git config branch.$b.description "$s"
 
-    run git checkout -b $branch
+    run git checkout -b $b
     git merge --log
-    run git push origin $branch
+    run git push origin $b
 }
 
 # branch - показать текущую ветку
