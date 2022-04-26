@@ -48,17 +48,17 @@ run() {
 git_diff() {
     m=`git status -s`
     if [ "$m" != "" ]; then
-	git status -s
-	PS3="Ваш выбор:"
-	select i in Комитим Ресетим Пропускаем Отмена
-	do
-	    case $i in
-		Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
-		Ресетим) run git reset --hard HEAD;;
-		Пропускаем) echo "Пропущено";;
-		Отмена) return 1;;
-	    esac
-	done
+		git status -s
+		PS3="Ваш выбор:"
+		select i in Комитим Ресетим Пропускаем Отмена
+		do
+	    	case $i in
+				Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
+				Ресетим) run git reset --hard HEAD;;
+				Пропускаем) echo "Пропущено";;
+				Отмена) return 1;;
+	    	esac
+		done
     fi
     return 0
 }
