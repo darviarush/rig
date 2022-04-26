@@ -151,6 +151,7 @@ merge() {
     run "git merge --no-ff $branch"
     run "push 'Слияние $branch \"`desc`\"'"
 	if [ "$1" == "" ]; then
+		echo "=== Удаление $branch ==="
 		run "c0 $branch"
 		run "git push origin :$branch"
 		run "git branch -D $branch"
