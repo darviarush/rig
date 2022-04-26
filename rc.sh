@@ -148,7 +148,7 @@ merge() {
     branch=`branch`
     run "c0 master"
     run "git merge --no-ff $branch"
-    run "git push 'Слияние $branch \"`desc`\"'"
+    run "push 'Слияние $branch \"`desc`\"'"
 	if [ "$1" == "" ]; then
 		run "git push origin :$branch"
 		run "git branch -D $branch"
