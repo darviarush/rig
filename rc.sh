@@ -146,7 +146,7 @@ pull() {
 
 # merge - мержит текущую ветку с мастером и удаляет её
 merge() {
-    branch=`branch`
+	local branch=`branch`
     run "c0 master"
     run "git merge --no-ff $branch"
     run "push 'Слияние $branch \"`desc`\"'"
