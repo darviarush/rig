@@ -111,6 +111,7 @@ bdiff() {
 # commit - комитит. Если нечего комитить - ничего не делает
 commit() {
     if [ "`sta`" != "" ]; then
+    	sta
         run "git add ."
         run "git commit -am \"`branch` ${1:-`desc`}\""
     fi
@@ -150,6 +151,7 @@ merge() {
     run "git merge --no-ff $branch"
     run "push 'Слияние $branch \"`desc`\"'"
 	if [ "$1" == "" ]; then
+		run "c0 $branch"
 		run "git push origin :$branch"
 		run "git branch -D $branch"
 	fi
