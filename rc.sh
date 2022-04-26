@@ -153,7 +153,6 @@ merge() {
     run "push 'Слияние $b \"`desc`\"'"
 	if [ "$1" == "" ]; then
 		echo "=== Удаление $b ==="
-		run "c0 $b"
 		run "git push origin :$b"
 		run "git branch -D $b"
 	fi
