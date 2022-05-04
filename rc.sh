@@ -146,16 +146,16 @@ pull() {
 
 # merge - мержит текущую ветку с мастером и удаляет её
 merge() {
-	local b="`branch`"
-	echo "=== merge $b ==="
+    local b="`branch`"
+    echo "=== merge $b ==="
     run "c0 master"
     run "git merge --no-ff $b"
     run "push 'Слияние $b \"`desc`\"'"
-	if [ "$1" == "" ]; then
-		echo "=== Удаление $b ==="
-		run "git push origin :$b"
-		run "git branch -D $b"
-	fi
+    if [ "$1" == "" ]; then
+	echo "=== Удаление $b ==="
+	run "git push origin :$b"
+	run "git branch -D $b"
+    fi
 }
 
 # sta - показать сокращённый git-статус
