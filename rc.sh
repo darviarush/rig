@@ -250,6 +250,16 @@ py_init() {
     eval "$(pyenv virtualenv-init -)"
 }
 
+# cov - тестирование perl-проектов с cover
+cov() {
+	cover -delete
+	PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
+	cover -report html_basic
+	if [ "$1" == "-O" ]; then xdg-open cover_db/coverage.html
+	elif [ "$1" == "-o" ]; then opera cover_db/coverage.html
+	fi
+}
+
 # portal - подключение по ssh для нестандартного порта
 alias portal='ssh -p 6022 '
 
