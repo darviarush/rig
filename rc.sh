@@ -102,11 +102,9 @@ c0() {
     fi
 }
 
-
-# bdiff - сравнение двух бранчей. Выполните installrig или установите kompare
+# bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
 bdiff() {
-    if [ "$1" == "" ]; then branch=`branch`; else branch=$1; fi
-    git diff master...$branch | kompare -
+    git diff master...${1:-`branch`} | kompare -
 }
 
 # commit - комитит. Если нечего комитить - ничего не делает
