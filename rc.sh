@@ -17,10 +17,10 @@ export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )
 if [ "$1" == startup ]; then
 
     for i in ~/.bashrc ~/.zshrc; do
-	if [ -e $i ]; then
-	    perl -i -0pe 's/$/\n\nexport RIG_RC=${\`pwd`}. $RIG_RC\/rc.sh/ if !/^export[ \t]+RIG_RC=/m' $i
-	    echo "Установлено в $i"
-	fi
+        if [ -e $i ]; then
+            perl -i -0pe 's/$/\n\nexport RIG_RC=${\`pwd`}. $RIG_RC\/rc.sh/ if !/^export[ \t]+RIG_RC=/m' $i
+            echo "Установлено в $i"
+        fi
     done
 fi
 
@@ -32,33 +32,33 @@ alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh;  push fn; popd'
 
 # help - показать список целей
 help() {
-	grep -e "^#" $RIG_RC/rc.sh | tail -n +2 | sed "s/^#[ \\t]\?//" 
-	echo
+    grep -e "^#" $RIG_RC/rc.sh | tail -n +2 | sed "s/^#[ \\t]\?//" 
+    echo
 }
 
 
 # run code - показать код bash и выполнить его
 run() {
-	echo "$*"
-	eval "$*"
-	c="$?"
-	if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
+    echo "$*"
+    eval "$*"
+    c="$?"
+    if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
 }
 
 git_diff() {
     m=`git status -s`
     if [ "$m" != "" ]; then
-		git status -s
-		PS3="Ваш выбор:"
-		select i in Комитим Ресетим Пропускаем Отмена
-		do
-	    	case $i in
-				Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
-				Ресетим) run git reset --hard HEAD;;
-				Пропускаем) echo "Пропущено";;
-				Отмена) return 1;;
-	    	esac
-		done
+        git status -s
+        PS3="Ваш выбор:"
+        select i in Комитим Ресетим Пропускаем Отмена
+        do
+            case $i in
+                Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
+                Ресетим) run git reset --hard HEAD;;
+                Пропускаем) echo "Пропущено";;
+                Отмена) return 1;;
+            esac
+        done
     fi
     return 0
 }
@@ -90,8 +90,8 @@ branch() {
 
 # branch_prompt - показать ветку красной и с отступом в пробел, если есть
 branch_prompt() {
-	b=`branch`
-	if [ "$b" != "" ]; then echo " $b"; fi
+    b=`branch`
+    if [ "$b" != "" ]; then echo " $b"; fi
 }
 
 # c0 branch - переключение на ветку
@@ -111,7 +111,7 @@ bdiff() {
 # commit - комитит. Если нечего комитить - ничего не делает
 commit() {
     if [ "`sta`" != "" ]; then
-    	sta
+        sta
         run "git add ."
         run "git commit -am \"`branch` ${1:-`desc`}\""
     fi
@@ -124,37 +124,38 @@ upd() {
 
 # push [comment] - делает комит текущей ветки
 push() {
-	branch=`branch`
-	if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
-	run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
-	run "git push origin $branch"
+    branch=`branch`
+    if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
+    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
+    run "git push origin $branch"
 }
 
 # pull - пулл текущей ветки
 pull() {
-	branch=`branch`
+    branch=`branch`
 
-	if [ "`sta`" != "" ]; then
-	    sta
-	    echo
-	    echo "Вначале запуште."
-	    return 1
-	fi
+    if [ "`sta`" != "" ]; then
+        sta
+        echo
+        echo "Вначале запуште."
+        return 1
+    fi
 
-	run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
+    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
 }
 
 # merge - мержит текущую ветку с мастером и удаляет её
 merge() {
     local b="`branch`"
     echo "=== merge $b ==="
+	push "${1:-`desc`}"
     run "c0 master"
     run "git merge --no-ff $b"
     run "push 'Слияние $b \"`desc`\"'"
-    if [ "$1" == "" ]; then
-	echo "=== Удаление $b ==="
-	run "git push origin :$b"
-	run "git branch -D $b"
+    if [ "$1" == "1" ]; then
+        echo "=== Удаление $b ==="
+        run "git push origin :$b"
+        run "git branch -D $b"
     fi
 }
 
@@ -255,12 +256,12 @@ py_init() {
 
 # cov - тестирование perl-проектов с cover
 cov() {
-	cover -delete
-	PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
-	cover -report html_basic
-	if [ "$1" == "-O" ]; then xdg-open cover_db/coverage.html
-	elif [ "$1" == "-o" ]; then opera cover_db/coverage.html
-	fi
+    cover -delete
+    PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
+    cover -report html_basic
+    if [ "$1" == "-O" ]; then xdg-open cover_db/coverage.html
+    elif [ "$1" == "-o" ]; then opera cover_db/coverage.html
+    fi
 }
 
 # portal - подключение по ssh для нестандартного порта
@@ -268,16 +269,16 @@ alias portal='ssh -p 6022 '
 
 # defopt - установить опции окружения по умолчанию
 defopt() {
-	xdg-settings set default-web-browser opera.desktop
+    xdg-settings set default-web-browser opera.desktop
 }
 
 # gitconf - конфигурирует git
 gitconf() {
-	git config --global pull.rebase false   # rebase
-	git config --global pull.ff only       # fast-forward only
+    git config --global pull.rebase false   # rebase
+    git config --global pull.ff only       # fast-forward only
 }
 
-# installrig - 		инсталлирует самое необходимое
+# installrig -         инсталлирует самое необходимое
 installrig() {
     pamac install aspell hspell libvoikko kompare
 }
