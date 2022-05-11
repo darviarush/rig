@@ -45,6 +45,7 @@ run() {
     if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
 }
 
+# git_diff - при изменениях в репозитории предлагает пользователю варианты действий с ними
 git_diff() {
     m=`git status -s`
     if [ "$m" != "" ]; then
@@ -69,7 +70,7 @@ alias desc='git config branch.`branch`.description'
 
 # new branch - создаёт ветку
 new() {
-    if "`git_diff`" == 1; then return; fi
+    if ! git_diff; then return; fi
     run git checkout master
     run git pull origin master
     local b=`echo "$1" | awk '{print $1}'`
@@ -101,18 +102,16 @@ c0() {
     fi
 }
 
-
-# bdiff - сравнение двух бранчей. Выполните installrig или установите kompare
+# bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
 bdiff() {
-    if [ "$1" == "" ]; then branch=`branch`; else branch=$1; fi
-    git diff master...$branch | kompare -
+    git diff master...${1:-`branch`} | kompare -
 }
 
 # commit - комитит. Если нечего комитить - ничего не делает
 commit() {
     if [ "`sta`" != "" ]; then
         sta
-        run "git add ."
+        run git add .
         run "git commit -am \"`branch` ${1:-`desc`}\""
     fi
 }
