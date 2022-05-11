@@ -64,7 +64,7 @@ git_diff() {
 }
 
 
-# desc - описание текущего бранча
+# desc - печатает описание текущего бранча
 alias desc='git config branch.`branch`.description'
 
 # new branch - создаёт ветку
