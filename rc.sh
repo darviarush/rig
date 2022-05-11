@@ -214,6 +214,9 @@ alias cdmx='cd ~/__/mx-basic'
 # cdth - cd to ethereal-theory
 alias cdth='cd ~/__/ethereal-theory'
 
+# cdfr - cd to rubin-forms
+alias cdrf='cd /mnt/ext/__/rubin-forms'
+
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
