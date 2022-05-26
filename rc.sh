@@ -112,7 +112,7 @@ commit() {
     if [ "`sta`" != "" ]; then
         sta
         run git add .
-        run "git commit -am \"`branch` ${1:-`desc`}\""
+        run "git commit -am \"`branch` $1\""
     fi
 }
 
