@@ -68,6 +68,15 @@ git_diff() {
 # desc - печатает описание текущего бранча
 alias desc='git config branch.`branch`.description'
 
+# sta - показать сокращённый git-статус
+alias sta="git status -s"
+
+# sta1 - показать git-статус
+alias sta1="git status"
+
+# reset - удалить изменения в файлах
+alias reset='git reset --hard HEAD'
+
 # new branch - создаёт ветку
 new() {
     if ! git_diff; then return; fi
@@ -158,14 +167,6 @@ merge() {
     fi
 }
 
-# sta - показать сокращённый git-статус
-alias sta="git status -s"
-
-# sta1 - показать git-статус
-alias sta1="git status"
-
-# reset - удалить изменения в файлах
-alias reset='git reset --hard HEAD'
 
 # release version-message - ставит тег и меняет версию в README.md
 release() {
