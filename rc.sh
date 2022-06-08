@@ -45,6 +45,9 @@ run() {
     if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
 }
 
+# locallib - указать локальную директорию для пакетов perl
+alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
+
 # git_diff - при изменениях в репозитории предлагает пользователю варианты действий с ними
 git_diff() {
     m=`git status -s`
