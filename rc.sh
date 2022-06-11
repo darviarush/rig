@@ -212,7 +212,7 @@ alias cde='cd ~/__/erswitcher'
 # cdn - cd to ninja
 alias cdn='cd ~/__/ninja'
 
-# cds - cd to sua-basic
+# cdnx - cd to mx-basic
 alias cdmx='cd ~/__/mx-basic'
 
 # cdth - cd to ethereal-theory
@@ -220,6 +220,9 @@ alias cdth='cd ~/__/ethereal-theory'
 
 # cdfr - cd to rubin-forms
 alias cdrf='cd /mnt/ext/__/rubin-forms'
+
+# cds - cd to golang-perl-storable
+alias cds='cd ~/__/golang-perl-storable'
 
 
 # npp - запустить notepad++ в новом окне
