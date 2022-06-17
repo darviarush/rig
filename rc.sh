@@ -16,9 +16,9 @@ export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )
 
 if [ "$1" == startup ]; then
 
-    for i in ~/.bashrc ~/.zshrc; do
+    for i in ~/.bashrc; do
         if [ -e $i ]; then
-            perl -i -0pe 's/$/\n\nexport RIG_RC=${\`pwd`}. $RIG_RC\/rc.sh/ if !/^export[ \t]+RIG_RC=/m' $i
+            perl -i -0pe 's/$/\n\nexport RIG_RC=${\`pwd`}. \$RIG_RC\/rc.sh/ if !/^export[ \t]+RIG_RC=/m' $i
             echo "Установлено в $i"
         fi
     done
