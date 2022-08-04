@@ -224,6 +224,9 @@ alias cdrf='cd /mnt/ext/__/rubin-forms'
 # cds - cd to golang-perl-storable
 alias cds='cd ~/__/golang-perl-storable'
 
+# cds - cd to test directory
+alias cdt='cd ~/__1/'
+
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
