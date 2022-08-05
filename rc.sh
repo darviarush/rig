@@ -224,7 +224,7 @@ alias cdrf='cd /mnt/ext/__/rubin-forms'
 # cds - cd to golang-perl-storable
 alias cds='cd ~/__/golang-perl-storable'
 
-# cds - cd to test directory
+# cdt - cd to test directory
 alias cdt='cd ~/__1/'
 
 
