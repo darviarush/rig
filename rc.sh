@@ -228,7 +228,7 @@ alias cds='cd ~/__/golang-perl-storable'
 alias cdt='cd ~/__1/'
 
 # cdr - cd to restoclub directory
-alias cdt='cd /home/Project/restoclub-2022'
+alias cdr='cd /home/Project/restoclub-2022'
 
 
 
