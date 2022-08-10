@@ -227,6 +227,10 @@ alias cds='cd ~/__/golang-perl-storable'
 # cdt - cd to test directory
 alias cdt='cd ~/__1/'
 
+# cdr - cd to restoclub directory
+alias cdt='cd /home/Project/restoclub-2022'
+
+
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
