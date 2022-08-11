@@ -107,8 +107,8 @@ branch_prompt() {
     #local status
     status=$?
     b=`branch`
-    if [ "$b" != "" ]; then echo " $b"; fi
-    if [ "$status" != 0 ]; then echo " 😡"; fi
+    if [ "$b" != "" ]; then echo -n " $b"; fi
+    if [ "$status" != 0 ]; then echo -n " 😡"; fi
     echo " $status $?"
 }
 
