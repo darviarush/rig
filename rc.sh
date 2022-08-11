@@ -103,12 +103,13 @@ branch() {
 
 # branch_prompt - показать ветку красной и с отступом в пробел, если есть
 branch_prompt() {
-    local b
-    local status
+    #local b
+    #local status
     status=$?
     b=`branch`
     if [ "$b" != "" ]; then echo " $b"; fi
     if [ "$status" != 0 ]; then echo " 😡"; fi
+    echo " $status $?"
 }
 
 # c0 branch - переключение на ветку
