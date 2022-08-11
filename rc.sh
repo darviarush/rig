@@ -105,11 +105,10 @@ branch() {
 branch_prompt() {
     #local b
     #local status
-    status=$?
+    local status=$?
     b=`branch`
     if [ "$b" != "" ]; then echo -n " $b"; fi
     if [ "$status" != 0 ]; then echo -n " 😡"; fi
-    echo " $status $?"
 }
 
 # c0 branch - переключение на ветку
