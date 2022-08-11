@@ -106,7 +106,7 @@ branch_prompt() {
     local status=$?
     local b=`branch`
     if [ "$b" != "" ]; then echo -n " $b"; fi
-    if [ "$status" != 0 ]; then echo -n "\[\033[01;32m\] 😡"; fi
+    if [ "$status" != 0 ]; then echo -n " 😡"; fi
 }
 
 # c0 branch - переключение на ветку
