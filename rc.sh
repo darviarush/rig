@@ -125,6 +125,7 @@ bdiff() {
 commit() {
     if [ "`sta`" != "" ]; then
         sta
+        if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
         run "git commit -am \"`branch` ${1:-`desc`}\""
     fi
