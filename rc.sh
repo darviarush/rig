@@ -41,7 +41,7 @@ help() {
 run() {
     echo "$*"
     eval "$*"
-    c="$?"
+    local c="$?"
     if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
 }
 
@@ -50,15 +50,16 @@ alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -
 
 # git_diff - при изменениях в репозитории предлагает пользователю варианты действий с ними
 git_diff() {
-    m=`git status -s`
+    local m=`git status -s`
     if [ "$m" != "" ]; then
         git status -s
         PS3="Ваш выбор:"
-        select i in Комитим Ресетим Пропускаем Отмена
+        select i in Комитим Ресетим stash Пропускаем Отмена
         do
             case $i in
                 Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
                 Ресетим) run git reset --hard HEAD;;
+                stash) run git stash;;
                 Пропускаем) echo "Пропущено";;
                 Отмена) return 1;;
             esac
