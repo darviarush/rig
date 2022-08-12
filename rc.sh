@@ -128,7 +128,7 @@ commit() {
         sta
         if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
-        run "git commit -am \"`branch` ${1:-`desc`}\""
+        run "git commit -am \"`branch` ${1:-`desc`}\"" || exit $?
     fi
 }
 
@@ -141,8 +141,8 @@ upd() {
 push() {
     branch=`branch`
     if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
-    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
-    run "git push origin $branch"
+    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch" || exit $?
+    run "git push origin $branch" || exit $?
 }
 
 # pull - пулл текущей ветки
