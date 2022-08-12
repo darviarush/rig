@@ -82,7 +82,7 @@ alias sta1="git status"
 alias reset='git reset --hard HEAD'
 
 # lg - лог гита со списками файлов
-lg='git log --name-only'
+alias lg='git log --name-only'
 
 
 # new branch - создаёт ветку
