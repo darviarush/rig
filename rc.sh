@@ -128,7 +128,7 @@ commit() {
         sta
         if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
-        run "git commit -am \"`branch` ${1:-`desc`}\"" || exit $?
+        run "git commit -am \"`branch` ${1:-`desc`}\"" || return $?
     fi
 }
 
@@ -140,9 +140,9 @@ upd() {
 # push [comment] - делает комит текущей ветки
 push() {
     branch=`branch`
-    if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi
-    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch" || exit $?
-    run "git push origin $branch" || exit $?
+    if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi || return $?
+    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch" || return $?
+    run "git push origin $branch" || return $?
 }
 
 # pull - пулл текущей ветки
