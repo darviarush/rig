@@ -53,8 +53,7 @@ git_diff() {
     local m=`git status -s`
     if [ "$m" != "" ]; then
         git status -s
-        PS3="Ваш выбор:"
-        select i in Комитим Ресетим stash Пропускаем Отмена
+        PS3="Ваш выбор:" select i in Комитим Ресетим stash Пропускаем Отмена
         do
             case $i in
                 Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
