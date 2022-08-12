@@ -57,7 +57,7 @@ git_diff() {
         select i in Комитим Ресетим stash Пропускаем Отмена
         do
             case $i in
-                Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"; break;;
+                Комитим) read -p "Введите комментарий: " a; commit "$a"; break;;
                 Ресетим) run git reset --hard HEAD; break;;
                 stash) run git stash; break;;
                 Пропускаем) echo "Пропущено"; break;;
