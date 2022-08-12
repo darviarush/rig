@@ -81,6 +81,10 @@ alias sta1="git status"
 # reset - удалить изменения в файлах
 alias reset='git reset --hard HEAD'
 
+# lg - лог гита со списками файлов
+lg='git log --name-only'
+
+
 # new branch - создаёт ветку
 new() {
     if ! git_diff; then return; fi
