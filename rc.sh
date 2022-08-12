@@ -56,10 +56,10 @@ git_diff() {
         PS3="Ваш выбор:" select i in Комитим Ресетим stash Пропускаем Отмена
         do
             case $i in
-                Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a";;
-                Ресетим) run git reset --hard HEAD;;
-                stash) run git stash;;
-                Пропускаем) echo "Пропущено";;
+                Комитим) read -p "Введите комментарий: " a; run git add .; run git commit -am "$a"; break;;
+                Ресетим) run git reset --hard HEAD; break;;
+                stash) run git stash; break;;
+                Пропускаем) echo "Пропущено"; break;;
                 Отмена) return 1;;
             esac
         done
