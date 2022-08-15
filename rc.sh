@@ -139,6 +139,7 @@ commit() {
 
 # upd - обновить ветку с мастера
 upd() {
+    pull
     run "git merge origin/master --no-edit --no-ff"
 }
 
