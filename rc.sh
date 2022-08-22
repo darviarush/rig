@@ -304,3 +304,28 @@ gitconf() {
 installrig() {
     pamac install aspell hspell libvoikko kompare
 }
+
+# cmd - Команда symphony в докере
+alias cmd='make localhost-cmd l="run --rm service-php-cli app/console"'
+
+# migsta - Статус миграций доктрины
+alias migsta='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:status --show-versions"'
+
+# miggen - Новая миграция доктрины
+alias miggen='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:generate"'
+
+# migdiff - Отличия в миграции доктрины
+alias migdiff='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:diff"'
+
+# migup1 - Накатить миграции доктрины по одной
+alias migup1='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate --up"'
+
+# migexec version  - Накатить конкретную миграцию доктрины (MyProject\Migrations\Version20180601193057)
+alias migexec='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute"'
+
+# migup - Накатить миграции доктрины
+alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migratee"'
+
+# migdown - Откатить миграции доктрины
+alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate prev"'
+
