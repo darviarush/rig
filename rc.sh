@@ -331,3 +331,7 @@ alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine
 # migdown - Откатить миграции доктрины
 alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate prev"'
 
+# migtab table - Создать entity по таблице
+migtab() {
+    make localhost-cmd l="run --rm service-php-cli app/console doctrine:make:entity"
+}
