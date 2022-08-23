@@ -320,8 +320,10 @@ alias migdiff='make localhost-cmd l="run --rm service-php-cli app/console doctri
 # migup1 - Накатить миграции доктрины по одной
 alias migup1='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate --up"'
 
-# migexec version  - Накатить конкретную миграцию доктрины (MyProject\Migrations\Version20180601193057)
-alias migexec='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute"'
+# migexec version [--up|--down]  - Накатить конкретную миграцию доктрины (20180601193057)
+migexec() {
+    make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute $*"
+}
 
 # migup - Накатить миграции доктрины
 alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migratee"'
