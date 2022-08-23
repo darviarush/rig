@@ -322,7 +322,7 @@ alias migup1='make localhost-cmd l="run --rm service-php-cli app/console doctrin
 
 # migexec version [--up|--down]  - Накатить конкретную миграцию доктрины (20180601193057)
 migexec() {
-    make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute $*"
+    make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute $* "
 }
 
 # migup - Накатить миграции доктрины
