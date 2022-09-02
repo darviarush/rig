@@ -133,7 +133,8 @@ commit() {
         sta
         if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
-        run "git commit -am \"`branch` ${1:-`desc`}\"" || return $?
+        local x="`echo \"${1:-`desc`}\" | sed \"s/'/\\\\'/g\"`"
+        run "git commit -am '`branch` $x'" || return $?
     fi
 }
 
