@@ -336,3 +336,9 @@ alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctri
 migtab() {
     make localhost-cmd l="run --rm service-php-cli app/console doctrine:make:entity"
 }
+
+# drm container - Остановить и удалить контейнер
+drm() {
+    docker stop -t 0 $1
+    docker rm $1
+}
