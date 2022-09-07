@@ -342,3 +342,9 @@ drm() {
     docker stop -t 0 $1
     docker rm $1
 }
+
+# front - Пересобрать фронт
+alias front='make localhost-node-cli l="bash -c '"'"'cd front; ./node_modules/.bin/gulp buildDev'"'"''
+
+# frontnpm - Переустановить npm i
+alias frontnpm='make localhost-node-cli l="bash -c '"'"'cd front; npm i'"'"''
