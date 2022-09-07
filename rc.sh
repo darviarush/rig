@@ -344,7 +344,11 @@ drm() {
 }
 
 # front - Пересобрать фронт
-alias front='make localhost-node-cli l="bash -c '"'"'cd front; ./node_modules/.bin/gulp buildDev'"'"''
+front() {
+    make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
+}
 
 # frontnpm - Переустановить npm i
-alias frontnpm='make localhost-node-cli l="bash -c '"'"'cd front; npm i'"'"''
+frontnpm() {
+    make localhost-node-cli l="bash -c 'cd front; npm i'"
+}
