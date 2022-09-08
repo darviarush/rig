@@ -242,6 +242,12 @@ alias cdt='cd ~/__1/'
 # cdr - cd to restoclub directory
 alias cdr='cd /home/Project/restoclub-2022'
 
+# cdcrm - cd to crm directory
+alias cdcrm='cd /home/Project/crm-2022'
+
+# cdga - cd to ga directory
+alias cdga='cd /home/Project/google.analytics.microservice'
+
 
 
 # npp - запустить notepad++ в новом окне
