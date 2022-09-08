@@ -249,9 +249,11 @@ alias cdcrm='cd /home/Project/crm-2020'
 alias cdga='cd /home/Project/google.analytics.microservice'
 
 
-
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
+
+# ports - Посмотреть порты
+alias ports='ss -tlpn'
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
