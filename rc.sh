@@ -252,8 +252,11 @@ alias cdga='cd /home/Project/google.analytics.microservice'
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
-# ports - Посмотреть порты
+# ports - Посмотреть порты через ss
 alias ports='ss -tlpn'
+
+# ports1 - Посмотреть порты через netstat
+alias ports1='netstat -tlpn'
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
