@@ -243,7 +243,7 @@ alias cdt='cd ~/__1/'
 alias cdr='cd /home/Project/restoclub-2022'
 
 # cdcrm - cd to crm directory
-alias cdcrm='cd /home/Project/crm-2022'
+alias cdcrm='cd /home/Project/crm-2020'
 
 # cdga - cd to ga directory
 alias cdga='cd /home/Project/google.analytics.microservice'
