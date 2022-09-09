@@ -182,9 +182,20 @@ merge() {
     fi
 }
 
-
-# release version-message - ставит тег и меняет версию в README.md
+# release [desc] - Делается на проде. pull и устанавливает тег
 release() {
+    local ver="`date '+%F %T'`"
+    commit "Релиз версии $ver"
+    if [ "$1" == "" ]; then
+        git tag -a "$ver"
+    else
+        git tag -a "$ver" -m "$1"
+    fi
+    git push origin --tags
+}
+
+# release2 version-message - ставит тег и меняет версию в README.md
+release2() {
     if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
 
     ver=`echo "$1" | awk '{print $1}'`
