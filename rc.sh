@@ -331,7 +331,9 @@ installrig() {
 }
 
 # cmd - Команда symphony в докере
-alias cmd='make localhost-cmd l="run --rm service-php-cli app/console"'
+cmd() {
+    make localhost-cmd l="run --rm service-php-cli app/console $*"
+}
 
 # migsta - Статус миграций доктрины
 alias migsta='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:status --show-versions"'
