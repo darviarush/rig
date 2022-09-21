@@ -351,7 +351,7 @@ migx() {
 }
 
 # migup - Накатить миграции доктрины
-alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migratee"'
+alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate"'
 
 # migdown - Откатить миграции доктрины
 alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate prev"'
