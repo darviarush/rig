@@ -335,6 +335,12 @@ cmd() {
     make localhost-cmd l="run --rm service-php-cli app/console $*"
 }
 
+# cmdx - Команда в докере
+cmdx() {
+    make localhost-cmd l="run --rm service-php-cli $*"
+}
+
+
 # migsta - Статус миграций доктрины
 alias migsta='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:status --show-versions"'
 
