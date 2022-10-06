@@ -340,6 +340,8 @@ cmdx() {
     make localhost-cmd l="run --rm service-php-cli $*"
 }
 
+# ccache - Очистка кеша
+alias ccache='make localhost-cmd l="run --rm service-php-cli app/console restoclub:core:clear-cache"'
 
 # migsta - Статус миграций доктрины
 alias migsta='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:status --show-versions"'
