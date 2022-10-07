@@ -171,7 +171,7 @@ pull() {
 merge() {
     local b="`branch`"
     echo "=== merge $b ==="
-	push "${1:-`desc`}"
+    push "${1:-`desc`}"
     run "c0 master"
     run "git merge --no-ff $b"
     run "push 'Слияние $b \"`desc`\"'"
@@ -180,6 +180,15 @@ merge() {
         run "git push origin :$b"
         run "git branch -D $b"
     fi
+}
+
+# indev - добавляет текущую ветку в ветку dev
+indev() {
+    local branch0=`branch`
+    run "git checkout dev"              \
+    && run "git merge --no-ff $branch0" \
+    && run "git push origin dev"        \
+    && run "git checkout $branch0"
 }
 
 # release [desc] - Делается на проде. pull и устанавливает тег
