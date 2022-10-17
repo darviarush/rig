@@ -187,6 +187,7 @@ indev() {
     local branch0=`branch`
     run "git checkout dev"              \
     && run "git merge --no-ff $branch0" \
+    && run "git pull origin dev --no-edit" \
     && run "git push origin dev"        \
     && run "git checkout $branch0"
 }
