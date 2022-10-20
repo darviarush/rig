@@ -54,11 +54,12 @@ git_diff() {
     if [ "$m" != "" ]; then
         git status -s
         PS3="Ваш выбор:"
-        select i in Комитим Ресетим stash Пропускаем Отмена
+        select i in Комитим Ресетим diff stash Пропускаем Отмена
         do
             case $i in
                 Комитим) read -p "Введите комментарий: " a; commit "$a"; break;;
                 Ресетим) run git reset --hard HEAD; break;;
+                diff) git diff;;
                 stash) run git stash; break;;
                 Пропускаем) echo "Пропущено"; break;;
                 Отмена) return 1;;
