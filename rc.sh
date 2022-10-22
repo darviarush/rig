@@ -276,7 +276,6 @@ alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> 
 
 # brig - регулировка яркости экрана
 brig() {
-    su
     local b
     for i in /sys/class/backlight/*
     do
@@ -285,7 +284,7 @@ brig() {
         echo -n "Введите новую: "
 
         read b
-        echo $b > /sys/class/backlight/intel_backlight/brightness
+        sudo sh -c "echo $b > $i/brightness"
     done
 }
 
