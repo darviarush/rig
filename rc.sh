@@ -54,11 +54,12 @@ git_diff() {
     if [ "$m" != "" ]; then
         git status -s
         PS3="Ваш выбор:"
-        select i in Комитим Ресетим stash Пропускаем Отмена
+        select i in Комитим Ресетим diff stash Пропускаем Отмена
         do
             case $i in
                 Комитим) read -p "Введите комментарий: " a; commit "$a"; break;;
                 Ресетим) run git reset --hard HEAD; break;;
+                diff) git diff;;
                 stash) run git stash; break;;
                 Пропускаем) echo "Пропущено"; break;;
                 Отмена) return 1;;
@@ -133,7 +134,10 @@ commit() {
         sta
         if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
-        run "git commit -am \"`branch` ${1:-`desc`}\"" || return $?
+        local x
+        if [ "$1" == "" ]; then x="`desc`"; else x="$1"; fi
+        x="`echo \"$x\" | sed \"s/'/\\\\'/g\"`"
+        run "git commit -am '`branch` $x'" || return $?
     fi
 }
 
@@ -168,7 +172,7 @@ pull() {
 merge() {
     local b="`branch`"
     echo "=== merge $b ==="
-	push "${1:-`desc`}"
+    push "${1:-`desc`}"
     run "c0 master"
     run "git merge --no-ff $b"
     run "push 'Слияние $b \"`desc`\"'"
@@ -179,9 +183,30 @@ merge() {
     fi
 }
 
+# indev - добавляет текущую ветку в ветку dev
+indev() {
+    local branch0=`branch`
+    run "git checkout dev"              \
+    && run "git merge --no-ff $branch0" \
+    && run "git pull origin dev --no-edit" \
+    && run "git push origin dev"        \
+    && run "git checkout $branch0"
+}
 
-# release version-message - ставит тег и меняет версию в README.md
+# release [desc] - Делается на проде. pull и устанавливает тег
 release() {
+    local ver="`date '+%F %T'`"
+    commit "Релиз версии $ver"
+    if [ "$1" == "" ]; then
+        git tag -a "$ver"
+    else
+        git tag -a "$ver" -m "$1"
+    fi
+    git push origin --tags
+}
+
+# release2 version-message - ставит тег и меняет версию в README.md
+release2() {
     if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
 
     ver=`echo "$1" | awk '{print $1}'`
@@ -239,11 +264,17 @@ alias cdt='cd ~/__1/'
 # cdr - cd to restoclub directory
 alias cdr='cd /home/Project/restoclub-2022'
 
+# cdcrm - cd to crm directory
+alias cdcrm='cd /home/Project/crm-2020'
+
+# cdga - cd to ga directory
+alias cdga='cd /home/Project/google.analytics.microservice'
 
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
+<<<<<<< HEAD
 
 brig() {
     local b
@@ -258,6 +289,13 @@ brig() {
     done
 }
 
+=======
+# ports - Посмотреть порты через ss
+alias ports='sudo ss -tlpn'
+
+# ports1 - Посмотреть порты через netstat
+alias ports1='sudo netstat -tlpn'
+>>>>>>> origin/master
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
@@ -321,7 +359,17 @@ installrig() {
 }
 
 # cmd - Команда symphony в докере
-alias cmd='make localhost-cmd l="run --rm service-php-cli app/console"'
+cmd() {
+    make localhost-cmd l="run --rm service-php-cli app/console $*"
+}
+
+# cmdx - Команда в докере
+cmdx() {
+    make localhost-cmd l="run --rm service-php-cli $*"
+}
+
+# ccache - Очистка кеша
+alias ccache='make localhost-cmd l="run --rm service-php-cli app/console restoclub:core:clear-cache"'
 
 # migsta - Статус миграций доктрины
 alias migsta='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:status --show-versions"'
@@ -341,7 +389,7 @@ migx() {
 }
 
 # migup - Накатить миграции доктрины
-alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migratee"'
+alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate"'
 
 # migdown - Откатить миграции доктрины
 alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate prev"'
@@ -349,4 +397,20 @@ alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctri
 # migtab table - Создать entity по таблице
 migtab() {
     make localhost-cmd l="run --rm service-php-cli app/console doctrine:make:entity"
+}
+
+# drm container - Остановить и удалить контейнер
+drm() {
+    docker stop -t 0 $1
+    docker rm $1
+}
+
+# front - Пересобрать фронт
+front() {
+    make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
+}
+
+# frontnpm - Переустановить npm i
+frontnpm() {
+    make localhost-node-cli l="bash -c 'cd front; npm i'"
 }
