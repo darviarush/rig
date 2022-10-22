@@ -244,6 +244,21 @@ alias cdr='cd /home/Project/restoclub-2022'
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
+
+brig() {
+    local b
+    for i in /sys/class/backlight/*
+    do
+        echo $i
+        echo "Яркость 0-`cat $i/max_brightness`: `cat $i/brightness`"
+        echo -n "Введите новую: "
+
+        read b
+        echo $b > /sys/class/backlight/intel_backlight/brightness
+    done
+}
+
+
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
     pushd ~/_vg
