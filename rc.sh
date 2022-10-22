@@ -274,8 +274,7 @@ alias cdga='cd /home/Project/google.analytics.microservice'
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
-<<<<<<< HEAD
-
+# brig - регулировка яркости экрана
 brig() {
     local b
     for i in /sys/class/backlight/*
@@ -289,13 +288,11 @@ brig() {
     done
 }
 
-=======
 # ports - Посмотреть порты через ss
 alias ports='sudo ss -tlpn'
 
 # ports1 - Посмотреть порты через netstat
 alias ports1='sudo netstat -tlpn'
->>>>>>> origin/master
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
