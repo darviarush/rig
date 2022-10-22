@@ -276,6 +276,7 @@ alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> 
 
 # brig - регулировка яркости экрана
 brig() {
+    su
     local b
     for i in /sys/class/backlight/*
     do
