@@ -120,8 +120,12 @@ branch_prompt() {
 c0() {
     if git_diff; then
         git checkout $1
+        C0=$1
     fi
 }
+
+# c0ret - возврат на предыдущий бранч
+alias c0ret='c0 $C0'
 
 # bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
 bdiff() {
