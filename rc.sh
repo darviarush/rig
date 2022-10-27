@@ -186,10 +186,10 @@ merge() {
 # indev - добавляет текущую ветку в ветку dev
 indev() {
     local branch0=`branch`
-    run "git checkout dev"              \
-    && run "git merge --no-ff $branch0" \
+    run "git checkout dev"                 \
     && run "git pull origin dev --no-edit" \
-    && run "git push origin dev"        \
+    && run "git merge --no-ff $branch0"    \
+    && run "git push origin dev"           \
     && run "git checkout $branch0"
 }
 
