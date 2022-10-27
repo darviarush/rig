@@ -119,8 +119,8 @@ branch_prompt() {
 # c0 branch - переключение на ветку
 c0() {
     if git_diff; then
+        C0=`branch`
         git checkout $1
-        C0=$1
     fi
 }
 
