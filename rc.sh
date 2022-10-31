@@ -274,6 +274,9 @@ alias cdcrm='cd /home/Project/crm-2020'
 # cdga - cd to ga directory
 alias cdga='cd /home/Project/google.analytics.microservice'
 
+# cdmb - cd to monitoring_bot directory
+alias cdmb='cd /home/Project/monitoring_bot'
+
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
