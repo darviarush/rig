@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Развернуть указанный сниппет в текущий каталог
+#
+#   mk сниппет название_без_расширения [FLAT] 
+#
+# $1 — сниппет
+# $2 — название сниппета
+# $1 — 
 
 export name=$2
 export Name=${2^}
 export NAME=${2^^}
 
+export timestamp=`date +%Y%m%d%H%M%S`
 export pkg=$2
 export xpkg=`echo "$pkg" | sed 's/python_//g'`
 export pypkg=`echo "$pkg" | sed 's/-/_/g' | sed 's/python_//g'`
