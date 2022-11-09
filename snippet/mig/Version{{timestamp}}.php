@@ -22,6 +22,10 @@ final class Version{{timestamp}} extends AbstractMigration
     {
         $this->checkDBPlatform();
         $this->addSql("ALTER TABLE public.ex ADD COLUMN active BOOLEAN NOT NULL;");
+        $this->addSql(<<<END
+            COMMENT ON COLUMN public.ex.active
+                IS '';
+        END);
     }
 
     public function down(Schema $schema) : void
