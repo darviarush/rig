@@ -416,6 +416,11 @@ front() {
     make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
 }
 
+# frontjs - Пересобрать только js
+frontjs() {
+    make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildJsDev'"
+}
+
 # frontnpm - Переустановить npm i
 frontnpm() {
     make localhost-node-cli l="bash -c 'cd front; npm i'"
