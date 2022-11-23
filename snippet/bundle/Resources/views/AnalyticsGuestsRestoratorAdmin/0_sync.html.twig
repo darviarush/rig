@@ -1,0 +1,34 @@
+<script>
+    var xhr = null
+
+    function syncAnalyticsGuestsRestorator() {
+        $("#sync-0-btn").addClass('fa-grav').removeClass('fa-exclamation-triangle').toggleClass('fa-spin')
+        if (xhr) {
+            xhr.abort()
+            xhr = null
+            return
+        }
+
+        xhr = $.ajax({
+            url: "{{ path('analytics_guests_restorator_updateReport') }}",
+            type: "post",
+            dataType: "json",
+            success: data => {
+                if (data.ok) {
+                    location.reload()
+                }
+            },
+            error: () => {
+                $("#sync-0-btn").removeClass('fa-grav').addClass('fa-exclamation-triangle')
+            },
+            complete: () => {
+                $("#sync-0-btn").removeClass('fa-spin')
+                xhr = null
+            },
+        })
+    }
+</script>
+
+<button type="submit" class="btn btn-primary" onClick="syncAnalyticsGuestsRestorator()">
+    <i id=sync-0-btn class="fa fa-grav" aria-hidden="true"></i> &nbsp; Обновить
+</button>

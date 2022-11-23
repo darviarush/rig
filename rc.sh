@@ -126,7 +126,7 @@ c0() {
     if git_diff; then
         C0=`branch`
         git checkout $branch
-        echo $C0 `desc`
+        echo $branch `desc`
     fi
 }
 

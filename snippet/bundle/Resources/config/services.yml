@@ -1,0 +1,10 @@
+services:
+  analytics.admin.analytics_guests_restorator:
+    class: Restoclub\AnalyticsBundle\Admin\AnalyticsGuestsRestoratorAdmin
+    arguments: [ ~, Restoclub\AnalyticsBundle\Entity\GuestsAndRestorators, AnalyticsBundle:AnalyticsGuestsRestoratorAdmin]
+    calls:
+      - [ setTemplate, [list, AnalyticsBundle:AnalyticsGuestsRestoratorAdmin:list.html.twig]]
+    tags:
+      - name: sonata.admin
+        manager_type: orm
+        label: Аналитика по гостям и рестораторам
