@@ -408,13 +408,13 @@ migtab() {
 
 # mkmig - создать миграцию на основе текущего времени и открыть её в phpstorm-е
 mkmig() {
-    local path=/home/Project/restoclub-2022/migrations/`date +%Y`/`date +%m`/
+    local path=/home/Project/restoclub-2022/migrations/`date +%Y`/`date +%m`
     mkdir -p $path
     pushd $path
     mk mig _ 1
     popd
 
-    
+    /usr/bin/env phpstorm --line 23 "${path}/Version$(date +%Y%m%d%H%M%S).php"
 }
 
 # drm container - Остановить и удалить контейнер
