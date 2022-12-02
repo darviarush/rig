@@ -413,6 +413,8 @@ mkmig() {
     pushd $path
     mk mig _ 1
     popd
+
+    
 }
 
 # drm container - Остановить и удалить контейнер
