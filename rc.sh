@@ -311,7 +311,7 @@ vg() {
     popd
 }
 
-# mk snippet name - копирует сниппет с подстановками в текущий каталог
+# mk snippet name [1] - копирует сниппет с подстановками в текущий каталог. [1] - директорию сделать flat
 alias mk='$RIG_RC/bin/mk.sh'
 
 # py_test - тестирует пакет питон в текущей папке с покрытием
@@ -404,6 +404,15 @@ alias migdown='make localhost-cmd l="run --rm service-php-cli app/console doctri
 # migtab table - Создать entity по таблице
 migtab() {
     make localhost-cmd l="run --rm service-php-cli app/console doctrine:make:entity"
+}
+
+# mkmig - создать миграцию на основе текущего времени и открыть её в phpstorm-е
+mkmig() {
+    local path=/home/Project/restoclub-2022/migrations/`date +%Y`/`date +%m`/
+    mkdir -p $path
+    pushd $path
+    mk mig _ 1
+    popd
 }
 
 # drm container - Остановить и удалить контейнер
