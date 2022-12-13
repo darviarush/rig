@@ -443,6 +443,9 @@ frontnpm() {
 }
 
 symtst() {
+    chmod -R 0777 ./bin/
+    make sf-clear-cache env="test"
+
     make testing-clear
     make testing-create-dirs
     make testing-create-db # (если тестовой базы нет testing-create-db)
