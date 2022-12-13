@@ -365,6 +365,16 @@ installrig() {
     pamac install aspell hspell libvoikko kompare
 }
 
+
+# drm container - Остановить и удалить контейнер
+drm() {
+    docker stop -t 0 $1
+    docker rm $1
+}
+
+
+#### Симфония
+
 # cmd - Команда symphony в докере
 cmd() {
     make localhost-cmd l="run --rm service-php-cli app/console $*"
@@ -417,12 +427,6 @@ mkmig() {
     /usr/bin/env phpstorm --line 23 "${path}/Version$(date +%Y%m%d%H%M%S).php"
 }
 
-# drm container - Остановить и удалить контейнер
-drm() {
-    docker stop -t 0 $1
-    docker rm $1
-}
-
 # front - Пересобрать фронт
 front() {
     make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
@@ -437,3 +441,15 @@ frontjs() {
 frontnpm() {
     make localhost-node-cli l="bash -c 'cd front; npm i'"
 }
+
+symtst() {
+    make testing-clear
+    make testing-create-dirs
+    make testing-create-db # (если тестовой базы нет testing-create-db)
+    make testing-migrate-db
+
+    make testing-php-lint # (проверяет синтаксис)
+    make testing-forgotten-debug-check # (проверя)
+    make testing-codecept-sf # (запуск всех симфони тестов)
+}
+
