@@ -454,5 +454,7 @@ symtst() {
     make testing-php-lint # (проверяет синтаксис)
     make testing-forgotten-debug-check # (проверя)
     make testing-codecept-sf # (запуск всех симфони тестов)
-}
 
+    make sf-def-parameters env=localhost
+    rm -fr var/cache/*
+}
