@@ -466,4 +466,5 @@ starter() {
     make dc-up-d
     cdr
     make localhost-up l=-d
+    xdg-open https://restoclub.localhost
 }
