@@ -442,6 +442,7 @@ frontnpm() {
     make localhost-node-cli l="bash -c 'cd front; npm i'"
 }
 
+# symtst - запускает тесты для релиза
 symtst() {
     chmod -R 0777 ./bin/
     make sf-clear-cache env="test"
@@ -457,4 +458,12 @@ symtst() {
 
     make sf-def-parameters env=localhost
     rm -fr var/cache/*
+}
+
+# starter - запускает проект
+starter() {
+    cdcrm
+    make dc-up-d
+    cdr
+    make localhost-up l=-d
 }
