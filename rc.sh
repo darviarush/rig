@@ -192,12 +192,11 @@ merge() {
 
 # indev - добавляет текущую ветку в ветку dev
 indev() {
-    local branch0=`branch`
-    run "git checkout dev"                 \
+    c0 dev                                 \
     && run "git pull origin dev --no-edit" \
-    && run "git merge --no-ff $branch0"    \
+    && run "git merge --no-ff $C0"         \
     && run "git push origin dev"           \
-    && run "git checkout $branch0"
+    && c0
 }
 
 # release [desc] - Делается на проде. pull и устанавливает тег
@@ -468,3 +467,10 @@ starter() {
     make localhost-up l=-d
     xdg-open https://restoclub.localhost
 }
+
+# pushdev [комментарий] - push и indev
+pushdev() {
+    push "$1"
+    indev
+}
+
