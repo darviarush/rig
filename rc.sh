@@ -279,6 +279,9 @@ alias cdga='cd /home/Project/google.analytics.microservice'
 # cdmb - cd to monitoring_bot directory
 alias cdmb='cd /home/Project/monitoring_bot'
 
+# cdapi - cd to api directory
+alias cdapi='cd /home/Project/api.restoclub.ru'
+
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
