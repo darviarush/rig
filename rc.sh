@@ -477,5 +477,5 @@ pushdev() {
     indev
 }
 
-# genapi - генерирует документацию по api
-alias genapi='cmd rc:api:gen-docs'
+# ga - генерирует документацию по api
+alias ga='cmd rc:api:gen-docs'
