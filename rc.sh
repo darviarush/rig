@@ -192,10 +192,11 @@ merge() {
 
 # indev - добавляет текущую ветку в ветку dev
 indev() {
-    c0 dev                                 \
-    && run "git pull origin dev --no-edit" \
+    local x=${1:-dev}
+    c0 $x                                  \
+    && run "git pull origin $x --no-edit"  \
     && run "git merge --no-ff $C0"         \
-    && run "git push origin dev"           \
+    && run "git push origin $x"            \
     && c0
 }
 
