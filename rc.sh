@@ -463,11 +463,15 @@ symtst() {
     rm -fr var/cache/*
 }
 
+# startfix - временный баг
+alias startfix="sudo rm -fr /tmp/openapi"
+
 # starter - запускает проект
 starter() {
     cdcrm
     make dc-up-d
     cdr
+    startfix
     make localhost-up l=-d
     xdg-open https://restoclub.localhost
 }
@@ -478,5 +482,5 @@ pushdev() {
     indev
 }
 
-# ga - генерирует документацию по api
+# ga - генерирует документацию по openapi
 alias ga='cmd rc:api:gen-docs'
