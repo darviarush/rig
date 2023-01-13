@@ -471,7 +471,8 @@ starter() {
     cdcrm
     make dc-up-d
     cdr
-    startfix
+    #startfix
+    make sf-def-parameters env="localhost"
     make localhost-up l=-d
     xdg-open https://restoclub.localhost
 }
