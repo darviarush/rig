@@ -155,6 +155,8 @@ upd() {
 
 # push [comment] - делает комит текущей ветки
 push() {
+    local branch
+    if [ -e "bin/meta" ]; then bin/meta || return 1; fi
     branch=`branch`
     if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi || return $?
     run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch" || return $?
