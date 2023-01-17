@@ -466,7 +466,7 @@ symtst() {
 }
 
 # startfix - временный баг
-alias startfix="sudo chown dart:dart -R /tmp/openapi web/uploads"
+alias startfix="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads"
 
 # starter - запускает проект
 starter() {
