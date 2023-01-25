@@ -1,8 +1,8 @@
 <?php
-namespace Restoclub\AnalyticsBundle;
+namespace Restoclub\{{Name}}Bundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AnalyticsBundle extends Bundle
+class {{Name}}Bundle extends Bundle
 {
 }

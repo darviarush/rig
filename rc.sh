@@ -437,10 +437,11 @@ mkbundle() {
     local path=/home/Project/restoclub-2022/src
     mkdir -p $path
     pushd $path
-    mk bundle $1
+    mk bundle ${1,,}
+    mv $1 ${1}Bundle
     popd
 
-    /usr/bin/env phpstorm --line 23 "${path}/$1/Entity/$1.php"
+    /usr/bin/env phpstorm --line 23 "${path}/${1}Bundle/Entity/$1.php"
 }
 
 
