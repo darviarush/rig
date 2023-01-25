@@ -1,16 +1,16 @@
 <?php
 
-namespace Restoclub\AnalyticsBundle\Admin;
+namespace Restoclub\{{Name}}Bundle\Admin;
 
 use Restoclub\CoreBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class AnalyticsGuestsRestoratorAdmin extends AbstractAdmin
+class {{Name}}Admin extends AbstractAdmin
 {
-    protected $baseRouteName    = 'analytics_guests_restorator';
-    protected $baseRoutePattern = 'analytics/guests-restorator';
+    protected $baseRouteName    = '{{name}}-route';
+    protected $baseRoutePattern = '{{name}}/route';
 
     public function getExportFormats(): array
     {

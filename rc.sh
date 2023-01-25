@@ -432,6 +432,18 @@ mkmig() {
     /usr/bin/env phpstorm --line 23 "${path}/Version$(date +%Y%m%d%H%M%S).php"
 }
 
+# mkbundle - создать бандл и открыть его в phpstorm-е
+mkbundle() {
+    local path=/home/Project/restoclub-2022/src
+    mkdir -p $path
+    pushd $path
+    mk bundle $1
+    popd
+
+    /usr/bin/env phpstorm --line 23 "${path}/$1/Entity/$1.php"
+}
+
+
 # front - Пересобрать фронт
 front() {
     make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"

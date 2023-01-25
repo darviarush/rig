@@ -1,7 +1,7 @@
 <script>
     var xhr = null
 
-    function syncAnalyticsGuestsRestorator() {
+    function sync{{Name}}() {
         $("#sync-0-btn").addClass('fa-grav').removeClass('fa-exclamation-triangle').toggleClass('fa-spin')
         if (xhr) {
             xhr.abort()
@@ -10,7 +10,7 @@
         }
 
         xhr = $.ajax({
-            url: "{{ path('analytics_guests_restorator_updateReport') }}",
+            url: "{{ path('{{name}}_updateReport') }}",
             type: "post",
             dataType: "json",
             success: data => {
@@ -29,6 +29,6 @@
     }
 </script>
 
-<button type="submit" class="btn btn-primary" onClick="syncAnalyticsGuestsRestorator()">
+<button type="submit" class="btn btn-primary" onClick="sync{{Name}}()">
     <i id=sync-0-btn class="fa fa-grav" aria-hidden="true"></i> &nbsp; Обновить
 </button>

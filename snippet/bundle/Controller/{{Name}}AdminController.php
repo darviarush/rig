@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Restoclub\AnalyticsBundle\Controller;
+namespace Restoclub\{{Name}}Bundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class AnalyticsGuestsRestoratorAdminController extends CRUDController
+class {{Name}}AdminController extends CRUDController
 {
     /**
      * Обновляет данные в таблице отчёта
