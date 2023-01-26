@@ -30,7 +30,7 @@ class {{Name}}
 
     /**
      * @ORM\ManyToOne(targetEntity="Restoclub\CatalogueBundle\Entity\Place")
-     * @ORM\JoinColumn(name="city_id")
+     * @ORM\JoinColumn(name="place_id")
      */
     public ?Place $place = null;
 
