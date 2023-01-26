@@ -432,7 +432,7 @@ mkmig() {
     /usr/bin/env phpstorm --line 23 "${path}/Version$(date +%Y%m%d%H%M%S).php"
 }
 
-# mkbundle - создать бандл и открыть его в phpstorm-е
+# mkbundle Name - создать бандл и открыть его в phpstorm-е
 mkbundle() {
     local path=/home/Project/restoclub-2022/src
     mkdir -p $path
@@ -442,6 +442,23 @@ mkbundle() {
     popd
 
     /usr/bin/env phpstorm --line 23 "${path}/${1}Bundle/Entity/$1.php"
+}
+
+# mkentity bundle entity - создать энтити в бандле и открыть его в phpstorm-е
+mkentity() {
+    local path=/home/Project/restoclub-2022/src/${1}Bundle
+
+    if [ ! -e $path ]; then echo "Нет $path"; return 0; fi
+    if [ "" == "$2" ]; then echo "Нет 2-го параметра - имени Entity"; return 0; fi
+
+    path=$path/Entity
+    mkdir -p $path
+
+    pushd $path
+    mk entity $2
+    popd
+
+    /usr/bin/env phpstorm --line 23 "${path}/$2.php"
 }
 
 
