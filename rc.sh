@@ -393,7 +393,7 @@ cmd() {
 
 # cmdx - Команда в докере
 cmdx() {
-    if [ -e api ]; then
+    if [ -e api || -e ../api ]; then
         docker-compose run --rm api-php-cli $*
     else
         make localhost-cmd l="run --rm service-php-cli $*"
