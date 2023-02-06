@@ -385,7 +385,6 @@ drm() {
 # cmd - Команда symphony в докере
 cmd() {
     if [ -e api ]; then
-	echo "crm!"
         docker-compose run --rm api-php-cli bin/console $*
     else
         make localhost-cmd l="run --rm service-php-cli app/console $*"
@@ -395,7 +394,6 @@ cmd() {
 # cmdx - Команда в докере
 cmdx() {
     if [ -e api ]; then
-	echo "crm!"
         docker-compose run --rm api-php-cli $*
     else
         make localhost-cmd l="run --rm service-php-cli $*"
