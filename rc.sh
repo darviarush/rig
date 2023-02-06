@@ -384,12 +384,20 @@ drm() {
 
 # cmd - Команда symphony в докере
 cmd() {
-    make localhost-cmd l="run --rm service-php-cli app/console $*"
+    if [ -e api ]; then
+        docker-compose run --rm api-php-cli bin/console $*
+    else
+        make localhost-cmd l="run --rm service-php-cli app/console $*"
+    fi
 }
 
 # cmdx - Команда в докере
 cmdx() {
-    make localhost-cmd l="run --rm service-php-cli $*"
+    if [ -e api ]; then
+        docker-compose run --rm api-php-cli $*
+    else
+        make localhost-cmd l="run --rm service-php-cli $*"
+    fi
 }
 
 # ccache - Очистка кеша
