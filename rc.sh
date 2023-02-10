@@ -528,5 +528,5 @@ pushdev() {
 # ga - генерирует документацию по openapi
 alias ga='cmd rc:api:gen-docs'
 
-# otask - открывает задачу текущей ветки
+# task - открывает задачу текущей ветки
 alias task='xdg-open https://restoclub.myjetbrains.com/youtrack/issue/`branch`'
