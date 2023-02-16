@@ -448,7 +448,8 @@ mkbundle() {
     mkdir -p $path
     pushd $path
     mk bundle ${1,,}
-    mv ${1,,} ${1}Bundle
+    mv ${1,,}/* ${1}Bundle
+    rmdir ${1,,}
     popd
 
     /usr/bin/env phpstorm --line 23 "${path}/${1}Bundle/Entity/$1.php"
