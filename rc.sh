@@ -419,6 +419,7 @@ alias migup1='make localhost-cmd l="run --rm service-php-cli app/console doctrin
 migx() {
     make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:execute $*"
 }
+# make dc-cmd l="run --rm service-php-cli-1 app/console doctrine:migrations:execute $*"
 
 # migup - Накатить миграции доктрины
 alias migup='make localhost-cmd l="run --rm service-php-cli app/console doctrine:migrations:migrate"'
