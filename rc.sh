@@ -194,7 +194,10 @@ merge() {
 
 # indev - добавляет текущую ветку в ветку dev
 indev() {
-    local x=${1:-dev}
+    local x=$1
+    if [ "$x" == "" ]; then
+       if [ -e api ]; then x=development; else x=dev; fi
+    fi
     c0 $x                                  \
     && run "git pull origin $x --no-edit"  \
     && run "git merge --no-ff $C0"         \
