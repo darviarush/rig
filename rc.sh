@@ -90,7 +90,7 @@ alias gl='git log --name-only --graph'
 new() {
     if ! git_diff; then return; fi
     run git checkout master
-    run git pull origin master
+    run git pull origin master --no-edit
     local b=`echo "$1" | awk '{print $1}'`
     if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
     local s="`echo "$1" | sed -r 's/^\S+\s*//'`"
@@ -159,7 +159,7 @@ push() {
     if [ -x "act" ]; then ./act meta || return 1; fi
     branch=`branch`
     if [ "$1" == 1 ]; then commit "`desc`"; else commit "$1"; fi || return $?
-    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch" || return $?
+    run "git pull origin $branch --no-edit || git merge --no-ff --no-edit origin/$branch" || return $?
     run "git push origin $branch" || return $?
 }
 
@@ -174,7 +174,7 @@ pull() {
         return 1
     fi
 
-    run "git pull origin $branch --no-edit || git merge --no-ff origin/$branch"
+    run "git pull origin $branch --no-edit || git merge --no-ff --no-edit origin/$branch"
 }
 
 # merge - мержит текущую ветку с мастером и удаляет её
@@ -183,7 +183,7 @@ merge() {
     echo "=== merge $b ==="
     push "${1:-`desc`}"
     run "c0 master"
-    run "git merge --no-ff $b"
+    run "git merge --no-ff --no-edit $b"
     run "push 'Слияние $b \"`desc`\"'"
     if [ "$1" == "1" ]; then
         echo "=== Удаление $b ==="
@@ -198,10 +198,10 @@ indev() {
     if [ "$x" == "" ]; then
        if [ -e api ]; then x=development; else x=dev; fi
     fi
-    c0 $x                                  \
-    && run "git pull origin $x --no-edit"  \
-    && run "git merge --no-ff $C0"         \
-    && run "git push origin $x"            \
+    c0 $x                                     \
+    && run "git pull origin $x --no-edit"     \
+    && run "git merge --no-edit --no-ff $C0"  \
+    && run "git push origin $x"               \
     && c0
 }
 
