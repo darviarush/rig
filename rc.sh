@@ -541,7 +541,7 @@ mkfeature() {
     local file=`basename $1`
     local dir=`dirname $1`
 
-    local path=/home/Project/restoclub-2022/frontend/$dir
+    local path=/home/Project/restoclub-2022/test/symphony/frontend/$dir
     mkdir -p $path
     pushd $path
     mk feature $file
