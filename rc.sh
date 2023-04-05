@@ -492,23 +492,6 @@ frontnpm() {
     make localhost-node-cli l="bash -c 'cd front; npm i'"
 }
 
-# symtst - запускает тесты для релиза
-symtst() {
-    chmod -R 0777 ./bin/
-    make sf-clear-cache env="test"
-
-    make testing-clear
-    make testing-create-dirs
-    make testing-create-db # (если тестовой базы нет testing-create-db)
-    make testing-migrate-db
-
-    make testing-php-lint # (проверяет синтаксис)
-    make testing-forgotten-debug-check # (проверя)
-    make testing-codecept-sf # (запуск всех симфони тестов)
-
-    make sf-def-parameters env=localhost
-    rm -fr var/cache/*
-}
 
 # startfix - временный баг
 alias startfix="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads"
@@ -549,4 +532,29 @@ mkfeature() {
 
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
+
+# feature path - запустить тест
+feature() {
+    make testing-codecept-sf-path path=$1
+    make sf-def-parameters env=localhost
+}
+
+# symtst - запускает тесты для релиза
+symtst() {
+    chmod -R 0777 ./bin/
+    make sf-clear-cache env="test"
+
+    make testing-clear
+    make testing-create-dirs
+    make testing-create-db # (если тестовой базы нет testing-create-db)
+    make testing-migrate-db
+
+    make testing-php-lint # (проверяет синтаксис)
+    make testing-forgotten-debug-check # (проверя)
+    make testing-codecept-sf # (запуск всех симфони тестов)
+
+    make sf-def-parameters env=localhost
+    rm -fr var/cache/*
+}
+
 
