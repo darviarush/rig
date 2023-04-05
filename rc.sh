@@ -536,7 +536,7 @@ alias ga='cmd rc:api:gen-docs'
 # task - открывает задачу текущей ветки
 alias task='xdg-open https://restoclub.myjetbrains.com/youtrack/issue/`branch`'
 
-# mkmig - создать миграцию на основе текущего времени и открыть её в phpstorm-е
+# mkfeature category/name - создать тест и открыть его в phpstorm-е
 mkfeature() {
     local file=`basename $1`
     local dir=`dirname $1`
