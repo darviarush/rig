@@ -535,7 +535,8 @@ mkfeature() {
 
 # feature path - запустить тест
 feature() {
-    make testing-codecept-sf-path path=$1
+    chmod -R 0777 ./bin/
+    make testing-codecept-sf-path path=$1.feature
     make sf-def-parameters env=localhost
 }
 
