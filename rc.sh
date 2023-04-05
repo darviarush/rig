@@ -540,7 +540,7 @@ features() {
 
     make testing-clear
     make testing-create-dirs
-    make testing-create-db # (если тестовой базы нет testing-create-db)
+    #make testing-create-db # (если тестовой базы нет testing-create-db)
     make testing-migrate-db
 
     make sf-def-parameters env=localhost
