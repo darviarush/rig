@@ -533,15 +533,8 @@ mkfeature() {
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
 
-# feature path - запустить тест
-feature() {
-    chmod -R 0777 ./bin/
-    make testing-codecept-sf-path path=$1.feature
-    make sf-def-parameters env=localhost
-}
-
-# symtst - запускает тесты для релиза
-symtst() {
+# features - подготавливает тесты
+features() {
     chmod -R 0777 ./bin/
     make sf-clear-cache env="test"
 
@@ -549,6 +542,19 @@ symtst() {
     make testing-create-dirs
     make testing-create-db # (если тестовой базы нет testing-create-db)
     make testing-migrate-db
+
+    make sf-def-parameters env=localhost
+}
+
+# feature path - запустить тест
+feature() {
+    make testing-codecept-sf-path path=$1.feature
+    make sf-def-parameters env=localhost
+}
+
+# symtst - запускает тесты для релиза
+symtst() {
+    features
 
     make testing-php-lint # (проверяет синтаксис)
     make testing-forgotten-debug-check # (проверя)
