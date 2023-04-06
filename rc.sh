@@ -519,19 +519,34 @@ alias ga='cmd rc:api:gen-docs'
 # task - открывает задачу текущей ветки
 alias task='xdg-open https://restoclub.myjetbrains.com/youtrack/issue/`branch`'
 
-# mkfeature category/name - создать тест и открыть его в phpstorm-е
-mkfeature() {
+# mksymfeature category/name - создать тест symphony и открыть его в phpstorm-е
+mksymfeature() {
     local file=`basename $1`
     local dir=`dirname $1`
 
     local path=/home/Project/restoclub-2022/tests/symfony/$dir
     mkdir -p $path
     pushd $path
-    mk feature $file
+    mk symfeature $file
     popd
 
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
+
+# mkapifeature category/name - создать тест api и открыть его в phpstorm-е
+mksymfeature() {
+    local file=`basename $1`
+    local dir=`dirname $1`
+
+    local path=/home/Project/restoclub-2022/tests/api/$dir
+    mkdir -p $path
+    pushd $path
+    mk apifeature $file
+    popd
+
+    /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
+}
+
 
 # features - подготавливает тесты
 features() {
