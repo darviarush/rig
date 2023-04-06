@@ -534,7 +534,7 @@ mksymfeature() {
 }
 
 # mkapifeature category/name - создать тест api и открыть его в phpstorm-е
-mksymfeature() {
+mkapifeature() {
     local file=`basename $1`
     local dir=`dirname $1`
 
