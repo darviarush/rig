@@ -2,8 +2,8 @@
 
 # Youtrack:
 #  - 
-# Swagger:
-#  - 
+# Run:
+#  - make testing-codecept-sf-path path=fixtures/.feature
 
 Функционал: 
 
