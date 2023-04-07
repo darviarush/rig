@@ -547,6 +547,8 @@ mkapifeature() {
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
 
+# toloc - переключиться на локальную базу с тестовой
+alias toloc='make sf-def-parameters env=localhost'
 
 # features - подготавливает тесты
 features() {
