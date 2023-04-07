@@ -548,7 +548,7 @@ mkapifeature() {
 }
 
 # toloc - переключиться на локальную базу с тестовой
-alias toloc='make sf-def-parameters env=localhost'
+alias toloc='make sf-def-parameters env=localhost && ccache'
 
 # features - подготавливает тесты
 features() {
