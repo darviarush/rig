@@ -550,7 +550,7 @@ mkapifeature() {
 # apifeature путь [тест] - запускает тест api
 apifeature() {
     make testing-codecept-api-path path="$1.feature$2"
-    
+    make sf-clear-cache env="dev"
 }
 
 # toloc - переключиться на локальную базу с тестовой
