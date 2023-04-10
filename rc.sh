@@ -547,14 +547,8 @@ mkapifeature() {
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
 
-# apifeature путь [тест] - запускает тест api
-apifeature() {
-    make testing-codecept-api-path path="$1.feature$2"
-    make sf-clear-cache env="dev"
-}
-
-# toloc - переключиться на локальную базу с тестовой
-alias toloc='make sf-def-parameters env=localhost && ccache'
+# fromtest - переключиться на локальную базу с тестовой
+alias fromtest='make sf-def-parameters env=localhost && ccache'
 
 # features - подготавливает тесты
 features() {
