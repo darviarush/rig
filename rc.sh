@@ -533,7 +533,7 @@ mksymfeature() {
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
 }
 
-# mkapifeature category/name - создать тест api и открыть его в phpstorm-е
+# mkapifeature путь/имя - создать тест api и открыть его в phpstorm-е
 mkapifeature() {
     local file=`basename $1`
     local dir=`dirname $1`
@@ -545,6 +545,12 @@ mkapifeature() {
     popd
 
     /usr/bin/env phpstorm --line 4 "${path}/$file.feature"
+}
+
+# apifeature путь [тест] - запускает тест api
+apifeature() {
+    make testing-codecept-api-path path="$1.feature$2"
+    
 }
 
 # toloc - переключиться на локальную базу с тестовой
