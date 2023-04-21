@@ -175,6 +175,7 @@ pull() {
     fi
 
     run "git pull origin $branch --no-edit || git merge --no-ff --no-edit origin/$branch"
+    if [ -x "act" ]; then ./act meta || return 1; fi
 }
 
 # merge - мержит текущую ветку с мастером и удаляет её
