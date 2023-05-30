@@ -495,7 +495,7 @@ frontnpm() {
 
 
 # sx - временный баг
-alias sx="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads"
+alias sx="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads; mkdir -p /tmp/cache/nginx; chmod 777 /tmp/cache/nginx"
 
 # starter - запускает проект
 starter() {
