@@ -505,7 +505,7 @@ sx() {
     chmod 777 /tmp/cache/nginx
 
     mkdir -p /tmp/log/nginx
-    echo > dev-cache_pages.log
+    echo > /tmp/log/nginx/dev-cache_pages.log
     chmod 777 /tmp/log/nginx
     chmod 777 /tmp/log/nginx/dev-cache_pages.log
 }
