@@ -495,7 +495,20 @@ frontnpm() {
 
 
 # sx - временный баг
-alias sx="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads; mkdir -p /tmp/cache/nginx; chmod 777 /tmp/cache/nginx"
+sx() {
+    sudo chown dart:dart -R /tmp/openapi web/uploads
+    rm -fr web/uploads
+    mkdir web/uploads
+    chmod 777 web/uploads
+
+    mkdir -p /tmp/cache/nginx
+    chmod 777 /tmp/cache/nginx
+
+    mkdir -p /tmp/log/nginx
+    echo > dev-cache_pages.log
+    chmod 777 /tmp/log/nginx
+    chmod 777 /tmp/log/nginx/dev-cache_pages.log
+}
 
 # starter - запускает проект
 starter() {
