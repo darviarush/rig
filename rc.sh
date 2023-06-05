@@ -491,11 +491,11 @@ frontnpm() {
 }
 
 
-# sx - временный баг
-sx() {
-    sudo chown dart:dart -R /tmp/openapi web/uploads
+# startfix - временный баг
+startfix() {
+    sudo chown dart:dart -R /tmp/openapi web/uploads &> /dev/null
     rm -fr web/uploads
-    mkdir web/uploads
+    mkdir -p web/uploads
     chmod 777 web/uploads
 
     mkdir -p /tmp/cache/nginx
