@@ -524,6 +524,9 @@ pushdev() {
     indev
 }
 
+# routers - выборка по роутам symphony
+alias routers='cmd debug:route | grep '
+
 # ga - генерирует документацию по openapi
 alias ga='cmd rc:api:gen-docs'
 
