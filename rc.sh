@@ -348,7 +348,7 @@ py_init() {
 cov() {
     cover -delete
     #PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
-    yath test -j4 --cover && cover -report html_basic
+    yath test -j4 --cover && cover -report html_basic || return 1
     if [ "$1" == "-O" ]; then xdg-open cover_db/coverage.html
     elif [ "$1" == "-o" ]; then opera cover_db/coverage.html
     fi
