@@ -357,6 +357,9 @@ cov() {
     fi
 }
 
+# pmuninstall - удаляет perl-модуль
+alias pmuninstall='sudo cpanm --uninstall'
+
 # portal - подключение по ssh для нестандартного порта
 alias portal='ssh -p 6022 '
 
