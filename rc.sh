@@ -195,10 +195,7 @@ merge() {
 
 # indev - добавляет текущую ветку в ветку dev
 indev() {
-    local x=$1
-    if [ "$x" == "" ]; then
-       if [ -e api ]; then x=development; else x=dev; fi
-    fi
+    local x=dev
     c0 $x                                     \
     && run "git pull origin $x --no-edit"     \
     && run "git merge --no-edit --no-ff $C0"  \
@@ -350,8 +347,8 @@ py_init() {
 # cov - тестирование perl-проектов с cover
 cov() {
     cover -delete
-    PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
-    cover -report html_basic
+    #PERL5OPT="$PERL5OPT -MDevel::Cover" prove -Ilib
+    yath test -j4 --cover && cover -report html_basic || return 1
     if [ "$1" == "-O" ]; then xdg-open cover_db/coverage.html
     elif [ "$1" == "-o" ]; then opera cover_db/coverage.html
     fi
@@ -497,8 +494,21 @@ frontnpm() {
 }
 
 
-# sx - временный баг
-alias sx="sudo chown dart:dart -R /tmp/openapi web/uploads; rm -fr web/uploads; mkdir web/uploads; chmod 777 web/uploads"
+# startfix - временный баг
+startfix() {
+    sudo chown dart:dart -R /tmp/openapi web/uploads &> /dev/null
+    rm -fr web/uploads
+    mkdir -p web/uploads
+    chmod 777 web/uploads
+
+    mkdir -p /tmp/cache/nginx
+    chmod 777 /tmp/cache/nginx
+
+    mkdir -p /tmp/log/nginx
+    echo > /tmp/log/nginx/dev-cache_pages.log
+    chmod 777 /tmp/log/nginx
+    chmod 777 /tmp/log/nginx/dev-cache_pages.log
+}
 
 # starter - запускает проект
 starter() {
@@ -516,6 +526,9 @@ pushdev() {
     push "$1"
     indev
 }
+
+# routers - выборка по роутам symphony
+alias routers='cmd debug:route | grep '
 
 # ga - генерирует документацию по openapi
 alias ga='cmd rc:api:gen-docs'
