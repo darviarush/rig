@@ -604,4 +604,7 @@ symtst() {
     rm -fr var/cache/*
 }
 
-
+# pr - создаёт pull-request для указанной ветки
+pr() {
+    opera "https://bitbucket.org/restonet/restoclub-2019/pull-requests/new?source=$(branch )&t=1"
+}
