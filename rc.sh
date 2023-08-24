@@ -360,6 +360,16 @@ cov() {
     fi
 }
 
+# gitgrep [options] regexp - поиск теста во всех репозиториях
+gitgrep() {
+    git grep $* $(git rev-list --all)
+}
+
+# githist file - история изменения файла
+githist() {
+    git log -p -- "$1"
+}
+
 # pmuninstall - удаляет perl-модуль
 alias pmuninstall='sudo cpanm --uninstall'
 
