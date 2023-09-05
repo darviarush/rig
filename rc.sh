@@ -293,7 +293,7 @@ alias cdmb='cd /home/Project/monitoring_bot'
 alias cdapi='cd /home/Project/api.restoclub.ru'
 
 # cdv3 - cd to node v3
-alias cdv3='cd /home/Project/node-ssr-v3'
+alias cdv3='cd /home/Project/node-ssr-v3/client'
 
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
