@@ -328,6 +328,35 @@ vg() {
 # mk snippet name [1] - копирует сниппет с подстановками в текущий каталог. [1] - директорию сделать flat
 alias mk='$RIG_RC/bin/mk.sh'
 
+# mkdist pkg - создать дистрибутив библиотеки perl
+mkdist() {
+    local pkg=$1
+    local name=`echo -n $1 | sed 's/::/-/g'`
+    local path=lib/`echo -n $1 | sed 's/::/\//g'`
+    local dir=perl-${name,,}
+    mkdir $dir || return
+
+    local mdpath=$path.md
+    local pmpath=$path.pm
+    local var=`echo -n $1 | sed 's/::/_/g'`
+
+    for i in $RIG_RC/snippet/perl-dist/*; do
+	echo $i `basename $i`
+	var=${var,,} dir=$dir pkg=$pkg name=$name mdpath=$mdpath pmpath=$pmpath perl -np -e 's/\{\{(\w+)\}\}/$ENV{$1}/g' $i >  $dir/`basename $i`
+    done
+
+    mkdir -p $dir/`dirname $path` || return
+    cp $dir/README.md $dir/$mdpath
+    mv $dir/MOD.pm $dir/$pmpath
+
+    pushd $dir
+    git init
+    git remote add origin git@github.com:darviarush/$dir.git
+    popd
+
+    opera "https://github.com/new?name=$dir&description=$pkg%20is%20" &> /dev/null
+}
+
 # py_test - тестирует пакет питон в текущей папке с покрытием
 py_test() {
     pypkg=`basename $(pwd )`
