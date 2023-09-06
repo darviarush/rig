@@ -342,7 +342,7 @@ mkdist() {
 
     for i in $RIG_RC/snippet/perl-dist/*; do
 	echo $i `basename $i`
-	var=${var,,} dir=$dir pkg=$pkg name=$name mdpath=$mdpath pmpath=$pmpath perl -np -e 's/\{\{(\w+)\}\}/$ENV{$1}/g' $i >  $dir/`basename $i`
+	year=`date +%Y` var=${var,,} dir=$dir pkg=$pkg name=$name mdpath=$mdpath pmpath=$pmpath perl -np -e 's/\{\{(\w+)\}\}/$ENV{$1}/g' $i >  $dir/`basename $i`
     done
 
     mkdir -p $dir/`dirname $path` || return
