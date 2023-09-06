@@ -349,13 +349,15 @@ mkdist() {
     cp $dir/README.md $dir/$mdpath
     mv $dir/MOD.pm $dir/$pmpath
 
-    pushd $dir
+    cd $dir
     git init
     git remote add origin git@github.com:darviarush/$dir.git
-    popd
 
     opera "https://github.com/new?name=$dir&description=$pkg%20is%20" &> /dev/null
 }
+
+# pushinit - комитит и пушит в первый раз
+alias pushinit='git add . && git commit -am init && git push --set-upstream origin master'
 
 # py_test - тестирует пакет питон в текущей папке с покрытием
 py_test() {
