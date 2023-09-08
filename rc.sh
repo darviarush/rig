@@ -208,7 +208,7 @@ release() {
     if [ "$PERL_LOCAL_LIB_ROOT" == "" ]; then
         cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
     fi
-    minil release
+    liveman -f -c && minil release
     #cp `perl -n -e 'print "lib/", $1 =~ y/-/\//r, ".md" if /^name\s*=\s*"([\w-]+)"/' minil.toml` README.md && push 'Change README.md'
 }
 
