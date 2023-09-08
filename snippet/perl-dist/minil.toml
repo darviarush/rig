@@ -2,11 +2,7 @@ name = "{{name}}"
 
 # badges = ["github-actions/test.yml"]
 authority="cpan:DART"
+license="gpl_3"
+
 module_maker="ModuleBuildTiny"
 static_install = "auto"
-
-[release]
-do_not_upload_to_cpan=false
-hooks=[
-    "cp {{mdpath}} README.md"
-]

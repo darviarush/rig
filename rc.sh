@@ -203,8 +203,15 @@ indev() {
     && c0
 }
 
-# release [desc] - Делается на проде. pull и устанавливает тег
+# release - релиз текущего perl-dist
 release() {
+    cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+    minil release
+    cp `perl -n -e 'print "lib/", $1 =~ y/-/\//r, ".md" if /^name\s*=\s*"([\w-]+)"/' minil.toml` README.md && push 'Change README.md'
+}
+
+# release1 [desc] - Делается на проде. pull и устанавливает тег
+release1() {
     local ver="`date '+%F %T'`"
     commit "Релиз версии $ver"
     if [ "$1" == "" ]; then
