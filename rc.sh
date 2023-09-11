@@ -259,6 +259,10 @@ alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py &
 # cda - cd to astrobook
 alias cda='cd ~/__/astrobook'
 
+# cdl - cd to le-yoga
+alias cdy='cd ~/__/le-yoga'
+
+
 # cdl - cd to @lib
 alias cdl='cd ~/__/@lib'
 
