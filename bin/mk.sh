@@ -2,7 +2,7 @@
 
 # Развернуть указанный сниппет в текущий каталог
 #
-#   mk сниппет название_без_расширения [FLAT] 
+#   mk сниппет название_без_расширения [FLAT]
 #
 # $1 — сниппет
 # $2 — название файла
@@ -35,9 +35,9 @@ replace_vars() {
 cp_path() {
 	path=$1
 	to=`echo $FLAT${1#$snippet}`
-	
+
 	if [ $to == . ]; then return; fi
-	
+
 	to=`echo $to | replace_vars`
 
 	echo $to
@@ -59,6 +59,6 @@ cp_path() {
 if [ -d $snippet ]; then
 	find $snippet | while read file; do cp_path "$file"; done
 else
-	cp_path $snippet.* 
+	cp_path $snippet.*
 fi
 
