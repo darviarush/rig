@@ -553,6 +553,11 @@ frontnpm() {
     make localhost-node-cli l="bash -c 'cd front; npm i'"
 }
 
+# frontadmin - Пересобрать фронт админки
+frontadmin() {
+    make localhost-node-cli l="bash -c 'cd front-admin; npm run build-dev'"
+}
+
 
 # startfix - временный баг
 startfix() {
