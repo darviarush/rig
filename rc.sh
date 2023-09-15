@@ -555,7 +555,7 @@ frontnpm() {
 
 # frontadmin - Пересобрать фронт админки
 frontadmin() {
-    make localhost-node-cli l="bash -c 'cd front-admin; npm run build-dev'"
+    make localhost-node-cli l="bash -c 'cd front-admin; node scripts/build.js development'"
 }
 
 
