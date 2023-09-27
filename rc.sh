@@ -208,8 +208,7 @@ release() {
     if [ "$PERL_LOCAL_LIB_ROOT" == "" ]; then
         cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
     fi
-    liveman -f -c && minil release
-    #cp `perl -n -e 'print "lib/", $1 =~ y/-/\//r, ".md" if /^name\s*=\s*"([\w-]+)"/' minil.toml` README.md && push 'Change README.md'
+    liveman -fc && minil release
 }
 
 # release1 [desc] - Делается на проде. pull и устанавливает тег
@@ -347,7 +346,9 @@ mkdist() {
     local name=`echo -n $1 | sed 's/::/-/g'`
     local path=lib/`echo -n $1 | sed 's/::/\//g'`
     local dir=perl-${name,,}
-    mkdir $dir || return
+
+    mkdir -p $dir/.github/workflows || return
+    cp $RIG_RC/snippet/perl-dist/test.yml $dir/.github/workflows/ || return
 
     local mdpath=$path.md
     local pmpath=$path.pm
@@ -361,6 +362,8 @@ mkdist() {
     mkdir -p $dir/`dirname $path` || return
     cp $dir/README.md $dir/$mdpath
     mv $dir/MOD.pm $dir/$pmpath
+
+
 
     cd $dir
     git init
