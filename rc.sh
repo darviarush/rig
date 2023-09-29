@@ -347,8 +347,9 @@ mkdist() {
     local path=lib/`echo -n $1 | sed 's/::/\//g'`
     local dir=perl-${name,,}
 
-    mkdir -p $dir/.github/workflows || return
-    cp $RIG_RC/snippet/perl-dist/test.yml $dir/.github/workflows/ || return
+    local wf=.github/workflows
+    mkdir -p $dir/$wf || return
+    cp $RIG_RC/snippet/perl-dist/$wf $dir/$wf/ || return
 
     local mdpath=$path.md
     local pmpath=$path.pm
@@ -362,8 +363,6 @@ mkdist() {
     mkdir -p $dir/`dirname $path` || return
     cp $dir/README.md $dir/$mdpath
     mv $dir/MOD.pm $dir/$pmpath
-
-
 
     cd $dir
     git init
