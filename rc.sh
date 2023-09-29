@@ -349,7 +349,7 @@ mkdist() {
 
     local wf=.github/workflows
     mkdir -p $dir/$wf || return
-    cp $RIG_RC/snippet/perl-dist/$wf $dir/$wf/ || return
+    cp $RIG_RC/snippet/perl-dist/$wf/test.yml $dir/$wf/ || return
 
     local mdpath=$path.md
     local pmpath=$path.pm
