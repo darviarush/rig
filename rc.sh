@@ -355,7 +355,7 @@ mkdist() {
     local pmpath=$path.pm
     local var=`echo -n $1 | sed 's/::/_/g'`
 
-    for i in $RIG_RC/snippet/perl-dist/*; do
+    for i in $RIG_RC/snippet/perl-dist/* $RIG_RC/snippet/perl-dist/.gitignore; do
 	echo $i `basename $i`
 	year=`date +%Y` var=${var,,} dir=$dir pkg=$pkg name=$name mdpath=$mdpath pmpath=$pmpath perl -np -e 's/\{\{(\w+)\}\}/$ENV{$1}/g' $i >  $dir/`basename $i`
     done
