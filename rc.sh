@@ -560,6 +560,9 @@ frontadmin() {
     make localhost-node-cli l="bash -c 'cd front-admin; node scripts/build.js development'"
 }
 
+# frontcrm - Пересобрать фронт crm
+alias frontcrm='make api-old-front-build-dev'
+
 
 # startfix - временный баг
 startfix() {
