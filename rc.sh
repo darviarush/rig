@@ -246,9 +246,13 @@ version() {
     perl -e '$_=join "", <>; print("$1\n") if /^#+[ \t]+VERSION\s+(\S+)/m' README.md
 }
 
-# github name - клонировать с github мой проект
+# github [name] - клонировать с github мой проект или перейти на github
 github() {
-    git clone git@github.com:darviarush/$1.git
+    if [ "$1" == "" ]; then
+        opera `git remote get-url origin | sed 's/^git@//' | sed 's/.git$//' | sed 's/:/\//'`
+    else
+        git clone git@github.com:darviarush/$1.git
+    fi
 }
 
 # install_pip - установить pip с инета
