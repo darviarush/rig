@@ -676,3 +676,9 @@ symtst() {
 pr() {
     opera "https://bitbucket.org/restonet/restoclub-2019/pull-requests/new?source=$(branch )&t=1&dest=release_candidate" &> /dev/null
 }
+
+# pullprod - пулл на прод
+alias pullprod='c0 master && pull && make login-2rrc-registry release--prod-monada'
+
+# pulldev - пулл на дев
+alias pullprod='indev && c0 dev && make login-2rrc-registry release--dev-monada'
