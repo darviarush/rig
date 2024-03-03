@@ -291,34 +291,34 @@ alias cdla='cd ~/__/@lib/perl-aion'
 alias='cdlact=cd ~/__/@lib/perl-aion-action'
 
 # cdlc - cd to perl-aion-carp
-alias='cdlc=cd ~/__/@lib/perl-aion-carp'
+alias 'cdlc=cd ~/__/@lib/perl-aion-carp'
 
 # cdlf - cd to perl-aion-format
-alias='cdlf=cd ~/__/@lib/perl-aion-format'
+alias 'cdlf=cd ~/__/@lib/perl-aion-format'
 
 # cdlfs - cd to perl-aion-fs
-alias='cdlfs=cd ~/__/@lib/perl-aion-fs'
+alias 'cdlfs=cd ~/__/@lib/perl-aion-fs'
 
 # cdlq - cd to perl-aion-query
-alias='cdlq=cd ~/__/@lib/perl-aion-query'
+alias 'cdlq=cd ~/__/@lib/perl-aion-query'
 
 # cdlr - cd to perl-aion-run
-alias='cdlr=cd ~/__/@lib/perl-aion-run'
+alias 'cdlr=cd ~/__/@lib/perl-aion-run'
 
 # cdls - cd to perl-aion-sige
-alias='cdls=cd ~/__/@lib/perl-aion-sige'
+alias 'cdls=cd ~/__/@lib/perl-aion-sige'
 
 # cdlsp - cd to perl-aion-spirit
-alias='cdlsp=cd ~/__/@lib/perl-aion-spirit'
+alias 'cdlsp=cd ~/__/@lib/perl-aion-spirit'
 
 # cdlsu - cd to perl-aion-surf
-alias='cdlsu=cd ~/__/@lib/perl-aion-surf'
+alias 'cdlsu=cd ~/__/@lib/perl-aion-surf'
 
 # cdlt - cd to perl-aion-telemetry
-alias='cdlt=cd ~/__/@lib/perl-aion-telemetry'
+alias 'cdlt=cd ~/__/@lib/perl-aion-telemetry'
 
 # cdlv - cd to perl-aion-view
-alias='cdlv=cd ~/__/@lib/perl-aion-view'
+alias 'cdlv=cd ~/__/@lib/perl-aion-view'
 
 # cde - cd to erswitcher
 alias cde='cd ~/__/erswitcher'
