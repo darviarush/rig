@@ -86,6 +86,25 @@ alias reset='git reset --hard HEAD'
 alias gl='git log --name-only --graph'
 
 
+# gitgrep [options] regexp - поиск теста во всех репозиториях
+gitgrep() {
+    git grep $* $(git rev-list --all)
+}
+
+# githist file - история изменения файла
+githist() {
+    git log -p -- "$1"
+}
+
+# bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
+bdiff() {
+    git diff master...${1:-`branch`} | kompare -
+}
+
+# pushinit - комитит и пушит в первый раз
+alias pushinit='git add . && git commit -am init && git push --set-upstream origin master'
+
+
 # new branch - создаёт ветку
 new() {
     if ! git_diff; then return; fi
@@ -130,10 +149,6 @@ c0() {
     fi
 }
 
-# bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
-bdiff() {
-    git diff master...${1:-`branch`} | kompare -
-}
 
 # commit - комитит. Если нечего комитить - ничего не делает
 commit() {
@@ -408,8 +423,6 @@ mkdist() {
     opera "https://github.com/new?name=$dir&description=$pkg%20is%20" &> /dev/null
 }
 
-# pushinit - комитит и пушит в первый раз
-alias pushinit='git add . && git commit -am init && git push --set-upstream origin master'
 
 # py_test - тестирует пакет питон в текущей папке с покрытием
 py_test() {
@@ -443,15 +456,6 @@ cov() {
     fi
 }
 
-# gitgrep [options] regexp - поиск теста во всех репозиториях
-gitgrep() {
-    git grep $* $(git rev-list --all)
-}
-
-# githist file - история изменения файла
-githist() {
-    git log -p -- "$1"
-}
 
 # pmuninstall - удаляет perl-модуль
 alias pmuninstall='sudo cpanm --uninstall'
@@ -709,3 +713,9 @@ symtst() {
 pr() {
     opera "https://bitbucket.org/restonet/restoclub-2019/pull-requests/new?source=$(branch )&t=1&dest=release_candidate" &> /dev/null
 }
+
+# pullprod - пулл на прод
+alias pullprod='c0 master && pull && make login-2rrc-registry release--prod-monada'
+
+# pulldev - пулл на дев
+alias pullprod='indev && c0 dev && make login-2rrc-registry release--dev-monada'
