@@ -581,14 +581,13 @@ mkentity() {
 }
 
 
+frontcrm() {
+    make api-old-front-build-dev
+}
+
 # front - Пересобрать фронт
 front() {
-    if [ "`pwd`" ~~ "crm-2020" ]
-    then
-        make api-old-front-build-dev
-    else
-        make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
-    fi
+    make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
 }
 
 # frontjs - Пересобрать только js
