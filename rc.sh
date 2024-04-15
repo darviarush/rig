@@ -585,6 +585,10 @@ mkentity() {
 }
 
 
+frontcrm() {
+    make api-old-front-build-dev
+}
+
 # front - Пересобрать фронт
 front() {
     make localhost-node-cli l="bash -c 'cd front; ./node_modules/.bin/gulp buildDev'"
