@@ -69,7 +69,6 @@ git_diff() {
     return 0
 }
 
-
 # desc - печатает описание текущего бранча
 alias desc='git config branch.`branch`.description'
 
@@ -381,6 +380,11 @@ alias ports='sudo ss -tlpn'
 
 # ports1 - Посмотреть порты через netstat
 alias ports1='sudo netstat -tlpn'
+
+# scpp u@h:/file file - scp с прогрессом
+scpp() {
+    rsync -r -v --progress -e ssh "$1" "$2"
+}
 
 # vg - перейти в каталог ~/_vg и запустить vagrant
 vg() {
