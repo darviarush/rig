@@ -375,6 +375,12 @@ brig() {
     done
 }
 
+# packagecheck - Проверяет пакеты на ошибки
+alias packagecheck='paccheck --files --file-properties --db-files --quiet --sha256sum'
+
+# sysreinstall - Переинсталлить все пакеты
+alias sysreinstall='pacman -Qqn | pacman -S -'
+
 # ports - Посмотреть порты через ss
 alias ports='sudo ss -tlpn'
 
