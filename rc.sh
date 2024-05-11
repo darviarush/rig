@@ -376,7 +376,7 @@ brig() {
 }
 
 # packagecheck - Проверяет пакеты на ошибки
-alias packagecheck='paccheck --files --file-properties --db-files --quiet --sha256sum'
+alias packagecheck='sudo paccheck --files --file-properties --db-files --quiet --sha256sum'
 
 # sysreinstall - Переинсталлить все пакеты
 alias sysreinstall='pacman -Qqn | pacman -S -'
