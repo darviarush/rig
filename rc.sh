@@ -486,14 +486,20 @@ gitconf() {
     git config --global pull.ff only       # fast-forward only
 }
 
-# installrig -         инсталлирует самое необходимое
+# installrig - инсталлирует самое необходимое
 installrig() {
     pamac install aspell hspell libvoikko kompare
 }
 
 
-# drm container - Остановить и удалить контейнер
+# drm container - остановить и удалить контейнер
 drm() {
     docker stop -t 0 $1
     docker rm $1
 }
+
+# bashing - перечитать .bashrc в терминале
+alias bashing='. ~/.bashrc'
+
+# bashed - редактировать .bashrc и перечитать
+alias bashed='mcedit ~/.bashrc; . ~/.bashrc'
