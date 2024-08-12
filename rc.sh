@@ -109,7 +109,7 @@ alias pushinit='git add . && git commit -am init && git push --set-upstream orig
 # new branch - создаёт ветку
 new() {
     if ! git_diff; then return; fi
-    run git checkout master
+    run git checkout ${GIT_NEW_FROM:-master}
     run git pull origin master --no-edit
     local b=`echo "$1" | awk '{print $1}'`
     if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
