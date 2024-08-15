@@ -99,7 +99,7 @@ githist() {
 
 # bdiff [branch] - сравнение двух бранчей. Выполните installrig или установите kompare
 bdiff() {
-    git diff master...${1:-`branch`} | kompare -
+    git diff ${GIT_NEW_FROM:-master}...${1:-`branch`} | kompare -
 }
 
 # pushinit - комитит и пушит в первый раз
