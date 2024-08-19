@@ -166,7 +166,7 @@ commit() {
 
 # upd - обновить ветку с мастера
 upd() {
-    run "git merge origin/${1:-master} --no-edit --no-ff"
+    run "git merge origin/${GIT_NEW_FROM:-${1:-master}} --no-edit --no-ff"
 }
 
 # push [comment] - делает комит текущей ветки
