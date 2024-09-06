@@ -8,6 +8,7 @@
 #
 # для добавления задач в bash
 
+#@category rc
 
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
@@ -15,6 +16,7 @@ export EDITOR=mcedit
 export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo ~/__/@lib/*/script | sed 's/ /:/g'`
 export PERL5LIB=lib:`shopt -s nullglob; echo $PERL5LIB ~/__/@lib/*/lib | sed 's/ /:/g'`
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )\[\033[01;32m\]]\$\[\033[00m\] '
+
 
 if [ "$1" == startup ]; then
 
@@ -34,7 +36,28 @@ alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
 
 # help - показать список целей
 help() {
-    grep -e "^#" $RIG_RC/rc.sh | tail -n +2 | sed "s/^#[ \\t]\?//" 
+    if perl -V > /dev/null; then
+        perl  -e '
+        use Term::ANSIColor qw/colored :constants/;
+        while(<>) {
+            print(colored("「$1」", "bold red"), "\n"), next if /#\@category\s+(.*)/;
+
+            next unless /^# /;
+
+            /^#\s+(\S+)(?:\s+((?:[^-]|\S-)+?))?\s+-\s+(.*)/ or do { print s/^# //r, "\n"; next; };
+
+            print colored(sprintf("   %15s", $1), "bold green"), do {
+                my $x = sprintf("  %-20s  ", $2 // " ");
+                $x =~ s/[\[\]]/ $& =~ m!\[! ? BRIGHT_BLACK . $& : $& . BRIGHT_YELLOW /ge;
+                $x = BRIGHT_YELLOW . $x . RESET;
+            },
+            colored($3, "bold blue"),
+            "\n";
+        }
+        ' $RIG_RC/rc.sh
+    else
+        grep -e "^#" $RIG_RC/rc.sh | tail -n +2 | sed "s/^#[ \\t]\?//"
+    fi
     echo
 }
 
@@ -49,6 +72,14 @@ run() {
 
 # locallib - указать локальную директорию для пакетов perl
 alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
+
+#@category git
+
+# gitconf - конфигурирует git
+gitconf() {
+    git config --global pull.rebase false   # rebase
+    git config --global pull.ff only       # fast-forward only
+}
 
 # git_diff - при изменениях в репозитории предлагает пользователю варианты действий с ними
 git_diff() {
@@ -219,6 +250,8 @@ indev() {
     && c0
 }
 
+#@category Релизы
+
 # release - релиз текущего perl-dist
 release() {
     if [ "$PERL_LOCAL_LIB_ROOT" == "" ]; then
@@ -274,6 +307,8 @@ github() {
 # install_pip - установить pip с инета
 alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
+
+#@category Переходы
 
 # cda - cd to astrobook
 alias cda='cd ~/__/astrobook'
@@ -360,6 +395,12 @@ alias cdapi='cd /home/Project/api.restoclub.ru'
 # cdv3 - cd to node v3
 alias cdv3='cd /home/Project/node-ssr-v3/client'
 
+# cdrig - cd to rig
+alias cdrig='cd $RIG_RC'
+
+
+#@category Утилиты
+
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
@@ -401,6 +442,34 @@ vg() {
     popd
 }
 
+# portal - подключение по ssh для нестандартного порта
+alias portal='ssh -p 6022 '
+
+# defopt - установить опции окружения по умолчанию
+defopt() {
+    xdg-settings set default-web-browser opera.desktop
+}
+
+# installrig - инсталлирует самое необходимое
+installrig() {
+    pamac install aspell hspell libvoikko kompare
+}
+
+
+# drm container - остановить и удалить контейнер
+drm() {
+    docker stop -t 0 $1
+    docker rm $1
+}
+
+# bashing - перечитать .bashrc в терминале
+alias bashing='. ~/.bashrc'
+
+# bashed - редактировать .bashrc и перечитать
+alias bashed='mcedit ~/.bashrc; . ~/.bashrc'
+
+#@category Файловые сниппеты
+
 # mk snippet name [1] - копирует сниппет с подстановками в текущий каталог. [1] - директорию сделать flat
 alias mk='$RIG_RC/bin/mk.sh'
 
@@ -435,6 +504,7 @@ mkdist() {
     opera "https://github.com/new?name=$dir&description=$pkg%20is%20" &> /dev/null
 }
 
+#@category python - тесты и создание пакетов
 
 # py_test - тестирует пакет питон в текущей папке с покрытием
 py_test() {
@@ -458,6 +528,8 @@ py_init() {
     eval "$(pyenv virtualenv-init -)"
 }
 
+#@category perl
+
 # cov - тестирование perl-проектов с cover
 cov() {
     cover -delete
@@ -472,34 +544,3 @@ cov() {
 # pmuninstall - удаляет perl-модуль
 alias pmuninstall='sudo cpanm --uninstall'
 
-# portal - подключение по ssh для нестандартного порта
-alias portal='ssh -p 6022 '
-
-# defopt - установить опции окружения по умолчанию
-defopt() {
-    xdg-settings set default-web-browser opera.desktop
-}
-
-# gitconf - конфигурирует git
-gitconf() {
-    git config --global pull.rebase false   # rebase
-    git config --global pull.ff only       # fast-forward only
-}
-
-# installrig - инсталлирует самое необходимое
-installrig() {
-    pamac install aspell hspell libvoikko kompare
-}
-
-
-# drm container - остановить и удалить контейнер
-drm() {
-    docker stop -t 0 $1
-    docker rm $1
-}
-
-# bashing - перечитать .bashrc в терминале
-alias bashing='. ~/.bashrc'
-
-# bashed - редактировать .bashrc и перечитать
-alias bashed='mcedit ~/.bashrc; . ~/.bashrc'
