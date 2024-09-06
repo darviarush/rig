@@ -70,8 +70,6 @@ run() {
     if [ "$c" != 0 ]; then echo "Завершение команды: $c. Выходим"; fi
 }
 
-# locallib - указать локальную директорию для пакетов perl
-alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
 
 #@category git
 
@@ -249,64 +247,6 @@ indev() {
     && run "git push origin $x"               \
     && c0
 }
-
-#@category Релизы
-
-# release - релиз текущего perl-dist
-release() {
-    if [ "$PERL_LOCAL_LIB_ROOT" == "" ]; then
-        cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
-    fi
-    liveman -fc && minil release
-}
-
-# release1 [desc] - Делается на проде. pull и устанавливает тег
-release1() {
-    local ver="`date '+%F %T'`"
-    commit "Релиз версии $ver"
-    if [ "$1" == "" ]; then
-        git tag -a "$ver"
-    else
-        git tag -a "$ver" -m "$1"
-    fi
-    git push origin --tags
-}
-
-# release2 version-message - ставит тег и меняет версию в README.md
-release2() {
-    if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
-
-    ver=`echo "$1" | awk '{print $1}'`
-    if [ "$ver" == "" ]; then echo "Нет версии!"; return; fi
-    desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
-    if [ "$desc" == "" ]; then echo "Нет описания!"; return; fi
-
-    perl -i -np -e 's/^(#+[ \t]+VERSION\s*)\S+/$1$ver/m' README.md
-    return
-
-    commit "Релиз версии $ver"
-
-    git tag -a "$ver" -m "$desc"
-    git push origin --tags
-}
-
-# version - версия из README.md текущего проекта
-version() {
-    perl -e '$_=join "", <>; print("$1\n") if /^#+[ \t]+VERSION\s+(\S+)/m' README.md
-}
-
-# github [name] - клонировать с github мой проект или перейти на github
-github() {
-    if [ "$1" == "" ]; then
-        opera `git remote get-url origin | sed 's/^git@//' | sed 's/.git$//' | sed 's/:/\//'`
-    else
-        git clone git@github.com:darviarush/$1.git
-    fi
-}
-
-# install_pip - установить pip с инета
-alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
-
 
 #@category Переходы
 
@@ -504,7 +444,64 @@ mkdist() {
     opera "https://github.com/new?name=$dir&description=$pkg%20is%20" &> /dev/null
 }
 
-#@category python - тесты и создание пакетов
+#@category Релизы
+
+# release - релиз текущего perl-dist
+release() {
+    if [ "$PERL_LOCAL_LIB_ROOT" == "" ]; then
+        cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+    fi
+    liveman -fc && minil release
+}
+
+# release1 [desc] - Делается на проде. pull и устанавливает тег
+release1() {
+    local ver="`date '+%F %T'`"
+    commit "Релиз версии $ver"
+    if [ "$1" == "" ]; then
+        git tag -a "$ver"
+    else
+        git tag -a "$ver" -m "$1"
+    fi
+    git push origin --tags
+}
+
+# release2 version-message - ставит тег и меняет версию в README.md
+release2() {
+    if [ "`branch`" != master ]; then echo "Вначале перейдите на master"; return; fi
+
+    ver=`echo "$1" | awk '{print $1}'`
+    if [ "$ver" == "" ]; then echo "Нет версии!"; return; fi
+    desc="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    if [ "$desc" == "" ]; then echo "Нет описания!"; return; fi
+
+    perl -i -np -e 's/^(#+[ \t]+VERSION\s*)\S+/$1$ver/m' README.md
+    return
+
+    commit "Релиз версии $ver"
+
+    git tag -a "$ver" -m "$desc"
+    git push origin --tags
+}
+
+# version - версия из README.md текущего проекта
+version() {
+    perl -e '$_=join "", <>; print("$1\n") if /^#+[ \t]+VERSION\s+(\S+)/m' README.md
+}
+
+# github [name] - клонировать с github мой проект или перейти на github
+github() {
+    if [ "$1" == "" ]; then
+        opera `git remote get-url origin | sed 's/^git@//' | sed 's/.git$//' | sed 's/:/\//'`
+    else
+        git clone git@github.com:darviarush/$1.git
+    fi
+}
+
+#@category python
+
+# install_pip - установить pip с инета
+alias install_pip='curl https://bootstrap.pypa.io/get-pip.py > /tmp/get-pip.py && python3 /tmp/get-pip.py'
 
 # py_test - тестирует пакет питон в текущей папке с покрытием
 py_test() {
@@ -544,3 +541,5 @@ cov() {
 # pmuninstall - удаляет perl-модуль
 alias pmuninstall='sudo cpanm --uninstall'
 
+# locallib - указать локальную директорию для пакетов perl
+alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
