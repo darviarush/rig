@@ -13,8 +13,8 @@
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
-export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo ~/__/@lib/*/script | sed 's/ /:/g'`
-export PERL5LIB=lib:`shopt -s nullglob; echo $PERL5LIB ~/__/@lib/*/lib | sed 's/ /:/g'`
+export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo /ext/__/@lib/*/script | sed 's/ /:/g'`
+export PERL5LIB=lib:`shopt -s nullglob; echo $PERL5LIB /ext/__/@lib/*/lib | sed 's/ /:/g'`
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )\[\033[01;32m\]]\$\[\033[00m\] '
 
 
@@ -34,8 +34,8 @@ alias ls='ls --color'
 ## mkdir -p etc/sublime-text-3/; rsync -ravh ~/.config/sublime-text-3/Packages/User/ etc/sublime-text-3/;
 alias fn='pushd $RIG_RC; mcedit rc.sh; . rc.sh; push fn; popd'
 
-# helprig - показать список целей
-helprig() {
+# -help - показать список целей
+-help() {
     if perl -V > /dev/null; then
         perl  -e '
         use Term::ANSIColor qw/colored :constants/;
@@ -251,89 +251,71 @@ indev() {
 #@category Переходы
 
 # cda - cd to astrobook
-alias cda='cd ~/__/astrobook'
+alias cda='cd /ext/__/astrobook'
 
 # cdl - cd to le-yoga
-alias cdy='cd ~/__/le-yoga'
+alias cdy='cd /ext/__/le-yoga'
 
 
 # cdl - cd to @lib
-alias cdl='cd ~/__/@lib'
+alias cdl='cd /ext/__/@lib'
 
 # cdla - cd to perl-aion
-alias cdla='cd ~/__/@lib/perl-aion'
+alias cdla='cd /ext/__/@lib/perl-aion'
 
 # cdlact - cd to perl-aion-action
-alias='cdlact=cd ~/__/@lib/perl-aion-action'
+alias='cdlact=cd /ext/__/@lib/perl-aion-action'
 
 # cdlc - cd to perl-aion-carp
-alias 'cdlc=cd ~/__/@lib/perl-aion-carp'
+alias 'cdlc=cd /ext/__/@lib/perl-aion-carp'
 
 # cdlf - cd to perl-aion-format
-alias 'cdlf=cd ~/__/@lib/perl-aion-format'
+alias 'cdlf=cd /ext/__/@lib/perl-aion-format'
 
 # cdlfs - cd to perl-aion-fs
-alias 'cdlfs=cd ~/__/@lib/perl-aion-fs'
+alias 'cdlfs=cd /ext/__/@lib/perl-aion-fs'
 
 # cdlq - cd to perl-aion-query
-alias 'cdlq=cd ~/__/@lib/perl-aion-query'
+alias 'cdlq=cd /ext/__/@lib/perl-aion-query'
 
 # cdlr - cd to perl-aion-run
-alias 'cdlr=cd ~/__/@lib/perl-aion-run'
+alias 'cdlr=cd /ext/__/@lib/perl-aion-run'
 
 # cdls - cd to perl-aion-sige
-alias 'cdls=cd ~/__/@lib/perl-aion-sige'
+alias 'cdls=cd /ext/__/@lib/perl-aion-sige'
 
 # cdlsp - cd to perl-aion-spirit
-alias 'cdlsp=cd ~/__/@lib/perl-aion-spirit'
+alias 'cdlsp=cd /ext/__/@lib/perl-aion-spirit'
 
 # cdlsu - cd to perl-aion-surf
-alias 'cdlsu=cd ~/__/@lib/perl-aion-surf'
+alias 'cdlsu=cd /ext/__/@lib/perl-aion-surf'
 
 # cdlt - cd to perl-aion-telemetry
-alias 'cdlt=cd ~/__/@lib/perl-aion-telemetry'
+alias 'cdlt=cd /ext/__/@lib/perl-aion-telemetry'
 
 # cdlv - cd to perl-aion-view
-alias 'cdlv=cd ~/__/@lib/perl-aion-view'
+alias 'cdlv=cd /ext/__/@lib/perl-aion-view'
 
 # cde - cd to erswitcher
-alias cde='cd ~/__/erswitcher'
+alias cde='cd /ext/__/erswitcher'
 
 # cdn - cd to ninja
-alias cdn='cd ~/__/ninja'
+alias cdn='cd /ext/__/ninja'
 
 # cdnx - cd to mx-basic
-alias cdmx='cd ~/__/mx-basic'
+alias cdmx='cd /ext/__/mx-basic'
 
 # cdth - cd to ethereal-theory
-alias cdth='cd ~/__/ethereal-theory'
+alias cdth='cd /ext/__/ethereal-theory'
 
 # cdfr - cd to rubin-forms
-alias cdrf='cd /mnt/ext/__/rubin-forms'
+alias cdrf='cd /ext/__/rubin-forms'
 
 # cds - cd to golang-perl-storable
-alias cds='cd ~/__/golang-perl-storable'
+alias cds='cd /ext/__/golang-perl-storable'
 
 # cdt - cd to test directory
-alias cdt='cd ~/__1/'
-
-# cdr - cd to restoclub directory
-alias cdr='cd /home/Project/restoclub-2022'
-
-# cdcrm - cd to crm directory
-alias cdcrm='cd /home/Project/crm-2020'
-
-# cdga - cd to ga directory
-alias cdga='cd /home/Project/google.analytics.microservice'
-
-# cdmb - cd to monitoring_bot directory
-alias cdmb='cd /home/Project/monitoring_bot'
-
-# cdapi - cd to api directory
-alias cdapi='cd /home/Project/api.restoclub.ru'
-
-# cdv3 - cd to node v3
-alias cdv3='cd /home/Project/node-ssr-v3/client'
+alias cdsc='cd /ext/__/@script'
 
 # cdrig - cd to rig
 alias cdrig='cd $RIG_RC'

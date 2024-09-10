@@ -1,5 +1,26 @@
 #!/bin/bash
 
+#### restoclub
+
+# cdr - cd to restoclub directory
+alias cdr='cd /home/Project/restoclub-2022'
+
+# cdcrm - cd to crm directory
+alias cdcrm='cd /home/Project/crm-2020'
+
+# cdga - cd to ga directory
+alias cdga='cd /home/Project/google.analytics.microservice'
+
+# cdmb - cd to monitoring_bot directory
+alias cdmb='cd /home/Project/monitoring_bot'
+
+# cdapi - cd to api directory
+alias cdapi='cd /home/Project/api.restoclub.ru'
+
+# cdv3 - cd to node v3
+alias cdv3='cd /home/Project/node-ssr-v3/client'
+
+
 #### Симфония
 
 # cmd - Команда symphony в докере
