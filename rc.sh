@@ -131,6 +131,17 @@ bdiff() {
     git diff ${GIT_NEW_FROM:-master}...${1:-`branch`} | kompare -
 }
 
+# mkpatch - создаёт патч на основе отличий текущей ветки от master (или $GIT_NEW_FROM)
+mkpatch() {
+    local $master=${GIT_NEW_FROM:-master}
+    local f=/tmp/patch-`branch`-$master.patch
+    git format-patch $master --stdout > $f
+    pushd `pwd`
+    cdkr
+    git am $f
+    popd
+}
+
 # pushinit - комитит и пушит в первый раз
 alias pushinit='git add . && git commit -am init && git push --set-upstream origin master'
 
