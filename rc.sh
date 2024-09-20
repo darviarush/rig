@@ -259,6 +259,14 @@ indev() {
     && c0
 }
 
+# pr - создаёт pull-request для текущей ветки
+pr() {
+    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):(\S+)/'; print "https://$1/$2/-/merge_requests/new"`
+    
+    opera "$x?source=$(branch )&t=1&dest=develop" &> /dev/null
+}
+
+
 #@category Переходы
 
 # cda - cd to astrobook
@@ -275,7 +283,7 @@ alias cdl='cd /ext/__/@lib'
 alias cdla='cd /ext/__/@lib/perl-aion'
 
 # cdlact - cd to perl-aion-action
-alias='cdlact=cd /ext/__/@lib/perl-aion-action'
+alias cdlact='cd /ext/__/@lib/perl-aion-action'
 
 # cdlc - cd to perl-aion-carp
 alias 'cdlc=cd /ext/__/@lib/perl-aion-carp'
