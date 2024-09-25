@@ -206,7 +206,8 @@ commit() {
 
 # upd - обновить ветку с мастера
 upd() {
-    run "git merge  --no-edit --no-ff origin/${GIT_NEW_FROM:-${1:-master}}"
+    local master=${GIT_NEW_FROM:-${1:-master}}
+    run "git pull --no-edit origin $master || git merge --no-edit --no-ff origin/$master"
 }
 
 # push [comment] - делает комит текущей ветки
@@ -259,11 +260,11 @@ indev() {
     && c0
 }
 
-# pr - создаёт pull-request для текущей ветки
-pr() {
-    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):(\S+)/'; print "https://$1/$2/-/merge_requests/new"`
+# pr - создаёт МР для текущей ветки
+mr() {
+    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
     
-    opera "$x?source=$(branch )&t=1&dest=develop" &> /dev/null
+    opera "$x?merge_request%5Bsource_branch%5D=`branch`&merge_request%5Btarget_branch%5D=develop&merge_request%5Bforce_remove_source_branch%5D=1&merge_request%5Bsquash%5D=1&merge_request%5Btitle%5D=`desc`" &> /dev/null
 }
 
 
