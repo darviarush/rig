@@ -269,7 +269,7 @@ mr() {
 
 # lr - ищет все МР по текущей ветке
 lr() {
-    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
+    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests"'`
 
     opera "$x?scope=all&state=all&search=`branch`" &> /dev/null
 }
