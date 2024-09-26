@@ -260,11 +260,18 @@ indev() {
     && c0
 }
 
-# pr - создаёт МР для текущей ветки
+# mr - создаёт МР для текущей ветки
 mr() {
     local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
     
     opera "$x?merge_request%5Bsource_branch%5D=`branch`&merge_request%5Btarget_branch%5D=develop&merge_request%5Bforce_remove_source_branch%5D=1&merge_request%5Bsquash%5D=1&merge_request%5Btitle%5D=`desc`" &> /dev/null
+}
+
+# lr - ищет все МР по текущей ветке
+lr() {
+    local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
+
+    opera "$x?scope=all&state=all&search=`branch`" &> /dev/null
 }
 
 
@@ -410,6 +417,7 @@ alias bashing='. ~/.bashrc'
 # bashed - редактировать .bashrc и перечитать
 alias bashed='mcedit ~/.bashrc; . ~/.bashrc'
 
+
 #@category Файловые сниппеты
 
 # mk snippet name [1] - копирует сниппет с подстановками в текущий каталог. [1] - директорию сделать flat
@@ -545,3 +553,41 @@ alias pmuninstall='sudo cpanm --uninstall'
 
 # locallib - указать локальную директорию для пакетов perl
 alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
+
+
+#@category symfony
+
+# sym - запускает команду symphony в контейнере
+alias sym='docker-compose -f ./docker/docker-compose-dev.yml exec php bin/console'
+
+# sym1 - запускает системную команду в контейнере
+alias sym1='docker-compose -f ./docker/docker-compose-dev.yml exec'
+
+# migsta - список миграций
+alias migsta='docker-compose -f ./docker/docker-compose-dev.yml exec php bin/console doctrine:migrations:list'
+
+# mig - применить конкретную миграцию. С параметром --down – отменить
+alias mig='sym doctrine:migrations:execute'
+
+# mkmig - генерирует миграцию
+mkmig() {
+    mkent
+    local tables="$( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml | perl -pe '$_=lcfirst; s/[A-Z]/ q{_} . lc $& /ge' | paste -sd '|')"
+
+    #echo "--$tables--"
+    
+    sym doctrine:migrations:diff > /dev/null
+    for f in $(sta | grep -P '\?\?.*/Version\d+\.php' | awk '{print $2}' ); do
+        basename $f .php | sed 's/Version//g'
+        perl -i -ne 'if( /->addSql/ and !/'$tables'/ ) {} else {print}' $f
+    done
+}
+
+# mkent - генерирует новые поля в изменённых entity
+mkent() {
+    for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
+        echo genent $i
+        sym doctrine:generate:entities AppBundle:$i
+    done
+}
+
