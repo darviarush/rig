@@ -264,7 +264,7 @@ indev() {
 mr() {
     local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
     
-    opera "$x?merge_request%5Bsource_branch%5D=`branch`&merge_request%5Btarget_branch%5D=develop&merge_request%5Bforce_remove_source_branch%5D=1&merge_request%5Bsquash%5D=1&merge_request%5Btitle%5D=`desc`" &> /dev/null
+    opera "$x?merge_request%5Bsource_branch%5D=`branch`&merge_request%5Btarget_branch%5D=develop&merge_request%5Bforce_remove_source_branch%5D=0&merge_request%5Bsquash%5D=1&merge_request%5Btitle%5D=`desc`" &> /dev/null
 }
 
 # lr - ищет все МР по текущей ветке
