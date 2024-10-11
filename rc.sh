@@ -557,13 +557,13 @@ alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -
 
 #@category symfony
 
-# sym команда... - запускает команду symphony в контейнере
+# sym symfonycommand [args...] - запускает команду symphony в контейнере
 alias sym='docker-compose -f ./docker/docker-compose-dev.yml exec php bin/console'
 
-# sym1 команда... - запускает системную команду в контейнере php
+# sym1 command [args...] - запускает системную команду в контейнере php
 alias sym1='docker-compose -f ./docker/docker-compose-dev.yml exec php'
 
-# sym2 контейнер команда... - запускает системную команду в указанном контейнере
+# sym2 container command [args...]  - запускает системную команду в указанном контейнере
 alias sym1='docker-compose -f ./docker/docker-compose-dev.yml exec'
 
 # migsta - список миграций
