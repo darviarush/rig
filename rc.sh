@@ -115,6 +115,9 @@ alias reset='git reset --hard HEAD'
 # gl - лог гита со списками файлов
 alias gl='git log --name-only --graph'
 
+# gl1 - лог гита в одну строку
+alias gl1='git log --name-only --graph --oneline'
+
 
 # gitgrep [options] regexp - поиск теста во всех репозиториях
 gitgrep() {
