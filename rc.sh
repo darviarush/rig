@@ -370,6 +370,9 @@ brig() {
     done
 }
 
+# sound - восстановление яркости экрана
+alias sound='systemctl --user restart pipewire'
+
 # packagecheck - Проверяет пакеты на ошибки
 alias packagecheck='sudo paccheck --files --file-properties --db-files --quiet --sha256sum'
 
