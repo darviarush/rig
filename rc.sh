@@ -100,7 +100,7 @@ git_diff() {
     return 0
 }
 
-# desc - печатает описание текущего бранча
+# desc [desc] - печатает/устанавливает описание текущего бранча
 alias desc='git config branch.`branch`.description'
 
 # sta - показать сокращённый git-статус
