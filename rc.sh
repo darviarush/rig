@@ -283,9 +283,11 @@ lr() {
 # cda - cd to astrobook
 alias cda='cd /ext/__/astrobook'
 
-# cdl - cd to le-yoga
+# cdy - cd to le-yoga
 alias cdy='cd /ext/__/le-yoga'
 
+# cdman - cd to liveman
+alias cdman='cd /ext/__/@lib/perl-liveman'
 
 # cdl - cd to @lib
 alias cdl='cd /ext/__/@lib'
@@ -341,10 +343,10 @@ alias cdth='cd /ext/__/ethereal-theory'
 # cdfr - cd to rubin-forms
 alias cdrf='cd /ext/__/rubin-forms'
 
-# cds - cd to golang-perl-storable
-alias cds='cd /ext/__/golang-perl-storable'
+# cdgos - cd to golang-perl-storable
+alias cdgos='cd /ext/__/golang-perl-storable'
 
-# cdt - cd to test directory
+# cdsc - cd to test directory
 alias cdsc='cd /ext/__/@script'
 
 # cdrig - cd to rig
