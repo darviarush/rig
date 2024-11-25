@@ -565,17 +565,21 @@ alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -
 
 #@category symfony
 
+alias _sym_conf='if [ -f ./docker/docker-compose-dev.yml ]; then echo ./docker/docker-compose-dev.yml; else echo ./docker-compose.yml; fi'
+
 # sym symfonycommand [args...] - запускает команду symphony в контейнере
-alias sym='docker-compose -f `if [ -f ./docker/docker-compose-dev.yml ]; then echo ./docker/docker-compose-dev.yml; else echo ./docker-compose.yml; fi` exec php bin/console'
+alias sym='docker-compose -f `_sym_conf` exec php bin/console'
 
 # sym1 command [args...] - запускает системную команду в контейнере php
-alias sym1='docker-compose -f ./docker/docker-compose-dev.yml exec php'
+alias sym1='docker-compose -f `_sym_conf` exec php'
 
 # sym2 container command [args...]  - запускает системную команду в указанном контейнере
-alias sym2='docker-compose -f ./docker/docker-compose-dev.yml exec'
+alias sym2='docker-compose -f `_sym_conf` exec'
+
+alias rou='sym debug:router'
 
 # migsta - список миграций
-alias migsta='docker-compose -f ./docker/docker-compose-dev.yml exec php bin/console doctrine:migrations:list'
+alias migsta='docker-compose -f `_sym_conf` exec php bin/console doctrine:migrations:list'
 
 # mig - применить конкретную миграцию. С параметром --down – отменить
 alias mig='sym doctrine:migrations:execute'
@@ -586,7 +590,7 @@ mkmig() {
     local tables="$( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml | perl -pe '$_=lcfirst; s/[A-Z]/ q{_} . lc $& /ge' | paste -sd '|')"
 
     #echo "--$tables--"
-    
+
     sym doctrine:migrations:diff > /dev/null
     for f in $(sta | grep -P '\?\?.*/Version\d+\.php' | awk '{print $2}' ); do
         basename $f .php | sed 's/Version//g'
