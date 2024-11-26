@@ -576,16 +576,20 @@ alias sym1='docker-compose -f `_sym_conf` exec php'
 # sym2 container command [args...]  - запускает системную команду в указанном контейнере
 alias sym2='docker-compose -f `_sym_conf` exec'
 
+# rou - список роутеров
 alias rou='sym debug:router'
 
 # migsta - список миграций
-alias migsta='docker-compose -f `_sym_conf` exec php bin/console doctrine:migrations:list'
+alias migsta='sym doctrine:migrations:list'
 
 # mig - применить конкретную миграцию. С параметром --down – отменить
 alias mig='sym doctrine:migrations:execute'
 
-# mkmig - генерирует миграцию
-mkmig() {
+# mkmig - создать миграцию с изменениями из кода
+alias mkmig='sym doctrine:migrations:diff'
+
+# mkmig1 - генерирует миграцию
+mkmig1() {
     mkent
     local tables="$( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml | perl -pe '$_=lcfirst; s/[A-Z]/ q{_} . lc $& /ge' | paste -sd '|')"
 
