@@ -588,6 +588,9 @@ alias mig='sym doctrine:migrations:execute'
 # mkmig - создать миграцию с изменениями из кода
 alias mkmig='sym doctrine:migrations:diff'
 
+# emptymig - создать пустую миграцию
+alias emptymig='sym doctrine:migrations:generate'
+
 # mkmig1 - генерирует миграцию
 mkmig1() {
     mkent
