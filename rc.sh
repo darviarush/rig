@@ -576,6 +576,9 @@ alias sym1='docker-compose -f `_sym_conf` exec php'
 # sym2 container command [args...]  - запускает системную команду в указанном контейнере
 alias sym2='docker-compose -f `_sym_conf` exec'
 
+# symf маска - поиск в командах симфони
+alias symf='sym list | grep'
+
 # rou - список роутеров
 alias rou='sym debug:router'
 
