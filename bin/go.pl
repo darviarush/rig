@@ -27,9 +27,10 @@ else {
     mc => 'mcedit %p:%l',
     kate => 'kate -l%l %p',
     npp => "'$ENV{HOME}/.wine/drive_c/Program Files/Notepad++/notepad++.exe' -n%l %p",
+    codium => 'codium -g %p:%l',
 );
 $r = $f{$ed} // "$ed %p:%l";
 $r =~ s/%l/$line/;
 $r =~ s/%p/$path/;
 
-print $r;
+print $r
