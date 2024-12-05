@@ -562,22 +562,23 @@ alias pmuninstall='sudo cpanm --uninstall'
 # locallib - указать локальную директорию для пакетов perl
 alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
 
+# go editor *.pm [subname|hasname|varname] - открывает в указанном редакторе perl-модуль
 go() {
     $RIG_RC/bin/go.pl $* > /tmp/__RIG__MOD || return
     eval `cat /tmp/__RIG__MOD`
 }
 
 # gomc module [subname|hasname|varname] - открывает в mcedit perl-модуль
-alias gomc=''
+alias gomc='go mc'
 
 # gokt module [subname|hasname|varname] - открывает в kate perl-модуль
-alias gokt='$RIG_RC/bin/go.pl kate'
+alias gokt='go kate'
 
 # goco module [subname|hasname|varname] - открывает в codium perl-модуль
-alias goco='$RIG_RC/bin/go.pl codium'
+alias goco='go codium'
 
 # gonp module [subname|hasname|varname] - открывает в notepad++ perl-модуль
-alias gonp='$RIG_RC/bin/go.pl npp'
+alias gonp='go npp'
 
 
 #@category symfony
