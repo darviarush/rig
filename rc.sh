@@ -562,8 +562,13 @@ alias pmuninstall='sudo cpanm --uninstall'
 # locallib - указать локальную директорию для пакетов perl
 alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
 
+go() {
+    $RIG_RC/bin/go.pl $* > /tmp/__RIG__MOD || return
+    eval `cat /tmp/__RIG__MOD`
+}
+
 # gomc module [subname|hasname|varname] - открывает в mcedit perl-модуль
-alias gomc='$RIG_RC/bin/go.pl mc'
+alias gomc=''
 
 # gokt module [subname|hasname|varname] - открывает в kate perl-модуль
 alias gokt='$RIG_RC/bin/go.pl kate'
