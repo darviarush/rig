@@ -562,20 +562,18 @@ alias pmuninstall='sudo cpanm --uninstall'
 # locallib - указать локальную директорию для пакетов perl
 alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -I ~/.local/lib/perl5/lib/perl5/ -Mlocal::lib)'
 
-# go editor *.pm [subname|hasname|varname]  - открывает в указанном редакторе модуль perl на указанной функции, свойстве или переменной
-go() {
-    perl -e 'for(@INC) { $f = "$_/$ARGV[0]"; print $f if -e $f } warn "Нет модуля `$ARGV[0]`\n"; exit 1' "$2" > /tmp/__RIG__MOD || return
-    if [ "$2" == "" ]; then "$1" "${cat /tmp/__RIG__MOD}"
-    else
-	perl -e 'open f, "/tmp/__RIG__MOD"; while(<f>) { print($.), exit 0 if /^(sub|has|my|our)\s+[%\@\$]$ARGV[0]\b/o } exit 1' "$3" > /tmp/__RIG__LINE \
-	|| ( "$1" "${cat /tmp/__RIG__MOD}"; return )
-	"$1" "${cat /tmp/__RIG__MOD}" "${cat /tmp/__RIG__LINE}"
-    fi
-    rm /tmp/__RIG__MOD /tmp/__RIG__LINE
-}
-
 # gomc module [subname|hasname|varname] - открывает в mcedit perl-модуль
-alias gomc='go mcedit'
+alias gomc='$RIG_RC/bin/go.pl mc'
+
+# gokt module [subname|hasname|varname] - открывает в kate perl-модуль
+alias gokt='$RIG_RC/bin/go.pl kate'
+
+# goco module [subname|hasname|varname] - открывает в codium perl-модуль
+alias goco='$RIG_RC/bin/go.pl codium'
+
+# gonp module [subname|hasname|varname] - открывает в notepad++ perl-модуль
+alias gonp='$RIG_RC/bin/go.pl npp'
+
 
 #@category symfony
 
