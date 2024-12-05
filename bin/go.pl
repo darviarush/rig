@@ -6,13 +6,14 @@
 $path = $pkg =~ s/::/\//gr . "\.pm";
 
 for(@INC) {
-    $f = "$_/$path";
-    last if -e $f;
+    $f1 = "$_/$path";
+    $f = $f1, last if -f $f1;
 }
 
-die "Нет модуля $mod\n" unless defined $f;
+warn("Нет модуля $mod\n"), exit 1 unless defined $f;
 
-if($name =~ /^\d+$/) { $line = $name }
+if($name eq "") { $line = 1 }
+elsif($name =~ /^\d+$/) { $line = $name }
 else {
     $line = 1;
     open f, $f or die "Not open $f: $!\n";
@@ -31,6 +32,6 @@ else {
 );
 $r = $f{$ed} // "$ed %p:%l";
 $r =~ s/%l/$line/;
-$r =~ s/%p/$path/;
+$r =~ s/%p/$f/;
 
 print $r
