@@ -349,6 +349,9 @@ alias cdgos='cd /ext/__/golang-perl-storable'
 # cdsc - cd to test directory
 alias cdsc='cd /ext/__/@script'
 
+# cdis - cd to job dir
+alias cdis='cd /ext/__/@is'
+
 # cdrig - cd to rig
 alias cdrig='cd $RIG_RC'
 
