@@ -104,7 +104,7 @@ git_diff() {
 alias desc='git config branch.`branch`.description'
 
 # branches - список веток с описанием
-alias branches='for i in `git branch --format="%(refname:short)"`; do printf "%10s %s" i `git config branch.$i.description`; done'
+alias branches='for i in `git branch --format="%(refname:short)"`; do printf "%10s %s\n" $i `git config branch.$i.description`; done'
 
 # sta - показать сокращённый git-статус
 alias sta="git status -s"
