@@ -156,7 +156,7 @@ alias pushinit='git add . && git commit -am init && git push --set-upstream orig
 new() {
     if ! git_diff; then return; fi
     run git checkout ${GIT_NEW_FROM:-master}
-    run git pull origin ${GIT_NEW_FROM:-master} --no-edit
+    upd
     local b=`echo "$1" | awk '{print $1}'`
     if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
     local s="`echo "$1" | sed -r 's/^\S+\s*//'`"
