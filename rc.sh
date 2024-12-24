@@ -358,6 +358,8 @@ alias cdis='cd /ext/__/@is'
 # cdrig - cd to rig
 alias cdrig='cd $RIG_RC'
 
+# cdp - cd to portalis
+alias cdp='cd /ext/__/@lib/perl-portalis'
 
 #@category Утилиты
 
