@@ -270,7 +270,7 @@ indev() {
 alias mkdiff='c0 ${GIT_NEW_FROM:-master} && pull && c0 && git diff ${GIT_NEW_FROM:-master} > /tmp/1.diff'
 
 # apply - применяет патч созданный mkdiff
-apply='git apply --reject /tmp/1.diff'
+alias apply='git apply --reject /tmp/1.diff'
 
 # mr - создаёт МР для текущей ветки
 mr() {
