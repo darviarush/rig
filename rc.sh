@@ -622,6 +622,7 @@ mig() {
     if [ -f ./docker/docker-compose-dev.yml ]; then
         sym doctrine:migrations:execute $*
     else
+	echo "sym doctrine:migrations:execute \"DoctrineMigrations\Version$1\" $2"
         sym doctrine:migrations:execute "DoctrineMigrations\Version$1" $2
     fi
 }
