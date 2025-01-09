@@ -615,10 +615,16 @@ alias symf='sym list | grep'
 alias rou='sym debug:router'
 
 # migsta - список миграций
-alias migsta='sym doctrine:migrations:list'
+alias migsta='if [ -f ./docker/docker-compose-dev.yml ]; then ../migs; else sym doctrine:migrations:list; fi'
 
 # mig - применить конкретную миграцию. С параметром --down – отменить
-alias mig='sym doctrine:migrations:execute'
+mig() {
+    if [ -f ./docker/docker-compose-dev.yml ]; then
+        sym doctrine:migrations:execute $*
+    else
+        sym doctrine:migrations:execute "DoctrineMigrations\Version$1" $2
+    fi
+}
 
 # mkmig - создать миграцию с изменениями из кода
 alias mkmig='sym doctrine:migrations:diff'
