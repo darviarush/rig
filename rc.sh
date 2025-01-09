@@ -615,7 +615,7 @@ alias symf='sym list | grep'
 alias rou='sym debug:router'
 
 # migsta - список миграций
-alias migsta='if [ -f ./docker/docker-compose-dev.yml ]; then ../migs; else sym doctrine:migrations:list; fi'
+alias migs='if [ -f ./docker/docker-compose-dev.yml ]; then ../migs; else sym doctrine:migrations:list; fi'
 
 # mig - применить конкретную миграцию. С параметром --down – отменить
 mig() {
