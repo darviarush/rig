@@ -614,7 +614,7 @@ alias sym2='docker-compose -f `_sym_conf` exec'
 # symf маска - поиск в командах симфони
 alias symf='sym list | grep'
 
-# rou - список роутеров
+# rou маска - список роутеров
 alias rou='sym debug:router --show-controllers | grep'
 
 # migsta - список миграций
