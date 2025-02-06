@@ -615,7 +615,7 @@ alias sym2='docker-compose -f `_sym_conf` exec'
 alias symf='sym list | grep'
 
 # rou - список роутеров
-alias rou='sym debug:router | grep'
+alias rou='sym debug:router --show-controllers | grep'
 
 # migsta - список миграций
 alias migs='if [ -f ./docker/docker-compose-dev.yml ]; then ../migs; else sym doctrine:migrations:list; fi'
