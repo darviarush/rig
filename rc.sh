@@ -272,6 +272,9 @@ alias mkdiff='c00=`branch`; git checkout ${GIT_NEW_FROM:-master} && pull && git 
 # apply - применяет патч созданный mkdiff
 alias apply='git apply --reject /tmp/1.diff'
 
+# vidiff - показывает diff созданный mkdiff
+alias vidiff='mcedit /tmp/1.diff'
+
 # mr - создаёт МР для текущей ветки
 mr() {
     local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
