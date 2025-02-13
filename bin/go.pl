@@ -1,7 +1,10 @@
 #!/usr/bin/perl
 # Открывает модуль perl в указанном редакторе
 
-($ed, $pkg, $name) = @ARGV;
+($ed, $mod, $name) = @ARGV;
+
+$pkg = $mod;
+$name = $', $pkg = $` if $mod =~ /#/;
 
 $path = $pkg =~ s/::/\//gr . "\.pm";
 
@@ -19,7 +22,7 @@ else {
     open f, $f or die "Not open $f: $!\n";
 
     while(<f>) {
-	$line = $., last if /^(sub|has)\s+$name\b/o;
+	$line = $., last if /^(sub|has|aspect|subtype)\s+[\'\"]?$name\b/o;
 	$line = $., last if /^(my|our)\s+[%\@\$]$name\b/o;
     }
 }
@@ -29,9 +32,10 @@ else {
     kate => 'kate -l%l %p',
     npp => "'$ENV{HOME}/.wine/drive_c/Program Files/Notepad++/notepad++.exe' -n%l %p",
     codium => 'codium -g %p:%l',
+    cd => 'cd %d'
 );
 $r = $f{$ed} // "$ed %p:%l";
-$r =~ s/%l/$line/;
-$r =~ s/%p/$f/;
+$r =~ s!%(.)! $1 eq 'line'? $line: $1 eq 'p'? $f: $1 eq 'd'? ($f =~ s/\/[^\/]*//r): "%$1"!ge;
+
 
 print $r

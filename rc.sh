@@ -581,7 +581,7 @@ alias locallib='cpanm --local-lib=~/.local/lib/perl5 local::lib && eval $(perl -
 
 # go editor *.pm [subname|hasname|varname] - открывает в указанном редакторе perl-модуль
 go() {
-    $RIG_RC/bin/go.pl $* > /tmp/__RIG__MOD || return
+    $RIG_RC/bin/go.pl "$1" "$2" "$3" > /tmp/__RIG__MOD || return
     eval `cat /tmp/__RIG__MOD`
 }
 
