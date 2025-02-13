@@ -13,7 +13,7 @@ for(@INC) {
     $f = $f1, last if -f $f1;
 }
 
-warn("Нет модуля $mod\n"), exit 1 unless defined $f;
+warn("Нет модуля $pkg\n"), exit 1 unless defined $f;
 
 if($name eq "") { $line = 1 }
 elsif($name =~ /^\d+$/) { $line = $name }
@@ -35,7 +35,7 @@ else {
     cd => 'cd %d'
 );
 $r = $f{$ed} // "$ed %p:%l";
-$r =~ s!%(.)! $1 eq 'line'? $line: $1 eq 'p'? $f: $1 eq 'd'? ($f =~ s/\/[^\/]*//r): "%$1"!ge;
+$r =~ s!%(.)! $1 eq 'l'? $line: $1 eq 'p'? $f: $1 eq 'd'? ($f =~ s/[^\/]*$//r): "%$1"!ge;
 
 
 print $r

@@ -585,6 +585,9 @@ go() {
     eval `cat /tmp/__RIG__MOD`
 }
 
+# gocd module - переходит в каталог модуля
+alias gocd='go cd'
+
 # gomc module [subname|hasname|varname] - открывает в mcedit perl-модуль
 alias gomc='go mc'
 
