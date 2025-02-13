@@ -659,7 +659,7 @@ mkent() {
         local path="src/AppBundle/Entity/$i.php"
         if [ ! -f "$path" ]; then
             echo "mk $path"
-            echo <<END
+            echo <<END > $path
 <?php
 
 namespace AppBundle\Entity;
@@ -672,7 +672,7 @@ use Doctrine\ORM\Mapping as ORM;
 class $i
 {
 }
-END > $path
+END
         fi
         sym doctrine:generate:entities AppBundle:$i
     done
