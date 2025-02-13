@@ -656,6 +656,7 @@ mkmig1() {
 mkent() {
     for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
         echo genent $i
+        touch src/AppBundle/Entity/$i.php
         sym doctrine:generate:entities AppBundle:$i
     done
 }
