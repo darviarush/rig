@@ -659,7 +659,7 @@ mkent() {
         local path="src/AppBundle/Entity/$i.php"
         if [ ! -f "$path" ]; then
             echo "mk $path"
-            echo <<END > $path
+            cat <<END > $path
 <?php
 
 namespace AppBundle\Entity;
