@@ -657,7 +657,9 @@ mkent() {
     for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
         echo genent $i
         local path="src/AppBundle/Entity/$i.php"
-        if [ ! -f "$path" ]; then echo <<END
+        if [ ! -f "$path" ]; then
+            echo "mk $path"
+            echo <<END
 <?php
 
 namespace AppBundle\Entity;
