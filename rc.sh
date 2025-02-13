@@ -656,7 +656,22 @@ mkmig1() {
 mkent() {
     for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
         echo genent $i
-        touch src/AppBundle/Entity/$i.php
+        local path="src/AppBundle/Entity/$i.php"
+        if [ ! -f "$path" ]; then echo <<END
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity()
+ */
+class $i
+{
+}
+END
+        fi
         sym doctrine:generate:entities AppBundle:$i
     done
 }
