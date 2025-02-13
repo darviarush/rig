@@ -672,7 +672,7 @@ use Doctrine\ORM\Mapping as ORM;
 class $i
 {
 }
-END
+END > $path
         fi
         sym doctrine:generate:entities AppBundle:$i
     done
