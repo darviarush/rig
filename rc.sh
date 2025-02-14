@@ -636,7 +636,7 @@ mig123() {
 alias mig='mig123'
 
 # mkmig - создать миграцию с изменениями из кода
-alias mkmig='sym doctrine:migrations:diff'
+alias mkmig='sym doctrine:migrations:diff > /dev/null'
 
 # emptymig - создать пустую миграцию
 alias emptymig='sym doctrine:migrations:generate'
