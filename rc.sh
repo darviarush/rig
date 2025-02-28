@@ -657,7 +657,7 @@ mkmig1() {
 
 # mkent - генерирует новые поля в изменённых entity
 mkent() {
-    for i in $(1:- sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
+    for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
         echo genent $i
         local path="src/AppBundle/Entity/$i.php"
         if [ ! -f "$path" ]; then
@@ -679,7 +679,7 @@ END
         fi
     done
 
-    for i in $(1:- sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
+    for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
         sym doctrine:generate:entities AppBundle:$i
     done
 }
