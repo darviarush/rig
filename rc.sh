@@ -680,8 +680,8 @@ END
     done
 
     for i in $( sta | grep .orm.yml | xargs -I {} basename {} .orm.yml ); do
-        #sym doctrine:generate:entities AppBundle:$i
         echo xxx $i
+        sym doctrine:generate:entities AppBundle:$i
     done
 }
 
