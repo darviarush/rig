@@ -29,13 +29,14 @@ find "src", "*.php", sub {
 		if(/^namespace\s+([\w\\]+)/m) {
 			$existsNamespace = $1;
 			($namespace) = $a =~ m!^src(/.*)/! or die "!";
-			$namespace ~= s!/!\\!g;
+			print "$namespace\n";
+			$namespace =~ s!/!\\!g;
 			$namespace = $root . $namespace;
 			if ($existsNamespace ne $namespace) {
 				s/^namespace\s+$existsNamespace\b/namespace $namespace/m;
             }
 		}
-        
+
 		$renameNamespace{"$existsNamespace\\$existsClass"} = "$namespace\\$class" if $class && $namespace && $existsNamespace ne $namespace;
     };
 0};
