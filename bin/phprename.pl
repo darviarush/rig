@@ -3,7 +3,6 @@
 use common::sense;
 use open qw/:std :utf8/;
 
-use Aion::Carp;
 use Aion::Fs qw/find replace/;
 
 my ($root) = @ARGV;
