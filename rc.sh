@@ -602,6 +602,7 @@ alias gonp='go npp'
 
 #@category php
 
+# phprename [root] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
 alias phprename='$RIG_RC/bin/phprename.pl'
 
 #@category symfony
