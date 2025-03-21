@@ -600,6 +600,9 @@ alias goco='go codium'
 # gonp module [subname|hasname|varname] - открывает в notepad++ perl-модуль
 alias gonp='go npp'
 
+#@category php
+
+alias phprename='$RIG_RC/bin/phprename.pl'
 
 #@category symfony
 
