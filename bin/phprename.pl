@@ -3,6 +3,7 @@
 use common::sense;
 use open qw/:std :utf8/;
 
+use Aion::Carp;
 use Aion::Fs qw/find replace/;
 
 my ($root) = @ARGV;
@@ -29,7 +30,7 @@ find "src", "*.php", sub {
 		# Пространство имён
 		if(/^namespace\s+([\w\\]+)/m) {
 			$existsNamespace = $1;
-			($namespace) = $a =~ m!^src(/.*)/! or die "!";
+			($namespace) = $a =~ m!^src(/.*)/!;
 			$namespace =~ s!/!\\!g;
 			$namespace = $root . $namespace;
 			if ($existsNamespace ne $namespace) {
@@ -38,14 +39,18 @@ find "src", "*.php", sub {
 		}
 
 		$renameNamespace{"$existsNamespace\\$existsClass"} = "$namespace\\$class" if $class && $namespace && $existsNamespace ne $namespace;
-    };
+    } $_;
 0};
 
-use DDP; p %renameClass; p %renameNamespace;
+use DDP;
+print "Переименованы классы:\n";
+p %renameClass;
+print "Переименованы нэймспейсы:\n";
+p %renameNamespace;
 
 # Второй проход для переименования неймспейсов
 find "src", "*.php", sub {
     replace {
 		s!^use\s+([\w\\]+)!use ${\($renameNamespace{$1} // $1)}!gm;
-    };
+    } $_;
 0};
