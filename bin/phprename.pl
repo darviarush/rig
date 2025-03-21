@@ -6,7 +6,7 @@ use open qw/:std :utf8/;
 use Aion::Fs qw/cat find/;
 
 my ($root) = @ARGV;
-$root //= 'App';
+$root //= $ENV{RIG_PHPRENAME_NAMESPACE} // 'App';
 
 my %renameClass;
 my %renameNamespace;
