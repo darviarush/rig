@@ -169,7 +169,7 @@ new() {
 }
 
 # branch - показать текущую ветку
-branch() {
+branch() { # git branch --show-current
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
