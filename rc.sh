@@ -605,8 +605,8 @@ alias gonp='go npp'
 # phprename [root] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
 alias phprename='$RIG_RC/bin/phprename.pl'
 
-# phpsortprop files... - сортирует именованные параметры функций и конструкторов в порядке сигнатур в указанных файлах или каталогах
-alias phpsortprop='$RIG_RC/bin/phpsortprop.pl'
+## phpsortprop files... - сортирует именованные параметры функций и конструкторов в порядке сигнатур в указанных файлах или каталогах
+#alias phpsortprop='$RIG_RC/bin/phpsortprop.pl'
 
 #@category symfony
 
