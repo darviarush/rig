@@ -19,6 +19,7 @@ class ArgumentOrderValidator extends NodeVisitorAbstract
     private array $errors = [];
     private array $use = [];
     private string $filePath;
+    private string $namespace = '';
     
     public function validateFile(string $filePath): void
     {
@@ -46,6 +47,12 @@ class ArgumentOrderValidator extends NodeVisitorAbstract
     
     public function enterNode(Node $node) {
         #echo "Visiting node: " . get_class($node) . "\n";
+
+        if ($node instanceof Node\Stmt\Namespace_) {
+            $namespaceName = $node->name->toString();
+            #echo "Пространство имен: $namespaceName\n"; // Выводим пространство имен
+            $this->namespace = $namespaceName;
+        }
 
         if ($node instanceof Node\Stmt\Use_) {
             foreach ($node->uses as $use) {
@@ -99,7 +106,7 @@ class ArgumentOrderValidator extends NodeVisitorAbstract
             $last = $matches[2];
         }
 
-        $className = $this->use[$name] . $last;
+        $className = ($this->use[$name] ?? $this->namespace . "\\" . $name) . $last;
         #echo "class $className\n";
 
         if (!class_exists($className)) {
