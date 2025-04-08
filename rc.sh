@@ -607,7 +607,7 @@ alias phprename='$RIG_RC/bin/phprename.pl'
 
 # phpsortprop [root] - проверяет в src в файлах *.php все ли именованные параметры соответствуют их пордку в конструкторе
 phpsortprop() {
-    find $1 -name '*.php' -exec $RIG_RC/bin/phpchecksortprop.php {} \;
+    find $1 -name '*.php' -exec php $RIG_RC/bin/phpchecksortprop.php {} \;
 }
 
 ## phpsortprop files... - сортирует именованные параметры функций и конструкторов в порядке сигнатур в указанных файлах или каталогах
