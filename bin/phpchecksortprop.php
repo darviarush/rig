@@ -5,20 +5,33 @@ declare(strict_types=1);
 use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\Expr\New_;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
 
-#require __DIR__ . '/vendor/autoload.php'; // Подключите Composer autoload
+# composer global require nikic/php-parser
 
-class ArgumentOrderValidator
+
+require 'vendor/autoload.php';
+
+class ArgumentOrderValidator extends NodeVisitorAbstract
 {
     private array $errors = [];
+    private array $use = [];
+    private string $filePath;
     
     public function validateFile(string $filePath): void
     {
-        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $this->filePath = $filePath;
+        #$parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $parser = (new ParserFactory())->createForHostVersion();
         $ast = $parser->parse(file_get_contents($filePath));
         
-        $this->traverseNodes($ast, $filePath);
+        $traverser = new NodeTraverser();
+        $traverser->addVisitor($this);
+        $traverser->traverse($ast);
+
+        //$this->traverseNodes($ast, $filePath);
         
         if (!empty($this->errors)) {
             echo "Found sorting issues:\n";
@@ -31,58 +44,68 @@ class ArgumentOrderValidator
         echo "All arguments are properly ordered!\n";
     }
     
-    private function traverseNodes(array $nodes, string $filePath): void
-    {
-        foreach ($nodes as $node) {
-            if ($node instanceof New_) {
-                $this->checkNew($node, $filePath);
+    public function enterNode(Node $node) {
+        #echo "Visiting node: " . get_class($node) . "\n";
+
+        if ($node instanceof Node\Stmt\Use_) {
+            foreach ($node->uses as $use) {
+                  // Получаем алиас
+                  $alias = $use->getAlias() ? $use->getAlias()->toString() : null;
+                  $name = $use->name->toString();
+                  #echo "Имя: $name, Алиас: $alias\n"; // Выводим имя и алиас
+                  $this->use[$alias] = $name;
             }
-            
-            if ($node instanceof Attribute) {
-                $this->checkAttribute($node, $filePath);
-            }
-            
-            if (property_exists($node, 'stmts')) {
-                $this->traverseNodes($node->stmts, $filePath);
-            }
+        }
+
+        if ($node instanceof New_) {
+            $this->checkNew($node);
+        }
+        
+        if ($node instanceof Attribute) {
+            $this->checkAttribute($node);
         }
     }
     
-    private function checkNew(New_ $node, string $filePath): void
+    private function checkNew(New_ $node): void
     {
-        try {
-            $className = (string) $node->class;
-            $constructorParams = $this->getConstructorParams($className);
-            
-            $sortedArgs = $this->sortArguments($node->args, $constructorParams);
-            if ($this->isOrderIncorrect($node->args, $sortedArgs)) {
-                $this->addError($filePath, $node->getLine(), "new {$className}");
-            }
-        } catch (ReflectionException) {
-            // Игнорируем классы, которые нельзя отразить
+        $className = (string) $node->class;
+        $constructorParams = $this->getConstructorParams($className);
+        
+        $sortedArgs = $this->sortArguments($node->args, $constructorParams);
+        if ($this->isOrderIncorrect($node->args, $sortedArgs)) {
+            $this->addError($sortedArgs, $node->getLine(), "new {$className}");
         }
     }
     
-    private function checkAttribute(Attribute $node, string $filePath): void
+    private function checkAttribute(Attribute $node): void
     {
-        try {
-            $attributeName = (string) $node->name;
-            $constructorParams = $this->getConstructorParams($attributeName);
-            
-            $sortedArgs = $this->sortArguments($node->args, $constructorParams);
-            if ($this->isOrderIncorrect($node->args, $sortedArgs)) {
-                $this->addError($filePath, $node->getLine(), "#[{$attributeName}]");
-            }
-        } catch (ReflectionException) {
-            // Игнорируем атрибуты без конструктора
+        $attributeName = (string) $node->name;
+        $constructorParams = $this->getConstructorParams($attributeName);
+        
+        $sortedArgs = $this->sortArguments($node->args, $constructorParams);
+        if ($this->isOrderIncorrect($node->args, $sortedArgs)) {
+            $this->addError($sortedArgs, $node->getLine(), "#[{$attributeName}]");
         }
     }
     
     /**
      * @return array<string>
      */
-    private function getConstructorParams(string $className): array
+    private function getConstructorParams(string $name): array
     {
+        $last = '';
+        if (preg_match('/([^\\\\]*)(\\\\.*)/', $name, $matches)) {
+            $name = $matches[1];
+            $last = $matches[2];
+        }
+
+        $className = $this->use[$name] . $last;
+        #echo "class $className\n";
+
+        if (!class_exists($className)) {
+            return [];
+        }
+
         $reflection = new ReflectionClass($className);
         $constructor = $reflection->getConstructor();
         
@@ -125,13 +148,14 @@ class ArgumentOrderValidator
         return $original !== $sorted;
     }
     
-    private function addError(string $file, int $line, string $context): void
+    private function addError(array $sortedArgs, int $line, string $context): void
     {
         $this->errors[] = sprintf(
-            "%s:%d - Incorrect argument order in %s",
-            basename($file),
+            "%s:%d %s - %s",
+            $this->filePath,
             $line,
-            $context
+            $context,
+            implode(", ", array_column($sortedArgs, 'name'))
         );
     }
 }
