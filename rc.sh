@@ -600,6 +600,9 @@ alias goco='go codium'
 # gonp module [subname|hasname|varname] - открывает в notepad++ perl-модуль
 alias gonp='go npp'
 
+# perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
+alias phprename='$RIG_RC/bin/perlrename.pl'
+
 #@category php
 
 # phprename [root] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
