@@ -601,7 +601,7 @@ alias goco='go codium'
 alias gonp='go npp'
 
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
-alias phprename='$RIG_RC/bin/perlrename.pl'
+alias perlrename='$RIG_RC/bin/perlrename.pl'
 
 #@category php
 
