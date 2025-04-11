@@ -12,7 +12,7 @@ my $debug = 0;
 find "lib", "*.pm", sub {
     replace {
 
-        if(/\bpackage\s+(\w:+)/) {
+        if(/\bpackage\s+([\w:]+)/) {
             my $existsPkg = $1;
 
 			my ($pkg) = $a =~ m!^lib/(.*)\.pm$!;
@@ -24,7 +24,7 @@ find "lib", "*.pm", sub {
 				printcolor "#red%s#r --> #green%s#r\n", $existsPkg, $pkg;
             }
         } else {
-			warncolor "#{red}Нет пакета:#r #gray%s#r\n", $a;
+			warncolor "#{red}Нет пакета:#r #bright_black%s#r\n", $a;
 		}
         
     } $_;
@@ -36,11 +36,11 @@ find "lib", "*.pm", sub {
 	my $i;
     replace {
 		s!
-			([\w:]+)
+			([^\w:])([\w:]+)([^\w:])
 		!
-			my $pkg = $renamePkg{$1};
+			my $pkg = $renamePkg{$2};
 			$i++ if defined $pkg;
-			$pkg // $1
+			join "", $1, $pkg // $2, $3
 		!gmxe;
     } $_;
 	
