@@ -168,6 +168,25 @@ new() {
     run git push origin $b
 }
 
+# del - удалить текущую ветку локально и в origin
+del() {
+    local b=`branch`
+    run git push origin :$b
+    run git checkout ${GIT_NEW_FROM:-master}
+    run git branch -D $b
+}
+
+# redel - удалить текущую ветку локально и в origin и создать новую такую же
+redel() {
+    local b=`branch`
+    local desc="`desc`"
+    run git push origin :$b
+    run git checkout ${GIT_NEW_FROM:-master}
+    run git branch -D $b
+    new "$b $desc"
+}
+
+
 # branch - показать текущую ветку
 branch() { # git branch --show-current
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
