@@ -298,7 +298,7 @@ alias vidiff='mcedit /tmp/1.diff'
 mr() {
     local x=`git remote -v | perl -e '<> =~ /\@([^:]+):([^.]+)/; print "https://$1/$2/-/merge_requests/new"'`
 
-    opera "$x?merge_request[assignee_ids][]=1036&merge_request[reviewer_ids][]=108&merge_request[source_branch]=`branch`&merge_request[target_branch]=develop&merge_request[force_remove_source_branch]=1&merge_request[squash]=1&merge_request[title]=`branch`+`desc`" &> /dev/null
+    opera "$x?merge_request[assignee_ids][]=1036&merge_request[reviewer_ids][]=1145&merge_request[source_branch]=`branch`&merge_request[target_branch]=develop&merge_request[force_remove_source_branch]=1&merge_request[squash]=1&merge_request[title]=`branch`+`desc`" &> /dev/null
 }
 
 # lr - ищет все МР по текущей ветке
