@@ -286,7 +286,7 @@ indev() {
 }
 
 # mkdiff - создаёт дифф текущей ветки для переноса в другой проект
-alias mkdiff='c00=`branch`; git checkout ${GIT_NEW_FROM:-master} && pull && git checkout $c00 && git diff ${GIT_NEW_FROM:-master} > /tmp/1.diff'
+alias mkdiff='c00=`branch`; git checkout ${GIT_NEW_FROM:-master} && pull && git checkout $c00 && git diff ${GIT_NEW_FROM:-master}...`branch` > /tmp/1.diff'
 
 # apply - применяет патч созданный mkdiff
 alias apply='git apply --reject /tmp/1.diff'
