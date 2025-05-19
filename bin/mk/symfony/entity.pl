@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use common::sense;
-use open qw/:std utf8/;
+use open qw/:std :utf8/;
 
 use Aion::Fs;
 use Aion::Format::Yaml;
