@@ -718,3 +718,5 @@ END
     done
 }
 
+# cpent path.php [*.yml] - cоздаёт сущность path на основе yml, если тот указан
+alias cpent='$RIG_RC/bin/mk/entity.pl'
