@@ -10,7 +10,7 @@ my ($path, $txt) = @ARGV;
 my ($Name) = $path =~ m!/(\w+)\.php$! or die "Нет имени файла $path";
 my $namespace = (($path =~ s/^src/App/r) =~ y!/!\\!r) =~ s!\\[^\\]*$!!r;
 
-my $cases = join "", map {
+my $cases = !$txt? '': join "", map {
 	my ($value, $alias) = split /\t/;
 	my $case = $value =~ s/-/_/gr;
 	
@@ -33,7 +33,7 @@ use App\\Enum\\Trait\\EnumWithAliasesTrait;
 /**
  * Заявка на БР.
  */
-enum ${Name}Enum: string
+enum $Name: string
 {
     use EnumWithAliasesTrait;
 $cases

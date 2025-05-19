@@ -722,4 +722,4 @@ END
 alias cpent='$RIG_RC/bin/mk/entity.pl'
 
 # cpenum path.php [*.txt] - cоздаёт enum на основе txt, если тот указан
-alias cpent='$RIG_RC/bin/mk/enum.pl'
+alias cpenum='$RIG_RC/bin/mk/enum.pl'
