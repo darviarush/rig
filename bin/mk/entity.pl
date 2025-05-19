@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 use common::sense;
 use open qw/:std utf8/;
 
@@ -21,6 +23,13 @@ my %PHP_TYPE = (
 
 my ($path, $yml) = @ARGV;
 
+my ($Name) = $path =~ m!/(\w+)\.php$! or die "Нет имени файла $path";
+my $name = to_snake_case($Name) . "s";
+my $namespace = (($path =~ s/^src/App/r) =~ y!/!\\!r) =~ s!\\[^\\]*$!!r;
+my ($pgns) = $path =~ m!^src/Storage/(\w+)/!;
+$pgns = to_snake_case($pgns) . "s";
+
+
 $yml = from_yaml cat $yml;
 $yml = $yml->{"AppBundle\\Entity\\$Name"};
 my $comment = $yml->{options}{comment};
@@ -43,7 +52,7 @@ if($fields_yml) {
 		my $stype = $PHP_TYPE{$type} // die "php $type?";
 
 		<< "END"
-    #[ORM\Column(type: Types::$dtype, nullable: $null, options: [
+    #[ORM\\Column(type: Types::$dtype, nullable: $null, options: [
         'comment' => '$comment',
     ])]
     private $snull$stype \$$_$znull;
@@ -55,7 +64,7 @@ END
 my $m2o;
 if($m2o_yml) {
 	$m2o = join "", map {
-		my $v = $fields_yml->{$_};
+		my $v = $m2o_yml->{$_};
 		my $ref = $v->{targetEntity};
 		my $inversedBy = $v->{inversedBy}; $inversedBy = $inversedBy? "'$inversedBy'": 'null';
 		my $nullable = $v->{joinColumn}{nullable};
@@ -65,20 +74,16 @@ if($m2o_yml) {
 		my $snull = $nullable? '?': '';
 		
 		<< "END"
-    #[ORM\ManyToOne(targetEntity: ${ref}::class)]
-    #[ORM\JoinColumn(nullable: $null, inversedBy: $inversedBy, options: [
+    #[ORM\\ManyToOne(targetEntity: ${ref}::class, inversedBy: $inversedBy)]
+    #[ORM\\JoinColumn(nullable: $null, options: [
         'comment' => '$comment',
     ])]
     private $snull$ref \$$_;
 
 END
-	} keys %$fields_yml;
+	} keys %$m2o_yml;
 }
 
-my ($Name) = $path =~ m!/(\w+)\.php$! or die "Нет имени файла $path";
-my $name = to_snake_case $Name;
-my $namespace = (($path =~ s/^src/App/r) =~ y!/!\\!r) =~ s/\.php$//;
-my ($pgns) = $path =~ m!^src/Storage/(\w+)/!;
 
 lay mkpath $path, << "END";
 <?php
@@ -87,15 +92,15 @@ declare(strict_types=1);
 
 namespace $namespace;
 
-use App\Enum\Trait\EntityIdentityUuidTrait;
-use App\Enum\Trait\EntityTimestampableTrait;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+use App\\Enum\\Trait\\EntityIdentityUuidTrait;
+use App\\Enum\\Trait\\EntityTimestampableTrait;
+use Doctrine\\DBAL\\Types\\Types;
+use Doctrine\\ORM\\Mapping as ORM;
 
-#[ORM\Table(name: '$pgns.$name', options: [
+#[ORM\\Table(name: '$pgns.$name', options: [
 	'comment' => '$comment',
 ])]
-#[ORM\Entity(repositoryClass: ${Name}Repository::class)]
+#[ORM\\Entity(repositoryClass: ${Name}Repository::class)]
 class $Name
 {
     use EntityIdentityUuidTrait;
@@ -114,14 +119,14 @@ declare(strict_types=1);
 
 namespace $namespace;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository;
+use Doctrine\\Persistence\\ManagerRegistry;
 
 /**
- * \@method Dgpr|null find(\$id, \$lockMode = null, \$lockVersion = null)
- * \@method Dgpr|null findOneBy(array \$criteria, array \$orderBy = null)
- * \@method Dgpr[]    findAll()
- * \@method Dgpr[]    findBy(array \$criteria, array \$orderBy = null, \$limit = null, \$offset = null)
+ * \@method $Name|null find(\$id, \$lockMode = null, \$lockVersion = null)
+ * \@method $Name|null findOneBy(array \$criteria, array \$orderBy = null)
+ * \@method ${Name}[]    findAll()
+ * \@method ${Name}[]    findBy(array \$criteria, array \$orderBy = null, \$limit = null, \$offset = null)
  *
  * \@extends ServiceEntityRepository<$Name>
  */
@@ -129,7 +134,7 @@ final class ${Name}Repository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry \$registry)
     {
-        parent::__construct(\$registry, $Name::class);
+        parent::__construct(\$registry, ${Name}::class);
     }
 }
 END
@@ -138,8 +143,7 @@ END
 
 sub to_snake_case($) {
 	my ($x) = @_;
-	
-	lcfirst($x =~ s/[A-Z]/_${\lc $&}/gr)
+	lcfirst($x) =~ s/[A-Z]/_${\lc $&}/gr
 }
 
 
