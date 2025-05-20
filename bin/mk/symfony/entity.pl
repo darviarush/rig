@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Создаёт entity по пути, а её поля берёт из старого entity в yml, если тот указан
+
 use common::sense;
 use open qw/:std :utf8/;
 
@@ -58,7 +60,7 @@ if($fields_yml) {
     private $snull$stype \$$_$znull;
 
 END
-	} keys %$fields_yml;
+	} sort keys %$fields_yml;
 }
 
 my $m2o;
@@ -81,7 +83,7 @@ if($m2o_yml) {
     private $snull$ref \$$_;
 
 END
-	} keys %$m2o_yml;
+	} sort keys %$m2o_yml;
 }
 
 

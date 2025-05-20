@@ -723,3 +723,6 @@ alias cpent='$RIG_RC/bin/mk/symfony/entity.pl'
 
 # cpenum path.php [*.txt] - cоздаёт enum на основе txt, если тот указан
 alias cpenum='$RIG_RC/bin/mk/symfony/enum.pl'
+
+# cpshow pathShow.php *.json - cоздаёт контроллер на основе примера и его DTO
+alias cpshow='$RIG_RC/bin/mk/symfony/dto.pl'

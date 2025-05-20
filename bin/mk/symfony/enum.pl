@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Создаёт enum по табличке "value, alias", через табуляцию. Табличка передаётся первым параметром
+
 use common::sense;
 use open qw/:std :utf8/;
 
