@@ -23,16 +23,19 @@ my $namespace = (($controller =~ s!/[^/]*$!!r) =~ s!/!\\!gr) =~ s!^src!App!r;
 my ($class) = $controller =~ m/([^\/]*)Controller\.php$/;
 
 open my $f, ">", mkpath $controller or die "$controller: $!";
-print $f << "END";
+print $f (<< "END");
 <?php
 
 declare(strict_types=1);
 
 namespace $namespace;
 
-use Nelmio\ApiDocBundle\Attribute\Model;
-use OpenApi\Attributes as OA;
-
+use App\\Storage\\User\\Permission\\Enum\\PermissionEnum;
+use OpenApi\\Attributes as OA;
+use Nelmio\\ApiDocBundle\\Attribute\\Model;
+use Symfony\\Component\\HttpKernel\\Attribute\\AsController;
+use Symfony\\Component\\Routing\\Annotation\\Route;
+use Symfony\\Component\\Security\\Http\\Attribute\\IsGranted;
 
 #[Route(path: '', name: '', methods: ['GET'])]
 #[AsController]
@@ -80,105 +83,149 @@ final readonly class ${class}Controller
 
     public function __invoke(
     ): ${class}Response {
+		return new ${class}Response(
 END
 
 # Рекурсивно обходит структуру
 sub mkDto (@);
+mkDto $s, ["Response"];
+
+my %P;
+
 sub mkDto (@) {
-	my ($s, $path, $is_array) = @_;
-	
-	my $name = $path->[$#$path];
-	my $Name = lcfirst $name;
-	
-	if(ref $s eq "HASH") {
-		my $c = @$path == 1? "${class}Response": "$class${Name}DTO";
-		my $p = @$path == 1? $response: do { ($controller =~ s!/[^/]*$!!r) . "/DTO/$class${Name}DTO.php" };
-		my $properties = join "", map { mkDto $s->{$_}, [@$path, $_] } sort keys %$s;
-		my $required = join ", ", map "'$_'", sort keys %$s;
-		lay mkpath $p, << "END";
+    my ($s, $path, $is_array) = @_;
+    
+    my $name = $path->[$#$path];
+    my $Name = ucfirst $name;
+    my $prop; my $type;
+    
+    if(ref $s eq "HASH") {
+        my $c = @$path == 1? "${class}Response": "$class${Name}DTO";
+        my $namespaceDTO = @$path == 1? $namespace: "${namespace}\\DTO";
+        my $p = @$path == 1? $response: do { ($controller =~ s!/[^/]*$!!r) . "/DTO/$class${Name}DTO.php" };
+        my $properties = join "", map { mkDto $s->{$_}, [@$path, $_] } sort keys %$s;
+        my $required = join ", ", map "'$_'", sort keys %$s;
+        die "Файл $p уже есть!" if exists $P{$p};
+        $P{$p} = 1;
+		
+		my $title = enru($c);
+		
+        lay mkpath $p, << "END";
 <?php
 
 declare(strict_types=1);
 
-namespace App\Controller\Api\TechConnect\Show\DTO;
+namespace $namespaceDTO;
 
-use Nelmio\ApiDocBundle\Annotation\Model;
-use OpenApi\Attributes as OA;
+use Nelmio\\ApiDocBundle\\Annotation\\Model;
+use OpenApi\\Attributes as OA;
 
-#[OA\Schema(
-    title: '',
-    description: '',
+#[OA\\Schema(
+    title: '$title',
+    description: '$title',
     required: [$required],
 )]
-final class $class${Name}DTO
+final class $c
 {
     public function __construct(
-$properties
-	)
+$properties    ) {
+    }
 }
 END
-		
-	}
-	elsif(ref $s eq "ARRAY") {
-		mkDto $s->[0], [@$path, $_], 1;
-	}
-	elsif($s =~ /^\d+$/) {
+        $type = $c;
+        $prop = << "END";
+            ref: new Model(type: ${c}::class),
+END
+    }
+    elsif(ref $s eq "ARRAY") {
+        return mkDto $s->[0], $path, 1;
+    }
+    else {
+        my $oatype; my $ex; my $fmt;
+        if(UNIVERSAL::isa($s, 'JSON::PP::Boolean')) {
+            $oatype = 'boolean';
+            $type = 'bool';
+            $ex = 'true';
+        }
+        elsif($s =~ /^\d+$/) {
+            $oatype = 'integer';
+            $type = 'int';
+            $ex = $s;
+        }
+        elsif($s =~ /^\d+\.\d+$/) {
+            $oatype = $type = 'float';
+            $ex = $s;
+        }
+        elsif($s =~ /^\d+.\d+.\d+$/) {
+            $oatype = 'string';
+            $type = '\DateTimeImmutable';
+            $ex = "'$s'";
+            $fmt = "format: date";
+        }
+        elsif($s =~ /^\d+.\d+.\d+/) {
+            $oatype = 'string';
+            $type = '\DateTimeImmutable';
+            $ex = "'$s'";
+            $fmt = "format: datetime";
+        }
+        else {
+            $oatype = $type = 'string';
+            $ex = "'$s'";
+        }
+    
+		my $desc = enru($name);
+	
+        $prop = << "END";
+            description: '$desc',
+            type: '$oatype',
+            example: $ex,
+            nullable: false,
+END
+    }
+
+	print $f "    " x (3+@$path), "$name: \$$name,\n";
+
+    if ($is_array) {
+        $prop =~ s/^/    /mg;
         << "END";
         #[OA\\Property(
-            description: '',
-            type: 'integer',
-            example: $s,
-            nullable: false,
+            type: 'array',
+            items: new OA\\Items(
+$prop            ),
         )]
-        public int \$$name,
+        public array \$$name,
 END
-	}
-	elsif($s =~ /^\d+\.\d+$/) {
+    } else {
         << "END";
         #[OA\\Property(
-            description: '',
-            type: 'float',
-            example: $s,
-            nullable: false,
-        )]
-        public float \$$name,
+$prop        )]
+        public $type \$$name,
 END
-	}
-	elsif($s =~ /^\d+-\d+-\d+$/) {
-        << "END";
-		#[OA\\Property(
-            description: '',
-            type: 'string',
-            format: 'date',
-            example: '$s',
-            nullable: false,
-        )]
-        public string \$$name,
-END
-	}
-	elsif($s =~ /^\d+-\d+-\d+/) {
-		<< "END";
-		#[OA\\Property(
-            description: '',
-            type: 'string',
-            format: 'datetime',
-            example: '$s',
-            nullable: false,
-        )]
-        public string \$$name,
-END
-	}
-	else {
-        << "END";
-        #[OA\\Property(
-            description: '',
-            type: 'string',
-            example: '$s',
-            nullable: false,
-        )]
-        public string \$$name,
-END
-	}
+    }
 }
 
 
+print $f +<< "END";
+        );
+    }
+}
+END
+
+sub enru {
+	my ($name) = @_;
+	my $desc_path = "/tmp/.rig-symfony-dto/$name";
+	-e $desc_path? cat $desc_path: do {
+		my $en = lcfirst($name) =~ s/DTO|[A-Z]/" ".(length($&) == 1? lc($&): $&)/ger;
+		print "$en -> ";
+		my $i = "/tmp/i";
+		my $o = "/tmp/o";
+		lay $i, $en;
+		my $com = "trans en:ru -b -i $i -o $o -no-rlwrap -no-init";
+		system($com) == 0 or die "$com: $?";
+		my $desc = ucfirst cat $o;
+		$desc =~ s/\s*$//;
+		lay mkpath $desc_path, $desc;
+		print $desc, "\n";
+		$desc
+	};
+}
