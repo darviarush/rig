@@ -670,6 +670,9 @@ mig123() {
 
 alias mig='mig123'
 
+# migall - применить все миграции
+alias migall='sym doctrine:migrations:migrate'
+
 # mkmig - создать миграцию с изменениями из кода
 alias mkmig='sym doctrine:migrations:diff > /dev/null'
 

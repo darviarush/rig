@@ -10,6 +10,7 @@ use Aion::Format::Yaml;
 use Aion::Format::Json;
 
 my ($controller, $txt) = @ARGV;
+$txt = $controller, $controller = $txt =~ s/(\.[^\/]*)?$/.php/r if !defined $txt;
 
 $txt = cat $txt;
 my $s;

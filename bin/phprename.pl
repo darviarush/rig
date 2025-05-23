@@ -8,6 +8,8 @@ use Aion::Fs qw/find replace/;
 my ($root) = @ARGV;
 $root //= $ENV{RIG_PHPRENAME_NAMESPACE} // 'App';
 
+die "Параметр root может содержать только буквы, цифры и бекслеш!" if $root !~ /^[\w\\]+$/;
+
 my %renameClass;
 my %renameNamespace;
 
