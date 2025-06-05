@@ -625,10 +625,10 @@ alias perlrename='$RIG_RC/bin/perlrename.pl'
 
 #@category php
 
-# phprename [root] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
+# phprename [root=App] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
 alias phprename='$RIG_RC/bin/phprename.pl'
 
-# phpsortprop [root] - проверяет в src в файлах *.php все ли именованные параметры соответствуют их пордку в конструкторе
+# phpsortprop [root=src] - проверяет в src в файлах *.php все ли именованные параметры соответствуют их пордку в конструкторе
 phpsortprop() {
     find $1 -name '*.php' -exec php $RIG_RC/bin/phpchecksortprop.php {} \;
 }
