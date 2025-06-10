@@ -116,7 +116,7 @@ alias sta1="git status"
 alias reset='git reset --hard HEAD'
 
 # gl - лог гита со списками файлов
-alias gl='git log --name-only --graph'
+alias gl='git log --name-only --graph --pretty=fuller'
 
 # gl1 - лог гита в одну строку
 alias gl1='git log --name-only --graph --oneline'
