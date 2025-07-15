@@ -655,7 +655,7 @@ alias symf='sym list | grep'
 # rou маска - список роутеров
 alias rou='sym debug:router --show-controllers | grep'
 
-# migsta - список миграций
+# migs - список миграций
 alias migs='if [ -f ./docker/docker-compose-dev.yml ]; then ../migs; else sym doctrine:migrations:list; fi'
 
 # mig - применить конкретную миграцию. С параметром --down – отменить
@@ -678,6 +678,12 @@ alias mkmig='sym doctrine:migrations:diff > /dev/null'
 
 # emptymig - создать пустую миграцию
 alias emptymig='sym doctrine:migrations:generate'
+
+# sql - выполнить sql из симфони
+alias sql='sym doctrine:query:sql'
+
+# dql - выполнить dql из симфони
+alias dql='sym doctrine:query:dql'
 
 # mkmig1 - генерирует миграцию
 mkmig1() {
