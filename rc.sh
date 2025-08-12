@@ -330,6 +330,10 @@ alias cdla='cd /ext/__/@lib/perl-aion'
 # cdlact - cd to perl-aion-action
 alias cdlact='cd /ext/__/@lib/perl-aion-action'
 
+# cdlm - cd to perl-aion-model
+alias cdlm='cd /ext/__/@lib/perl-aion-model'
+
+
 # cdlc - cd to perl-aion-carp
 alias 'cdlc=cd /ext/__/@lib/perl-aion-carp'
 
