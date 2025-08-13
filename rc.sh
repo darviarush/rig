@@ -624,6 +624,9 @@ alias goco='go codium'
 # gonp module [subname|hasname|varname] - открывает в notepad++ perl-модуль
 alias gonp='go npp'
 
+# gozd module [subname|hasname|varname] - открывает в zed perl-модуль
+alias gozd='go zed'
+
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
 alias perlrename='$RIG_RC/bin/perlrename.pl'
 
