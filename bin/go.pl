@@ -33,7 +33,7 @@ else {
     npp => "'$ENV{HOME}/.wine/drive_c/Program Files/Notepad++/notepad++.exe' -n%l %p",
     codium => 'codium -g %p:%l',
     cd => 'cd %d',
-    zed => 'zeditor --goto %p:%l',
+    zed => 'zeditor %p:%l',
 );
 $r = $f{$ed} // "$ed %p:%l";
 $r =~ s!%(.)! $1 eq 'l'? $line: $1 eq 'p'? $f: $1 eq 'd'? ($f =~ s/[^\/]*$//r): "%$1"!ge;
