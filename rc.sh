@@ -651,7 +651,7 @@ phpsortprop() {
 alias _sym_conf='if [ -f ./docker/docker-compose-dev.yml ]; then echo ./docker/docker-compose-dev.yml; else echo ./docker-compose.yml; fi'
 
 # sym symfonycommand [args...] - запускает команду symphony в контейнере
-alias sym='docker-compose -f `_sym_conf` exec php bin/console'
+alias sym='docker-compose -f `_sym_conf` exec php php bin/console'
 
 # sym1 command [args...] - запускает системную команду в контейнере php
 alias sym1='docker-compose -f `_sym_conf` exec php'
