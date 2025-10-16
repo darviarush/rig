@@ -309,6 +309,12 @@ lr() {
     opera "$x?scope=all&state=all&search=`branch`" &> /dev/null
 }
 
+# amend - добавляет изменения в последний комит
+alias amend='git add . && git commit --amend --no-edit && git push origin +`branch`'
+
+# amendс - меняет комментарий последнего комита
+alias amend='git commit --amend && git push origin +`branch`'
+
 
 #@category Переходы
 
