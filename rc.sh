@@ -313,7 +313,7 @@ lr() {
 alias amend='git add . && git commit --amend --no-edit && git push origin +`branch`'
 
 # amendс - меняет комментарий последнего комита
-alias amend='git commit --amend && git push origin +`branch`'
+alias amendc='git commit --amend && git push origin +`branch`'
 
 # stash - stash с комментарием - № и описанием ветки
 alias stash='git stash -m "`branch` `desc`"'
