@@ -310,7 +310,7 @@ lr() {
 }
 
 # amend - добавляет изменения в последний комит
-alias amend='git add . && git commit --amend --no-edit && git push origin +`branch`'
+alias amend='if [[ "`git log -1 --pretty=%B`" == "`branch`"* ]]; then git add . && git commit --amend --no-edit && git push origin +`branch`; else echo "last commit is `git log -1 --pretty=%B`" && false fi'
 
 # amendс - меняет комментарий последнего комита
 alias amendc='git commit --amend && git push origin +`branch`'
