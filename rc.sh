@@ -168,6 +168,26 @@ new() {
     run git push origin $b
 }
 
+# del1 - удалить текущую ветку локально
+del1() {
+    local b=`branch`
+    run git checkout ${GIT_NEW_FROM:-master}
+    run git branch -D $b
+}
+
+# refresh - обновить текущую ветку локально
+refresh() {
+    local b=`branch`
+    local d="`desc`"
+    run git checkout ${GIT_NEW_FROM:-master}
+    run git branch -D $b
+    run git checkout -b $b
+    if [ "$d" != "" ]; then
+        run desc "$d"
+    fi
+}
+
+
 # del - удалить текущую ветку локально и в origin
 del() {
     local b=`branch`
