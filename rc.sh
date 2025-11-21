@@ -339,6 +339,12 @@ alias amendc='git commit --amend && git push origin +`branch`'
 # stash - stash с комментарием - № и описанием ветки
 alias stash='git stash -m "`branch` `desc`"'
 
+# spop - stash pop
+alias spop='git stash pop'
+
+# sls - stash list
+alias spop='git stash list'
+
 
 #@category Переходы
 
