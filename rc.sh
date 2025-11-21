@@ -343,7 +343,7 @@ alias stash='git stash -m "`branch` `desc`"'
 alias spop='git stash pop'
 
 # sls - stash list
-alias spop='git stash list'
+alias sls='git stash list'
 
 
 #@category Переходы
