@@ -343,8 +343,7 @@ alias stash='git stash -m "`branch` `desc`"'
 alias spop='git stash pop'
 
 # sls - stash list
-alias sls='git stash list'
-
+alias sls='git stash list --name-only | awk '\''BEGIN {head="\033[35m"; file="\033[36m"; reset="\033[0m"} /^stash@/ {print "\n" head $0 reset; next} {print file $0 reset }'\'''
 
 #@category Переходы
 
