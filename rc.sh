@@ -342,6 +342,10 @@ alias stash='git stash -m "`branch` `desc`"'
 # spop - stash pop
 alias spop='git stash pop'
 
+# stop - stash apply
+alias stop='git stash apply'
+
+
 # sls - stash list
 alias sls='git stash list --name-only | awk '\''BEGIN {head="\033[35m"; file="\033[36m"; reset="\033[0m"} /^stash@/ {print "\n" head $0 reset; next} {print file $0 reset }'\'''
 
