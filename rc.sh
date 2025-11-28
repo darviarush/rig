@@ -243,7 +243,7 @@ commit() {
         if [ "$PRECOMMIT" != "" ]; then . $PRECOMMIT; fi
         run git add .
         local x
-        if [ "$1" == "" ]; then x="`desc`"; else x="$1"; fi
+        if [ "$1" == "" -o "$1" == 1 ]; then x="`desc`"; else x="$1"; fi
         x="`echo \"$x\" | sed \"s/'/\\\\'/g\"`"
         run "git commit -am '`branch` $x'" || return $?
     fi
