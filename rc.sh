@@ -678,6 +678,24 @@ alias gozd='go zed'
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
 alias perlrename='$RIG_RC/bin/perlrename.pl'
 
+# cplib - копировать в буфер обмена библиотеку для дипсика
+cplib() {
+    local file=/tmp/cplib
+    truncate -s 0 $file
+    for i in find lib -name "*.pm" -o -name "*.md"; do
+        echo "@$i" >> $file
+        cat "$i" >> $file
+        echo >> $file
+    done
+
+    if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+	cat $file | wl-copy
+    else
+	cat $file | xclip -selection clipboard
+    fi
+    rm -f $file
+}
+
 #@category php
 
 # phprename [root=App] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
