@@ -682,7 +682,7 @@ alias perlrename='$RIG_RC/bin/perlrename.pl'
 cplib() {
     local file=/tmp/cplib
     truncate -s 0 $file
-    for i in find lib -name "*.pm" -o -name "*.md"; do
+    for i in `find lib -name "*.pm" -o -name "*.md"`; do
         echo "@$i" >> $file
         cat "$i" >> $file
         echo >> $file
