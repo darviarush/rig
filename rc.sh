@@ -678,15 +678,24 @@ alias gozd='go zed'
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
 alias perlrename='$RIG_RC/bin/perlrename.pl'
 
-# cplib - копировать в буфер обмена библиотеку для дипсика
-cplib() {
-    local file=/tmp/cplib
+# dep - копировать в буфер обмена библиотеку для дипсика
+dep() {
+    local file=/tmp/.dep-lib-to-deepseek
     truncate -s 0 $file
-    for i in `find lib -name "*.pm" -o -name "*.md"`; do
+    for i in `find "${1:-lib}" -type f`; do
         echo "@$i" >> $file
         cat "$i" >> $file
         echo >> $file
     done
+
+    echo <<END
+
+---
+
+Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
+
+В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
+END >> $file
 
     if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
 	cat $file | wl-copy
