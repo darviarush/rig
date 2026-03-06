@@ -687,15 +687,15 @@ dep() {
         cat "$i" >> $file
         echo >> $file
     done
-
-    echo <<END
+    
+    cat >> $file <<'END'
 
 ---
 
 Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
 
 В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
-END >> $file
+END
 
     if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
 	cat $file | wl-copy
