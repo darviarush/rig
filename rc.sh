@@ -708,7 +708,6 @@ END
 
 # gitdep - копировать файлы 
 gitdep() {
-    dep() {
     local revision="${1:-HEAD}"
     local file=/tmp/.dep-lib-to-deepseek
     truncate -s 0 "$file"
