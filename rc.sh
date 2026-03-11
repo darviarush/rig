@@ -501,7 +501,6 @@ installrig() {
     pamac install aspell hspell libvoikko kompare
 }
 
-
 # drm container - остановить и удалить контейнер
 drm() {
     docker stop -t 0 $1
@@ -514,6 +513,8 @@ alias bashing='. ~/.bashrc'
 # bashed - редактировать .bashrc и перечитать
 alias bashed='mcedit ~/.bashrc; . ~/.bashrc'
 
+# tocb - скопировать в буфер обмена поток ввода
+alias tocb='xclip -selection clipboard'
 
 #@category Файловые сниппеты
 
@@ -687,7 +688,7 @@ dep() {
         cat "$i" >> $file
         echo >> $file
     done
-    
+
     cat >> $file <<'END'
 
 ---
