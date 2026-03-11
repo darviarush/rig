@@ -714,7 +714,7 @@ gitdep() {
 
     # Получаем список всех файлов в указанной ревизии и итерируемся по ним
     # -r (recursive), --name-only (только пути)
-    for i in $(git ls-tree -r --name-only "$revision"); do
+    for i in $(git diff-tree --no-commit-id --name-only -r --diff-filter=d "$revision"); do
         echo "@$i" >> "$file"
         # Извлекаем содержимое файла напрямую из git-объекта
         git show "$revision:$i" >> "$file"
