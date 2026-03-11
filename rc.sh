@@ -706,6 +706,30 @@ END
     rm -f $file
 }
 
+# gitdep - копировать файлы 
+gitdep() {
+    dep() {
+    local revision="${1:-HEAD}"
+    local file=/tmp/.dep-lib-to-deepseek
+    truncate -s 0 "$file"
+
+    # Получаем список всех файлов в указанной ревизии и итерируемся по ним
+    # -r (recursive), --name-only (только пути)
+    for i in $(git ls-tree -r --name-only "$revision"); do
+        echo "@$i" >> "$file"
+        # Извлекаем содержимое файла напрямую из git-объекта
+        git show "$revision:$i" >> "$file"
+        echo >> "$file"
+    done
+
+    if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+        wl-copy < "$file"
+    else
+        xclip -selection clipboard < "$file"
+    fi
+    rm -f "$file"
+}
+
 #@category php
 
 # phprename [root=App] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
