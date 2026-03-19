@@ -683,13 +683,15 @@ alias perlrename='$RIG_RC/bin/perlrename.pl'
 dep() {
     local file=/tmp/.dep-lib-to-deepseek
     truncate -s 0 $file
-    for i in `find "${1:-lib}" -type f`; do
-        echo "@$i" >> $file
-        cat "$i" >> $file
-        echo >> $file
+    local search_paths=("${@:-lib}")
+
+    find "${search_paths[@]}" -type f -print0 | while IFS= read -r -d '' i; do
+        echo "@$i" >> "$file"
+        cat "$i" >> "$file"
+        echo >> "$file"
     done
 
-    cat >> $file <<'END'
+    cat >> "$file" <<'END'
 
 ---
 
@@ -699,11 +701,11 @@ dep() {
 END
 
     if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-	cat $file | wl-copy
+	wl-copy < "$file"
     else
-	cat $file | xclip -selection clipboard
+	xclip -selection clipboard < "$file"
     fi
-    rm -f $file
+    rm -f "$file"
 }
 
 # gitdep - копировать файлы 
