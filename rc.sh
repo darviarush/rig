@@ -444,6 +444,12 @@ alias cdp='cd /ext/__/@lib/perl-portalis'
 
 #@category Утилиты
 
+# save - пушит в git @article и @script
+save() {
+    pushd /ext/__/@article && push 'save' && popd \
+    && pushd /ext/__/@script && push 'save' && popd
+}
+
 # npp - запустить notepad++ в новом окне
 alias npp='~/.wine/drive_c/Program\ Files/Notepad++/notepad++.exe -multiInst &> /dev/null &'
 
