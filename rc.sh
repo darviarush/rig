@@ -104,7 +104,7 @@ git_diff() {
 alias desc='git config branch.`branch`.description'
 
 # desc1 - печатает номер и описание текущего бранча
-alias desc='branch && git config branch.`branch`.description'
+alias desc1='echo -n "`branch` " && git config branch.`branch`.description'
 
 # branches - список веток с описанием
 alias branches='for i in `git branch --format="%(refname:short)" --sort=creatordate`; do printf "%-10s %s\n" "$i" "`git config branch.$i.description`"; done'
