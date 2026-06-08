@@ -162,7 +162,7 @@ new() {
     upd
     local b=`echo "$1" | awk '{print $1}'`
     if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
-    local s="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    local s="`echo "$1" | sed -r 's/^\S+\s*//' | sed -E 's/^(\S+) - /\1 /'`"
     git config --global merge.branchdesc true
     git config branch.$b.description "$s"
 
