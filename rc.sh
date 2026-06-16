@@ -688,7 +688,7 @@ alias gozd='go zed'
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
 alias perlrename='$RIG_RC/bin/perlrename.pl'
 
-# dep - копировать в буфер обмена библиотеку для дипсика
+# dep path... - копировать в буфер обмена библиотеки для дипсика
 dep() {
     local file=/tmp/.dep-lib-to-deepseek
     truncate -s 0 $file
@@ -704,10 +704,11 @@ dep() {
 
 ---
 
-Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
-
-В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
 END
+#Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
+# 
+#В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
+# END
 
     if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
 	wl-copy < "$file"
