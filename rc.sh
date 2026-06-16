@@ -742,6 +742,9 @@ gitdep() {
 
 #@category php
 
+# wcomposer - o+w composer.json и composer.lock
+alias wcomposer='chmod o+w composer.json composer.lock'
+
 # phprename [root=App] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
 alias phprename='$RIG_RC/bin/phprename.pl'
 
