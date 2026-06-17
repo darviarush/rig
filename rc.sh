@@ -618,6 +618,11 @@ github() {
     fi
 }
 
+# metacpan - перейти на metacpan по name из minil.toml
+metacpan() {
+    perl -e 'while(<>) { print "https://metacpan.org/pod/", $1 =~ s/-/::/gr, "\n" if /^\s*name\s*=\s*"([\w-]+)"/ }' minil.toml | xargs opera
+}
+
 #@category python
 
 # install_pip - установить pip с инета
