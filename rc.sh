@@ -378,6 +378,9 @@ alias cdlann='cd /ext/__/@lib/perl-aion-annotation'
 # cdlenum - cd to perl-aion-enum
 alias cdlenum='cd /ext/__/@lib/perl-aion-enum'
 
+# cdlenv - cd to perl-aion-env
+alias cdlenv='cd /ext/__/@lib/perl-aion-env'
+
 # cdlemit - cd to perl-aion-emitter
 alias cdlemit='cd /ext/__/@lib/perl-aion-emitter'
 
