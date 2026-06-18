@@ -386,7 +386,7 @@ alias cdlemit='cd /ext/__/@lib/perl-aion-emitter'
 
 
 # cdly - cd to perl-aion-aya
-alias cdlm='cd /ext/__/@lib/perl-aion-aya'
+alias cdly='cd /ext/__/@lib/perl-aion-aya'
 
 # cdlc - cd to perl-aion-carp
 alias 'cdlc=cd /ext/__/@lib/perl-aion-carp'
