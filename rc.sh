@@ -13,9 +13,12 @@
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
-export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo /ext/__/@lib/*/script | sed 's/ /:/g'`
-export PERL5LIB=lib:`shopt -s nullglob; echo $PERL5LIB /ext/__/@lib/*/lib | sed 's/ /:/g'`
+export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo /ext/__/@lib/*/script | tr ' ' :`
+export PERL5LIB=$PERL5LIB:lib:`shopt -s nullglob; echo /ext/__/@lib/*/lib | tr ' ' :`
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )\[\033[01;32m\]]\$\[\033[00m\] '
+
+export PATH=`echo "$PATH" | tr ':' '\n' | awk '!a[$0]++' | tr '\n' ':' | sed 's/:$//' | sed 's/^://'`
+export PERL5LIB=`echo "$PERL5LIB" | tr ':' '\n' | awk '!a[$0]++' | tr '\n' ':' | sed 's/:$//' | sed 's/^://'`
 
 
 if [ "$1" == startup ]; then
