@@ -476,6 +476,9 @@ brig() {
     done
 }
 
+# brig_ - восстановление ползунков яркости мониторов
+alias brig_='systemctl --user restart plasma-powerdevil.service'
+
 # snd - восстановление яркости экрана
 alias snd='systemctl --user restart pipewire'
 
