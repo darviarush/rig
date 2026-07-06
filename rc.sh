@@ -479,8 +479,8 @@ brig() {
 # brig_ - восстановление ползунков яркости мониторов
 alias brig_='systemctl --user restart plasma-powerdevil.service'
 
-# snd - восстановление яркости экрана
-alias snd='systemctl --user restart pipewire'
+# snd - восстановление звука
+alias snd='systemctl --user restart pipewire pipewire-pulse wireplumber'
 
 # packagecheck - Проверяет пакеты на ошибки
 alias packagecheck='sudo paccheck --files --file-properties --db-files --quiet --sha256sum'
