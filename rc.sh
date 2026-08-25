@@ -13,9 +13,12 @@
 export LANG=ru_RU.UTF-8
 export LANGUAGE=ru_RU:ru
 export EDITOR=mcedit
-export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo /ext/__/@lib/*/script | sed 's/ /:/g'`
-export PERL5LIB=lib:`shopt -s nullglob; echo $PERL5LIB /ext/__/@lib/*/lib | sed 's/ /:/g'`
+export PATH=$PATH:/usr/sbin:`shopt -s nullglob; echo /ext/__/@lib/*/script | tr ' ' :`
+export PERL5LIB=$PERL5LIB:lib:`shopt -s nullglob; echo /ext/__/@lib/*/lib | tr ' ' :`
 export PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[31m\]$(branch_prompt )\[\033[01;32m\]]\$\[\033[00m\] '
+
+export PATH=`echo "$PATH" | tr ':' '\n' | awk '!a[$0]++' | tr '\n' ':' | sed 's/:$//' | sed 's/^://'`
+export PERL5LIB=`echo "$PERL5LIB" | tr ':' '\n' | awk '!a[$0]++' | tr '\n' ':' | sed 's/:$//' | sed 's/^://'`
 
 
 if [ "$1" == startup ]; then
@@ -162,7 +165,7 @@ new() {
     upd
     local b=`echo "$1" | awk '{print $1}'`
     if [ "$b" == "" ]; then echo "Нет бранча!"; return; fi
-    local s="`echo "$1" | sed -r 's/^\S+\s*//'`"
+    local s="`echo "$1" | sed -r 's/^\S+\s*//' | sed -E 's/^(\S+) - /\1 /'`"
     git config --global merge.branchdesc true
     git config branch.$b.description "$s"
 
@@ -378,6 +381,9 @@ alias cdlann='cd /ext/__/@lib/perl-aion-annotation'
 # cdlenum - cd to perl-aion-enum
 alias cdlenum='cd /ext/__/@lib/perl-aion-enum'
 
+# cdlenv - cd to perl-aion-env
+alias cdlenv='cd /ext/__/@lib/perl-aion-env'
+
 # cdlemit - cd to perl-aion-emitter
 alias cdlemit='cd /ext/__/@lib/perl-aion-emitter'
 
@@ -385,8 +391,8 @@ alias cdlemit='cd /ext/__/@lib/perl-aion-emitter'
 alias cdly='cd /ext/__/@lib/perl-aion-aya'
 
 
-# cdlm - cd to perl-aion-model
-alias cdlm='cd /ext/__/@lib/perl-aion-model'
+# cdly - cd to perl-aion-aya
+alias cdly='cd /ext/__/@lib/perl-aion-aya'
 
 # cdlc - cd to perl-aion-carp
 alias 'cdlc=cd /ext/__/@lib/perl-aion-carp'
@@ -473,8 +479,11 @@ brig() {
     done
 }
 
-# snd - восстановление яркости экрана
-alias snd='systemctl --user restart pipewire'
+# brig_ - восстановление ползунков яркости мониторов
+alias brig_='systemctl --user restart plasma-powerdevil.service'
+
+# snd - восстановление звука
+alias snd='systemctl --user restart pipewire pipewire-pulse wireplumber'
 
 # packagecheck - Проверяет пакеты на ошибки
 alias packagecheck='sudo paccheck --files --file-properties --db-files --quiet --sha256sum'
@@ -618,6 +627,11 @@ github() {
     fi
 }
 
+# metacpan - перейти на metacpan по name из minil.toml
+metacpan() {
+    perl -e 'while(<>) { print "https://metacpan.org/pod/", $1 =~ s/-/::/gr, "\n" if /^\s*name\s*=\s*"([\w-]+)"/ }' minil.toml | xargs opera
+}
+
 #@category python
 
 # install_pip - установить pip с инета
@@ -691,7 +705,7 @@ alias gozd='go zed'
 # perlrename - заменяет в lib все пакеты на соответствующие путям *.pm
 alias perlrename='$RIG_RC/bin/perlrename.pl'
 
-# dep - копировать в буфер обмена библиотеку для дипсика
+# dep path... - копировать в буфер обмена библиотеки для дипсика
 dep() {
     local file=/tmp/.dep-lib-to-deepseek
     truncate -s 0 $file
@@ -707,10 +721,11 @@ dep() {
 
 ---
 
-Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
-
-В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
 END
+#Нужно добавить документацию в *.md с примерами, которые затем преобразуются в автотесты (t/**.t - Test::More) c помощью утилиты liveman.
+# 
+#В частности `$code # -> $code` преобразуется в `is $code, $code`, `$code # => text` в `is $code, "text"` и т.д. (см. https://metacpan.org/pod/Liveman).
+# END
 
     if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
 	wl-copy < "$file"
@@ -744,6 +759,9 @@ gitdep() {
 }
 
 #@category php
+
+# wcomposer - o+w composer.json и composer.lock
+alias wcomposer='chmod o+w composer.json composer.lock'
 
 # phprename [root=App] - заменяет в src все неймспейсы и классы на соответствующие путям и именам файлов *.php
 alias phprename='$RIG_RC/bin/phprename.pl'
