@@ -357,6 +357,9 @@ alias sls='git stash list --name-only | awk '\''BEGIN {head="\033[35m"; file="\0
 
 #@category Переходы
 
+# cdi - cd to Inanna Book
+alias cd='cd /ext/__/@article/adr/kak-inanna-menqla-strany'
+
 # cda - cd to astrobook
 alias cda='cd /ext/__/astrobook'
 
