@@ -76,6 +76,9 @@ run() {
 
 #@category git
 
+# pick - черри-пик
+alias pick='git cherry-pick'
+
 # gitconf - конфигурирует git
 gitconf() {
     git config --global pull.rebase false   # rebase
