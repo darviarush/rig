@@ -85,6 +85,12 @@ alias lc='git log --branches --not --remotes --date-order --format="%h %ad %s (%
 # uc - отправленные в репозиторий комиты
 alias uc='git log --branches --remotes --date-order --format="%h %cd %s (%D)" --date=iso'
 
+# si - запушенные за сегодня
+alias si='git log --branches --remotes --date-order --format="%h %cd %s (%D)" --date=iso --since=midnight'
+
+# so - запушенные за вчера
+alias so='git log --branches --remotes --date-order --format="%h %cd %s (%D)" --date=iso --since="yesterday 00:00" --until="today 00:00"'
+
 # con - какой ветке принадлежит комит
 alias con='git branch --contains'
 
