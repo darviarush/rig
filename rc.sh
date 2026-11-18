@@ -79,6 +79,9 @@ run() {
 # pick - черри-пик
 alias pick='git cherry-pick'
 
+# lc - не отправленные в репозиторий комиты
+alias lc='git log --branches --not --remotes --date-order --format="%h %ad %s (%D)" --date=iso'
+
 # gitconf - конфигурирует git
 gitconf() {
     git config --global pull.rebase false   # rebase
