@@ -82,6 +82,12 @@ alias pick='git cherry-pick'
 # lc - не отправленные в репозиторий комиты
 alias lc='git log --branches --not --remotes --date-order --format="%h %ad %s (%D)" --date=iso'
 
+# uc - отправленные в репозиторий комиты
+alias uc='git log --branches --remotes --date-order --format="%h %cd %s (%D)" --date=iso'
+
+# con - какой ветке принадлежит комит
+alias con='git branch --contains'
+
 # gitconf - конфигурирует git
 gitconf() {
     git config --global pull.rebase false   # rebase
