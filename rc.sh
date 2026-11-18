@@ -264,7 +264,8 @@ commit() {
 # upd - обновить ветку с мастера
 upd() {
     local master=${GIT_NEW_FROM:-${1:-master}}
-    run "git pull --no-edit origin $master || git merge --no-edit origin/$master"
+    run "git pull --rebase origin $master || git rebase origin/$master"
+    #run "git pull --no-edit origin $master || git merge --no-edit origin/$master"
 }
 
 # push [comment] - делает комит текущей ветки
