@@ -83,7 +83,7 @@ alias pick='git cherry-pick'
 alias lc='git log --branches --not --remotes --reverse --format="%h %ad %s (%D)" --date=iso'
 
 # uc - отправленные в репозиторий комиты
-alias uc='git log --branches --remotes --reverse --format="%h %cd %s (%D)" --date=iso'
+alias uc='git log --branches --remotes --format="%h %cd %s (%D)" --date=iso'
 
 # si - запушенные за сегодня
 alias si='git log --branches --remotes --reverse --format="%h %cd %s (%D)" --date=iso --since=midnight'
