@@ -380,7 +380,7 @@ alias sls='git stash list --name-only | awk '\''BEGIN {head="\033[35m"; file="\0
 alias cdi='cd /ext/__/@article/adr/kak-inanna-menqla-strany'
 
 # cda - cd to astrobook
-alias cda='cd /ext/__/astrobook'
+alias cda='cd /ext/__/@lib/astrobook'
 
 # cdy - cd to le-yoga
 alias cdy='cd /ext/__/le-yoga'
